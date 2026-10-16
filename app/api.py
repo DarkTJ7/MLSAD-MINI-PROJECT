@@ -99,7 +99,7 @@ def submit(fnol:FNOL,request:Request):
     with connection.pipeline() as pipe:
         pipe.multi()
         pipe.set('run:'+run_id,json.dumps({'status':'queued','state':state}),ex=86400)
-        q.enqueue_call(analyze,args=(state,),timeout=60,pipeline=pipe)
+        q.enqueue_call(analyze,args=(state,),timeout=max(1,int(state['deadline']-now)+5),pipeline=pipe)
         pipe.execute()
     return {'run_id':run_id,'status':'queued','poll_path':'/runs/'+run_id}
 

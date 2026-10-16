@@ -49,6 +49,13 @@ services:
       timeout: 20s
       start_period: 60s
       retries: 20
+  policy-preflight:
+    <<: *app
+    command: [python, -m, app.preflight]
+    depends_on:
+      indexer: {condition: service_completed_successfully}
+      safety: {condition: service_healthy}
+    restart: 'no'
   api:
     <<: *app
     environment:
@@ -61,6 +68,7 @@ services:
       safety: {condition: service_healthy}
       agent-worker: {condition: service_healthy}
       verification-worker: {condition: service_healthy}
+      policy-preflight: {condition: service_completed_successfully}
     healthcheck:
       test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=2)"]
       interval: 10s

@@ -66,7 +66,7 @@ def _analyze(state):
         carry(state)
         TASKS.labels('analysis','escalated' if state.get('failure') else 'success').inc()
         if not save(connection,state,'verifying'):return
-        Queue('verification',connection=connection).enqueue(verify_job,state,job_timeout=60,
+        Queue('verification',connection=connection).enqueue(verify_job,state,job_timeout=max(1,int(state['deadline']-time.time())+5),
             retry=Retry(max=1,interval=[2]))
     except Exception as exc:
         TASKS.labels('analysis','error').inc()
@@ -86,7 +86,7 @@ def _verify_job(state):
             state['retried']=True
             state['fnol']['retrieval_version']='v3'
             state['stage']='base_read'
-            Queue('analysis',connection=connection).enqueue(analyze,state,job_timeout=60,
+            Queue('analysis',connection=connection).enqueue(analyze,state,job_timeout=max(1,int(state['deadline']-time.time())+5),
                 retry=Retry(max=1,interval=[2]))
             save(connection,state,'retrying')
             return
