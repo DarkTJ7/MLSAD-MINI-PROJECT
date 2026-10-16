@@ -93,6 +93,16 @@ class Gateway:
             view={'stage':context['stage'],'description':context['fnol']['description'],
                   'risk':context['risk'],'passages':[p['text'][:140] for p in context.get('passages',[])[:3]]}
             view['available_actions']=available
+            if version=='v4':
+                view['passages']=[{'id':p['clause_id'],'text':p['text'][:140]} for p in context.get('passages',[])[:3]]
+                view['tool_catalog']={'corpus_search':'Find cover or modifying clauses.',
+                    'clause_lookup':'Inspect an already retrieved source; identifier supplied automatically.',
+                    'finish':'Research complete: hand off draft for independent verification.',
+                    'escalate':'Research tools failed; not a coverage decision.'}
+                view['objective']={'fields_read':'Find a policy provision applying to the reported event.',
+                    'base_read':'Find the exceptions or use limitations modifying the apparent cover.',
+                    'modifiers_read':'Inspect an original source passage before handing off the research.',
+                    'clause_read':'Hand the researched clauses to the independent verifier.'}.get(context['stage'],'Read the request fields.')
             payload['messages'][-1]['content']=json.dumps(view)
             payload.update(temperature=0,max_tokens=100,response_format={'type':'json_schema','json_schema':{
                 'name':'planner_action','strict':True,'schema':{'type':'object','properties':{

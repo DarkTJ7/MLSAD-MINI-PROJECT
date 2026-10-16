@@ -1,0 +1,292 @@
+{
+  "fnol": {
+    "additionalProperties": false,
+    "properties": {
+      "policy_number": {
+        "maxLength": 60,
+        "minLength": 3,
+        "pattern": "^[A-Za-z0-9/-]+$",
+        "title": "Policy Number",
+        "type": "string"
+      },
+      "vehicle_registration": {
+        "maxLength": 20,
+        "minLength": 4,
+        "pattern": "^[A-Z0-9 -]+$",
+        "title": "Vehicle Registration",
+        "type": "string"
+      },
+      "insurer": {
+        "default": "HDFC ERGO",
+        "maxLength": 100,
+        "title": "Insurer",
+        "type": "string"
+      },
+      "product": {
+        "default": "private_car_package",
+        "maxLength": 100,
+        "title": "Product",
+        "type": "string"
+      },
+      "policy_start": {
+        "format": "date",
+        "title": "Policy Start",
+        "type": "string"
+      },
+      "policy_end": {
+        "format": "date",
+        "title": "Policy End",
+        "type": "string"
+      },
+      "loss_date": {
+        "format": "date",
+        "title": "Loss Date",
+        "type": "string"
+      },
+      "reported_date": {
+        "format": "date",
+        "title": "Reported Date",
+        "type": "string"
+      },
+      "description": {
+        "maxLength": 4000,
+        "minLength": 12,
+        "title": "Description",
+        "type": "string"
+      },
+      "location": {
+        "maxLength": 200,
+        "minLength": 2,
+        "title": "Location",
+        "type": "string"
+      },
+      "country": {
+        "default": "India",
+        "maxLength": 60,
+        "title": "Country",
+        "type": "string"
+      },
+      "vehicle_use": {
+        "default": "personal",
+        "pattern": "^(personal|commute|business|delivery|hire_reward|unknown)$",
+        "title": "Vehicle Use",
+        "type": "string"
+      },
+      "estimated_repair": {
+        "maximum": 100000000,
+        "minimum": 0,
+        "title": "Estimated Repair",
+        "type": "number"
+      },
+      "idv": {
+        "exclusiveMinimum": 0,
+        "maximum": 100000000,
+        "title": "Idv",
+        "type": "number"
+      },
+      "network_garage": {
+        "default": false,
+        "title": "Network Garage",
+        "type": "boolean"
+      },
+      "driver_licensed": {
+        "anyOf": [
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Driver Licensed"
+      },
+      "intoxicated": {
+        "anyOf": [
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Intoxicated"
+      },
+      "third_party_involved": {
+        "default": false,
+        "title": "Third Party Involved",
+        "type": "boolean"
+      },
+      "police_report": {
+        "default": false,
+        "title": "Police Report",
+        "type": "boolean"
+      },
+      "retrieval_version": {
+        "default": "v4",
+        "pattern": "^v[1234]$",
+        "title": "Retrieval Version",
+        "type": "string"
+      }
+    },
+    "required": [
+      "policy_number",
+      "vehicle_registration",
+      "policy_start",
+      "policy_end",
+      "loss_date",
+      "reported_date",
+      "description",
+      "location",
+      "estimated_repair",
+      "idv"
+    ],
+    "title": "FNOL",
+    "type": "object"
+  },
+  "feedback": {
+    "additionalProperties": false,
+    "properties": {
+      "satisfactory": {
+        "title": "Satisfactory",
+        "type": "boolean"
+      },
+      "reason": {
+        "maxLength": 1000,
+        "minLength": 3,
+        "title": "Reason",
+        "type": "string"
+      }
+    },
+    "required": [
+      "satisfactory",
+      "reason"
+    ],
+    "title": "Feedback",
+    "type": "object"
+  },
+  "recommendation": {
+    "$defs": {
+      "Citation": {
+        "properties": {
+          "clause_id": {
+            "title": "Clause Id",
+            "type": "string"
+          },
+          "document": {
+            "title": "Document",
+            "type": "string"
+          },
+          "page": {
+            "title": "Page",
+            "type": "integer"
+          },
+          "quote": {
+            "title": "Quote",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clause_id",
+          "document",
+          "page",
+          "quote"
+        ],
+        "title": "Citation",
+        "type": "object"
+      },
+      "Kind": {
+        "enum": [
+          "own_damage",
+          "third_party",
+          "theft",
+          "total_loss"
+        ],
+        "title": "Kind",
+        "type": "string"
+      }
+    },
+    "properties": {
+      "recommendation_only": {
+        "const": true,
+        "default": true,
+        "title": "Recommendation Only",
+        "type": "boolean"
+      },
+      "classification": {
+        "$ref": "#/$defs/Kind"
+      },
+      "coverage_position": {
+        "enum": [
+          "potentially_covered",
+          "coverage_concern",
+          "insufficient_evidence"
+        ],
+        "title": "Coverage Position",
+        "type": "string"
+      },
+      "queue": {
+        "pattern": "^(fast-track|surveyor assignment|investigation)$",
+        "title": "Queue",
+        "type": "string"
+      },
+      "reason": {
+        "title": "Reason",
+        "type": "string"
+      },
+      "requires_human": {
+        "const": true,
+        "default": true,
+        "title": "Requires Human",
+        "type": "boolean"
+      },
+      "escalation": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Escalation"
+      },
+      "citations": {
+        "items": {
+          "$ref": "#/$defs/Citation"
+        },
+        "title": "Citations",
+        "type": "array"
+      },
+      "verified": {
+        "title": "Verified",
+        "type": "boolean"
+      },
+      "prompt_version": {
+        "title": "Prompt Version",
+        "type": "string"
+      },
+      "limitations": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Limitations",
+        "type": "array"
+      }
+    },
+    "required": [
+      "classification",
+      "coverage_position",
+      "queue",
+      "reason",
+      "escalation",
+      "citations",
+      "verified",
+      "prompt_version",
+      "limitations"
+    ],
+    "title": "Recommendation",
+    "type": "object"
+  }
+}

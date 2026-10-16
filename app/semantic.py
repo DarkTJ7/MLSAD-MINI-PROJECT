@@ -7,7 +7,7 @@ from functools import lru_cache
 def safety_url():return os.getenv('SAFETY_URL','').rstrip('/')
 def scan_text(text):
     if not safety_url():
-        if os.getenv('SAFETY_REQUIRED','false').lower()=='true':raise RuntimeError('Safety service required')
+        if os.getenv('SAFETY_REQUIRED','true').lower()=='true':raise RuntimeError('Safety service required')
         return {'blocked':False,'method':'lexical-only-development-mode'}
     return _scan(safety_url(),text)
 
@@ -18,7 +18,7 @@ def _scan(url,text):
 
 def verify_claims(state):
     if not safety_url():
-        if os.getenv('SAFETY_REQUIRED','false').lower()=='true':return {'passed':False,'reason':'semantic_service_missing'}
+        if os.getenv('SAFETY_REQUIRED','true').lower()=='true':return {'passed':False,'reason':'semantic_service_missing'}
         return {'passed':True,'method':'development-exact-checks-only','claims':[]}
     result=state['proposed'];citations=result['citations']
     premise=' '.join(c['quote'] for c in citations)

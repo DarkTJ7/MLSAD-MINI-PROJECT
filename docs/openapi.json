@@ -1,0 +1,421 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Motor Insurance FNOL Triage",
+    "description": "Advisory only. Human handlers decide claims.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runs": {
+      "post": {
+        "summary": "Submit",
+        "operationId": "submit_runs_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FNOL"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runs/{run_id}": {
+      "get": {
+        "summary": "Status",
+        "operationId": "status_runs__run_id__get",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runs/{run_id}/trace": {
+      "get": {
+        "summary": "Run Trace",
+        "operationId": "run_trace_runs__run_id__trace_get",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runs/{run_id}/feedback": {
+      "post": {
+        "summary": "Feedback",
+        "operationId": "feedback_runs__run_id__feedback_post",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Feedback"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quality": {
+      "get": {
+        "summary": "Quality",
+        "operationId": "quality_quality_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "FNOL": {
+        "properties": {
+          "policy_number": {
+            "type": "string",
+            "maxLength": 60,
+            "minLength": 3,
+            "pattern": "^[A-Za-z0-9/-]+$",
+            "title": "Policy Number"
+          },
+          "vehicle_registration": {
+            "type": "string",
+            "maxLength": 20,
+            "minLength": 4,
+            "pattern": "^[A-Z0-9 -]+$",
+            "title": "Vehicle Registration"
+          },
+          "insurer": {
+            "type": "string",
+            "maxLength": 100,
+            "title": "Insurer",
+            "default": "HDFC ERGO"
+          },
+          "product": {
+            "type": "string",
+            "maxLength": 100,
+            "title": "Product",
+            "default": "private_car_package"
+          },
+          "policy_start": {
+            "type": "string",
+            "format": "date",
+            "title": "Policy Start"
+          },
+          "policy_end": {
+            "type": "string",
+            "format": "date",
+            "title": "Policy End"
+          },
+          "loss_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Loss Date"
+          },
+          "reported_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Reported Date"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 12,
+            "title": "Description"
+          },
+          "location": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 2,
+            "title": "Location"
+          },
+          "country": {
+            "type": "string",
+            "maxLength": 60,
+            "title": "Country",
+            "default": "India"
+          },
+          "vehicle_use": {
+            "type": "string",
+            "pattern": "^(personal|commute|business|delivery|hire_reward|unknown)$",
+            "title": "Vehicle Use",
+            "default": "personal"
+          },
+          "estimated_repair": {
+            "type": "number",
+            "maximum": 100000000.0,
+            "minimum": 0.0,
+            "title": "Estimated Repair"
+          },
+          "idv": {
+            "type": "number",
+            "maximum": 100000000.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Idv"
+          },
+          "network_garage": {
+            "type": "boolean",
+            "title": "Network Garage",
+            "default": false
+          },
+          "driver_licensed": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Driver Licensed"
+          },
+          "intoxicated": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Intoxicated"
+          },
+          "third_party_involved": {
+            "type": "boolean",
+            "title": "Third Party Involved",
+            "default": false
+          },
+          "police_report": {
+            "type": "boolean",
+            "title": "Police Report",
+            "default": false
+          },
+          "retrieval_version": {
+            "type": "string",
+            "pattern": "^v[1234]$",
+            "title": "Retrieval Version",
+            "default": "v4"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "policy_number",
+          "vehicle_registration",
+          "policy_start",
+          "policy_end",
+          "loss_date",
+          "reported_date",
+          "description",
+          "location",
+          "estimated_repair",
+          "idv"
+        ],
+        "title": "FNOL"
+      },
+      "Feedback": {
+        "properties": {
+          "satisfactory": {
+            "type": "boolean",
+            "title": "Satisfactory"
+          },
+          "reason": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 3,
+            "title": "Reason"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "satisfactory",
+          "reason"
+        ],
+        "title": "Feedback"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

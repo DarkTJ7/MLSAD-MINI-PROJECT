@@ -1,0 +1,1896 @@
+{
+  "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+  "services": [
+    "analysis-1",
+    "api",
+    "safety",
+    "verification"
+  ],
+  "span_count": 137,
+  "missing_parents": [],
+  "spans": [
+    {
+      "name": "POST /runs",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "c6f4974183dd79a7",
+      "parent_id": null,
+      "attributes": {
+        "server.address": "127.0.0.1",
+        "server.port": 18766,
+        "url.path": "/runs",
+        "url.scheme": "http",
+        "http.request.method": "POST",
+        "network.protocol.version": "1.1",
+        "http.route": "/runs",
+        "http.response.status_code": 202
+      },
+      "start": 1792186786808018200,
+      "end": 1792186788907082800,
+      "service": "api"
+    },
+    {
+      "name": "http.POST",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "1b9758de446d91bb",
+      "parent_id": "c6f4974183dd79a7",
+      "attributes": {
+        "http.route": "/runs",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "http.status_code": 202
+      },
+      "start": 1792186786808702100,
+      "end": 1792186788904292600,
+      "service": "api"
+    },
+    {
+      "name": "fastapi.dependencies",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "fc40bf7b9a0ebb48",
+      "parent_id": "1b9758de446d91bb",
+      "attributes": {
+        "code.function.name": "app.api.submit"
+      },
+      "start": 1792186786813583400,
+      "end": 1792186786814249000,
+      "service": "api"
+    },
+    {
+      "name": "fastapi.endpoint",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "520bad71017b19c1",
+      "parent_id": "1b9758de446d91bb",
+      "attributes": {
+        "code.function.name": "app.api.submit",
+        "run_id": "57130783-f470-477a-9571-5b39ad309330"
+      },
+      "start": 1792186786817357600,
+      "end": 1792186788899642300,
+      "service": "api"
+    },
+    {
+      "name": "http.client",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "02bf44c23d0ae839",
+      "parent_id": "520bad71017b19c1",
+      "attributes": {
+        "http.status_code": 200
+      },
+      "start": 1792186786832117500,
+      "end": 1792186788893072200,
+      "service": "api"
+    },
+    {
+      "name": "POST /screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "c920fd117c9239ba",
+      "parent_id": "02bf44c23d0ae839",
+      "attributes": {
+        "server.address": "127.0.0.1",
+        "server.port": 18763,
+        "url.path": "/screen",
+        "url.scheme": "http",
+        "http.request.method": "POST",
+        "network.protocol.version": "1.1",
+        "http.route": "/screen",
+        "http.response.status_code": 200
+      },
+      "start": 1792186788876710200,
+      "end": 1792186788890817100,
+      "service": "safety"
+    },
+    {
+      "name": "safety./screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "109ffdf525de7070",
+      "parent_id": "02bf44c23d0ae839",
+      "attributes": {},
+      "start": 1792186788877548000,
+      "end": 1792186788887240800,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.dependencies",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "e905780b067bef90",
+      "parent_id": "109ffdf525de7070",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186788879301600,
+      "end": 1792186788879584500,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.endpoint",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "5abbdac7a1f0b139",
+      "parent_id": "109ffdf525de7070",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186788882350200,
+      "end": 1792186788882497400,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.serialization",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "fe6b4f0b72960b0e",
+      "parent_id": "109ffdf525de7070",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186788884861500,
+      "end": 1792186788884992400,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.serialization",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "7e462b5d85dd475b",
+      "parent_id": "1b9758de446d91bb",
+      "attributes": {
+        "code.function.name": "app.api.submit"
+      },
+      "start": 1792186788902188900,
+      "end": 1792186788902296600,
+      "service": "api"
+    },
+    {
+      "name": "agent.analysis",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "b542e8d752220a57",
+      "parent_id": "520bad71017b19c1",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2"
+      },
+      "start": 1792186788919364500,
+      "end": 1792186813606093200,
+      "service": "analysis-1"
+    },
+    {
+      "name": "plan",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "23ea1917b3228255",
+      "parent_id": "b542e8d752220a57",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "agent": "analysis",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "prompt_version": "v4"
+      },
+      "start": 1792186788966958800,
+      "end": 1792186791145718100,
+      "service": "analysis-1"
+    },
+    {
+      "name": "http.client",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "5bbc904dce9d4b82",
+      "parent_id": "23ea1917b3228255",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "http.status_code": 200
+      },
+      "start": 1792186788970732300,
+      "end": 1792186791139791500,
+      "service": "analysis-1"
+    },
+    {
+      "name": "POST /screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "4bf967872f12b80a",
+      "parent_id": "5bbc904dce9d4b82",
+      "attributes": {
+        "server.address": "127.0.0.1",
+        "server.port": 18763,
+        "url.path": "/screen",
+        "url.scheme": "http",
+        "http.request.method": "POST",
+        "network.protocol.version": "1.1",
+        "http.route": "/screen",
+        "http.response.status_code": 200
+      },
+      "start": 1792186791121684100,
+      "end": 1792186791135871500,
+      "service": "safety"
+    },
+    {
+      "name": "safety./screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "c34f60960c5898ee",
+      "parent_id": "5bbc904dce9d4b82",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2"
+      },
+      "start": 1792186791122605600,
+      "end": 1792186791132840700,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.dependencies",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "5f10834b7144a9a8",
+      "parent_id": "c34f60960c5898ee",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186791125113000,
+      "end": 1792186791125404600,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.endpoint",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "213c3543a8e82669",
+      "parent_id": "c34f60960c5898ee",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186791128041700,
+      "end": 1792186791128190300,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.serialization",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "22e8a18ec1f7de79",
+      "parent_id": "c34f60960c5898ee",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186791130485100,
+      "end": 1792186791130610500,
+      "service": "safety"
+    },
+    {
+      "name": "tool",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "a1b9bc17be8d9e5d",
+      "parent_id": "b542e8d752220a57",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "agent": "analysis",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "prompt_version": "v4"
+      },
+      "start": 1792186791151949900,
+      "end": 1792186791153134300,
+      "service": "analysis-1"
+    },
+    {
+      "name": "plan",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "3d5be592ff208959",
+      "parent_id": "b542e8d752220a57",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "agent": "analysis",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "prompt_version": "v4"
+      },
+      "start": 1792186791157752700,
+      "end": 1792186793683071200,
+      "service": "analysis-1"
+    },
+    {
+      "name": "http.client",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "55141161a85c90a3",
+      "parent_id": "3d5be592ff208959",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "http.status_code": 200
+      },
+      "start": 1792186791162012100,
+      "end": 1792186793679934400,
+      "service": "analysis-1"
+    },
+    {
+      "name": "tool",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "adad716a9c6642f6",
+      "parent_id": "b542e8d752220a57",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "agent": "analysis",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "prompt_version": "v4"
+      },
+      "start": 1792186793688397600,
+      "end": 1792186793694511100,
+      "service": "analysis-1"
+    },
+    {
+      "name": "plan",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "e7d306f1faa3191e",
+      "parent_id": "b542e8d752220a57",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "agent": "analysis",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "prompt_version": "v4"
+      },
+      "start": 1792186793698420400,
+      "end": 1792186795918071000,
+      "service": "analysis-1"
+    },
+    {
+      "name": "http.client",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "5b56727a830e0814",
+      "parent_id": "e7d306f1faa3191e",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "http.status_code": 200
+      },
+      "start": 1792186793701098200,
+      "end": 1792186793729597200,
+      "service": "analysis-1"
+    },
+    {
+      "name": "POST /screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "87ee6a899ae2d967",
+      "parent_id": "5b56727a830e0814",
+      "attributes": {
+        "server.address": "127.0.0.1",
+        "server.port": 18763,
+        "url.path": "/screen",
+        "url.scheme": "http",
+        "http.request.method": "POST",
+        "network.protocol.version": "1.1",
+        "http.route": "/screen",
+        "http.response.status_code": 200
+      },
+      "start": 1792186793703932600,
+      "end": 1792186793728566900,
+      "service": "safety"
+    },
+    {
+      "name": "safety./screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "5a82512d21deee6f",
+      "parent_id": "5b56727a830e0814",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2"
+      },
+      "start": 1792186793704806600,
+      "end": 1792186793723912500,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.dependencies",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "78838146ca8a72ff",
+      "parent_id": "5a82512d21deee6f",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186793709093800,
+      "end": 1792186793709661700,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.endpoint",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "a0a32378fcac522d",
+      "parent_id": "5a82512d21deee6f",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186793715654700,
+      "end": 1792186793715998500,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.serialization",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "0dc60dbb869569f5",
+      "parent_id": "5a82512d21deee6f",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186793721019400,
+      "end": 1792186793721205700,
+      "service": "safety"
+    },
+    {
+      "name": "http.client",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "e68d1ae137bbebab",
+      "parent_id": "e7d306f1faa3191e",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "http.status_code": 200
+      },
+      "start": 1792186793733412600,
+      "end": 1792186793755634300,
+      "service": "analysis-1"
+    },
+    {
+      "name": "POST /screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "7a0c61342ad53c2f",
+      "parent_id": "e68d1ae137bbebab",
+      "attributes": {
+        "server.address": "127.0.0.1",
+        "server.port": 18763,
+        "url.path": "/screen",
+        "url.scheme": "http",
+        "http.request.method": "POST",
+        "network.protocol.version": "1.1",
+        "http.route": "/screen",
+        "http.response.status_code": 200
+      },
+      "start": 1792186793737149000,
+      "end": 1792186793754161700,
+      "service": "safety"
+    },
+    {
+      "name": "safety./screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "fa95a4ee211bbb89",
+      "parent_id": "e68d1ae137bbebab",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2"
+      },
+      "start": 1792186793738829700,
+      "end": 1792186793751260500,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.dependencies",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "3fe81b1ee4a4d1ae",
+      "parent_id": "fa95a4ee211bbb89",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186793740853900,
+      "end": 1792186793741266800,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.endpoint",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "c3d36cd1cb3fa6ff",
+      "parent_id": "fa95a4ee211bbb89",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186793744717400,
+      "end": 1792186793745090200,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.serialization",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "d50da8021d9dfa23",
+      "parent_id": "fa95a4ee211bbb89",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186793748742100,
+      "end": 1792186793748915900,
+      "service": "safety"
+    },
+    {
+      "name": "http.client",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "3fcc771a2e6ce186",
+      "parent_id": "e7d306f1faa3191e",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "http.status_code": 200
+      },
+      "start": 1792186793760001000,
+      "end": 1792186793780312000,
+      "service": "analysis-1"
+    },
+    {
+      "name": "POST /screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "f24d6c13bf40060c",
+      "parent_id": "3fcc771a2e6ce186",
+      "attributes": {
+        "server.address": "127.0.0.1",
+        "server.port": 18763,
+        "url.path": "/screen",
+        "url.scheme": "http",
+        "http.request.method": "POST",
+        "network.protocol.version": "1.1",
+        "http.route": "/screen",
+        "http.response.status_code": 200
+      },
+      "start": 1792186793763015800,
+      "end": 1792186793779680100,
+      "service": "safety"
+    },
+    {
+      "name": "safety./screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "1ce1a2552d859ba2",
+      "parent_id": "3fcc771a2e6ce186",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2"
+      },
+      "start": 1792186793763967800,
+      "end": 1792186793774689600,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.dependencies",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "35236631c6d248ba",
+      "parent_id": "1ce1a2552d859ba2",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186793766408100,
+      "end": 1792186793766605300,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.endpoint",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "74efa8aa4dcb3675",
+      "parent_id": "1ce1a2552d859ba2",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186793769239900,
+      "end": 1792186793769505600,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.serialization",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "275ed4f414653e08",
+      "parent_id": "1ce1a2552d859ba2",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186793771827900,
+      "end": 1792186793772059900,
+      "service": "safety"
+    },
+    {
+      "name": "http.client",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "d9710354fcf2e424",
+      "parent_id": "e7d306f1faa3191e",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "http.status_code": 200
+      },
+      "start": 1792186793784908500,
+      "end": 1792186793803710500,
+      "service": "analysis-1"
+    },
+    {
+      "name": "POST /screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "c9125e68bd5727ae",
+      "parent_id": "d9710354fcf2e424",
+      "attributes": {
+        "server.address": "127.0.0.1",
+        "server.port": 18763,
+        "url.path": "/screen",
+        "url.scheme": "http",
+        "http.request.method": "POST",
+        "network.protocol.version": "1.1",
+        "http.route": "/screen",
+        "http.response.status_code": 200
+      },
+      "start": 1792186793788069800,
+      "end": 1792186793802647900,
+      "service": "safety"
+    },
+    {
+      "name": "safety./screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "1a14888f1b962042",
+      "parent_id": "d9710354fcf2e424",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2"
+      },
+      "start": 1792186793788958500,
+      "end": 1792186793799327400,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.dependencies",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "c817191adf67e12a",
+      "parent_id": "1a14888f1b962042",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186793790637500,
+      "end": 1792186793790853400,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.endpoint",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "092218b1e7dba61b",
+      "parent_id": "1a14888f1b962042",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186793793731000,
+      "end": 1792186793793979900,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.serialization",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "194d56b53ccf29c6",
+      "parent_id": "1a14888f1b962042",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186793796504900,
+      "end": 1792186793796626800,
+      "service": "safety"
+    },
+    {
+      "name": "http.client",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "10a3db67410997bf",
+      "parent_id": "e7d306f1faa3191e",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "http.status_code": 200
+      },
+      "start": 1792186793807082800,
+      "end": 1792186793826677200,
+      "service": "analysis-1"
+    },
+    {
+      "name": "POST /screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "c3683a51e6a86a7a",
+      "parent_id": "10a3db67410997bf",
+      "attributes": {
+        "server.address": "127.0.0.1",
+        "server.port": 18763,
+        "url.path": "/screen",
+        "url.scheme": "http",
+        "http.request.method": "POST",
+        "network.protocol.version": "1.1",
+        "http.route": "/screen",
+        "http.response.status_code": 200
+      },
+      "start": 1792186793809906800,
+      "end": 1792186793826197800,
+      "service": "safety"
+    },
+    {
+      "name": "safety./screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "261bad23ac325bef",
+      "parent_id": "10a3db67410997bf",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2"
+      },
+      "start": 1792186793810607900,
+      "end": 1792186793821553900,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.dependencies",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "3707a9ae74cad56d",
+      "parent_id": "261bad23ac325bef",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186793812370400,
+      "end": 1792186793812657200,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.endpoint",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "317ce405b3ef318e",
+      "parent_id": "261bad23ac325bef",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186793815762600,
+      "end": 1792186793816076600,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.serialization",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "5eda2b3a79517c49",
+      "parent_id": "261bad23ac325bef",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186793818805400,
+      "end": 1792186793818978700,
+      "service": "safety"
+    },
+    {
+      "name": "http.client",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "e479d9b9aff7434b",
+      "parent_id": "e7d306f1faa3191e",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "http.status_code": 200
+      },
+      "start": 1792186793830836300,
+      "end": 1792186793847414500,
+      "service": "analysis-1"
+    },
+    {
+      "name": "POST /screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "142449a953b1b8c7",
+      "parent_id": "e479d9b9aff7434b",
+      "attributes": {
+        "server.address": "127.0.0.1",
+        "server.port": 18763,
+        "url.path": "/screen",
+        "url.scheme": "http",
+        "http.request.method": "POST",
+        "network.protocol.version": "1.1",
+        "http.route": "/screen",
+        "http.response.status_code": 200
+      },
+      "start": 1792186793833705300,
+      "end": 1792186793846093300,
+      "service": "safety"
+    },
+    {
+      "name": "safety./screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "bb10913b301e26b6",
+      "parent_id": "e479d9b9aff7434b",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2"
+      },
+      "start": 1792186793834403200,
+      "end": 1792186793843167700,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.dependencies",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "473efa81c7847059",
+      "parent_id": "bb10913b301e26b6",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186793836135100,
+      "end": 1792186793836322600,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.endpoint",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "61f7f6c52a9afc26",
+      "parent_id": "bb10913b301e26b6",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186793838558800,
+      "end": 1792186793838825200,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.serialization",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "c97c1782bc2d018a",
+      "parent_id": "bb10913b301e26b6",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186793840986500,
+      "end": 1792186793841143400,
+      "service": "safety"
+    },
+    {
+      "name": "http.client",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "ac2bc09f1f92760d",
+      "parent_id": "e7d306f1faa3191e",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "http.status_code": 200
+      },
+      "start": 1792186793852094300,
+      "end": 1792186795914304600,
+      "service": "analysis-1"
+    },
+    {
+      "name": "tool",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "cb3f601551f912ee",
+      "parent_id": "b542e8d752220a57",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "agent": "analysis",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "prompt_version": "v4"
+      },
+      "start": 1792186795924084500,
+      "end": 1792186795930923000,
+      "service": "analysis-1"
+    },
+    {
+      "name": "plan",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "539b55542646f539",
+      "parent_id": "b542e8d752220a57",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "agent": "analysis",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "prompt_version": "v4"
+      },
+      "start": 1792186795934916000,
+      "end": 1792186805561302100,
+      "service": "analysis-1"
+    },
+    {
+      "name": "http.client",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "31649db52b9595a4",
+      "parent_id": "539b55542646f539",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "http.status_code": 200
+      },
+      "start": 1792186795947958900,
+      "end": 1792186795971821300,
+      "service": "analysis-1"
+    },
+    {
+      "name": "POST /screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "a4d8d84081cb0193",
+      "parent_id": "31649db52b9595a4",
+      "attributes": {
+        "server.address": "127.0.0.1",
+        "server.port": 18763,
+        "url.path": "/screen",
+        "url.scheme": "http",
+        "http.request.method": "POST",
+        "network.protocol.version": "1.1",
+        "http.route": "/screen",
+        "http.response.status_code": 200
+      },
+      "start": 1792186795951691600,
+      "end": 1792186795971397700,
+      "service": "safety"
+    },
+    {
+      "name": "safety./screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "393e287ca0e850e4",
+      "parent_id": "31649db52b9595a4",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2"
+      },
+      "start": 1792186795952728000,
+      "end": 1792186795965279900,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.dependencies",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "d7dae45a4469e33b",
+      "parent_id": "393e287ca0e850e4",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186795955497700,
+      "end": 1792186795955820400,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.endpoint",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "816c1d8ddd7b105b",
+      "parent_id": "393e287ca0e850e4",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186795959548100,
+      "end": 1792186795959819300,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.serialization",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "51974f1b0138dda5",
+      "parent_id": "393e287ca0e850e4",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186795962669200,
+      "end": 1792186795962846200,
+      "service": "safety"
+    },
+    {
+      "name": "http.client",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "969bce7854d37a50",
+      "parent_id": "539b55542646f539",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "http.status_code": 200
+      },
+      "start": 1792186795977451500,
+      "end": 1792186795997434200,
+      "service": "analysis-1"
+    },
+    {
+      "name": "POST /screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "3ba49dabcf688179",
+      "parent_id": "969bce7854d37a50",
+      "attributes": {
+        "server.address": "127.0.0.1",
+        "server.port": 18763,
+        "url.path": "/screen",
+        "url.scheme": "http",
+        "http.request.method": "POST",
+        "network.protocol.version": "1.1",
+        "http.route": "/screen",
+        "http.response.status_code": 200
+      },
+      "start": 1792186795981382700,
+      "end": 1792186795996142100,
+      "service": "safety"
+    },
+    {
+      "name": "safety./screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "f51fda1e478d1901",
+      "parent_id": "969bce7854d37a50",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2"
+      },
+      "start": 1792186795982251800,
+      "end": 1792186795993032700,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.dependencies",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "316fa588a94418f3",
+      "parent_id": "f51fda1e478d1901",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186795983997800,
+      "end": 1792186795984183100,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.endpoint",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "1949250ea48c1c32",
+      "parent_id": "f51fda1e478d1901",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186795987039500,
+      "end": 1792186795987439300,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.serialization",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "ace4c69b888f1e14",
+      "parent_id": "f51fda1e478d1901",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186795990744000,
+      "end": 1792186795990891900,
+      "service": "safety"
+    },
+    {
+      "name": "http.client",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "44e14d4d399645b2",
+      "parent_id": "539b55542646f539",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "http.status_code": 200
+      },
+      "start": 1792186796002545200,
+      "end": 1792186796023749900,
+      "service": "analysis-1"
+    },
+    {
+      "name": "POST /screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "a83ea793a02b710b",
+      "parent_id": "44e14d4d399645b2",
+      "attributes": {
+        "server.address": "127.0.0.1",
+        "server.port": 18763,
+        "url.path": "/screen",
+        "url.scheme": "http",
+        "http.request.method": "POST",
+        "network.protocol.version": "1.1",
+        "http.route": "/screen",
+        "http.response.status_code": 200
+      },
+      "start": 1792186796006218100,
+      "end": 1792186796022449400,
+      "service": "safety"
+    },
+    {
+      "name": "safety./screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "4a1114aac59b757b",
+      "parent_id": "44e14d4d399645b2",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2"
+      },
+      "start": 1792186796007920500,
+      "end": 1792186796019317800,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.dependencies",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "6e9a48e72af867e1",
+      "parent_id": "4a1114aac59b757b",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186796010678600,
+      "end": 1792186796011017700,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.endpoint",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "4b0d9ea2fd52dbf0",
+      "parent_id": "4a1114aac59b757b",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186796014312100,
+      "end": 1792186796014585900,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.serialization",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "0c56810bd732474c",
+      "parent_id": "4a1114aac59b757b",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186796017041600,
+      "end": 1792186796017234200,
+      "service": "safety"
+    },
+    {
+      "name": "http.client",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "9cd6de6204feb979",
+      "parent_id": "539b55542646f539",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "http.status_code": 200
+      },
+      "start": 1792186796028390800,
+      "end": 1792186796049285000,
+      "service": "analysis-1"
+    },
+    {
+      "name": "POST /screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "a65534710d631f71",
+      "parent_id": "9cd6de6204feb979",
+      "attributes": {
+        "server.address": "127.0.0.1",
+        "server.port": 18763,
+        "url.path": "/screen",
+        "url.scheme": "http",
+        "http.request.method": "POST",
+        "network.protocol.version": "1.1",
+        "http.route": "/screen",
+        "http.response.status_code": 200
+      },
+      "start": 1792186796031665400,
+      "end": 1792186796048634600,
+      "service": "safety"
+    },
+    {
+      "name": "safety./screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "5bc3ac6bf5c79df3",
+      "parent_id": "9cd6de6204feb979",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2"
+      },
+      "start": 1792186796032527100,
+      "end": 1792186796044360600,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.dependencies",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "fcb17d2ab0c48301",
+      "parent_id": "5bc3ac6bf5c79df3",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186796034637300,
+      "end": 1792186796034920800,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.endpoint",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "49c8c86b4b1ed3f3",
+      "parent_id": "5bc3ac6bf5c79df3",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186796038569200,
+      "end": 1792186796038842300,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.serialization",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "680405a8010f001b",
+      "parent_id": "5bc3ac6bf5c79df3",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186796041980200,
+      "end": 1792186796042177900,
+      "service": "safety"
+    },
+    {
+      "name": "http.client",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "753c100742b4938c",
+      "parent_id": "539b55542646f539",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "http.status_code": 200
+      },
+      "start": 1792186796053022500,
+      "end": 1792186796076286700,
+      "service": "analysis-1"
+    },
+    {
+      "name": "POST /screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "9faf7b2f821c6e67",
+      "parent_id": "753c100742b4938c",
+      "attributes": {
+        "server.address": "127.0.0.1",
+        "server.port": 18763,
+        "url.path": "/screen",
+        "url.scheme": "http",
+        "http.request.method": "POST",
+        "network.protocol.version": "1.1",
+        "http.route": "/screen",
+        "http.response.status_code": 200
+      },
+      "start": 1792186796055677800,
+      "end": 1792186796076330100,
+      "service": "safety"
+    },
+    {
+      "name": "safety./screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "a754bc92be57856d",
+      "parent_id": "753c100742b4938c",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2"
+      },
+      "start": 1792186796056535400,
+      "end": 1792186796068391800,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.dependencies",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "a9850c946be96009",
+      "parent_id": "a754bc92be57856d",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186796058880700,
+      "end": 1792186796059156900,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.endpoint",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "25777965e7866e34",
+      "parent_id": "a754bc92be57856d",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186796062122700,
+      "end": 1792186796062372400,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.serialization",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "0679673ad9cdffa6",
+      "parent_id": "a754bc92be57856d",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186796065172800,
+      "end": 1792186796065428200,
+      "service": "safety"
+    },
+    {
+      "name": "http.client",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "94e5249ccbb52737",
+      "parent_id": "539b55542646f539",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "http.status_code": 200
+      },
+      "start": 1792186796081534300,
+      "end": 1792186796107923300,
+      "service": "analysis-1"
+    },
+    {
+      "name": "POST /screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "576f6e6748d27370",
+      "parent_id": "94e5249ccbb52737",
+      "attributes": {
+        "server.address": "127.0.0.1",
+        "server.port": 18763,
+        "url.path": "/screen",
+        "url.scheme": "http",
+        "http.request.method": "POST",
+        "network.protocol.version": "1.1",
+        "http.route": "/screen",
+        "http.response.status_code": 200
+      },
+      "start": 1792186796084674300,
+      "end": 1792186796107030100,
+      "service": "safety"
+    },
+    {
+      "name": "safety./screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "44935e2745138433",
+      "parent_id": "94e5249ccbb52737",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2"
+      },
+      "start": 1792186796085771600,
+      "end": 1792186796101842200,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.dependencies",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "58372baa11285ac0",
+      "parent_id": "44935e2745138433",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186796088663000,
+      "end": 1792186796088906200,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.endpoint",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "2c80bbdd2a2c4244",
+      "parent_id": "44935e2745138433",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186796094759600,
+      "end": 1792186796095099200,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.serialization",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "0d50c3adb0ae55b3",
+      "parent_id": "44935e2745138433",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186796098550700,
+      "end": 1792186796098727800,
+      "service": "safety"
+    },
+    {
+      "name": "http.client",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "a519be6b5cb28cf4",
+      "parent_id": "539b55542646f539",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "http.status_code": 200
+      },
+      "start": 1792186796115014500,
+      "end": 1792186796138832100,
+      "service": "analysis-1"
+    },
+    {
+      "name": "POST /screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "e6f8f35fbcc94217",
+      "parent_id": "a519be6b5cb28cf4",
+      "attributes": {
+        "server.address": "127.0.0.1",
+        "server.port": 18763,
+        "url.path": "/screen",
+        "url.scheme": "http",
+        "http.request.method": "POST",
+        "network.protocol.version": "1.1",
+        "http.route": "/screen",
+        "http.response.status_code": 200
+      },
+      "start": 1792186796119210400,
+      "end": 1792186796137737700,
+      "service": "safety"
+    },
+    {
+      "name": "safety./screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "32a71d724601b0b5",
+      "parent_id": "a519be6b5cb28cf4",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2"
+      },
+      "start": 1792186796120086200,
+      "end": 1792186796132961800,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.dependencies",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "f5f85afb917768ea",
+      "parent_id": "32a71d724601b0b5",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186796122923800,
+      "end": 1792186796123197100,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.endpoint",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "3b1c89461b8bb6cf",
+      "parent_id": "32a71d724601b0b5",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186796126606900,
+      "end": 1792186796126962300,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.serialization",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "deed1d3da5c2148a",
+      "parent_id": "32a71d724601b0b5",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186796130622700,
+      "end": 1792186796130782100,
+      "service": "safety"
+    },
+    {
+      "name": "http.client",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "ecfa7bcb9d001f0a",
+      "parent_id": "539b55542646f539",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "http.status_code": 200
+      },
+      "start": 1792186796143600800,
+      "end": 1792186796166101700,
+      "service": "analysis-1"
+    },
+    {
+      "name": "POST /screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "070d0557da2ef3ff",
+      "parent_id": "ecfa7bcb9d001f0a",
+      "attributes": {
+        "server.address": "127.0.0.1",
+        "server.port": 18763,
+        "url.path": "/screen",
+        "url.scheme": "http",
+        "http.request.method": "POST",
+        "network.protocol.version": "1.1",
+        "http.route": "/screen",
+        "http.response.status_code": 200
+      },
+      "start": 1792186796147188000,
+      "end": 1792186796164962100,
+      "service": "safety"
+    },
+    {
+      "name": "safety./screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "439b8c213e7e0081",
+      "parent_id": "ecfa7bcb9d001f0a",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2"
+      },
+      "start": 1792186796147978900,
+      "end": 1792186796160917200,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.dependencies",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "0676d1cd34becb84",
+      "parent_id": "439b8c213e7e0081",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186796150037300,
+      "end": 1792186796150282700,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.endpoint",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "577f0e33fe545639",
+      "parent_id": "439b8c213e7e0081",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186796152922000,
+      "end": 1792186796153200900,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.serialization",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "88d855b06b99b693",
+      "parent_id": "439b8c213e7e0081",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186796156806100,
+      "end": 1792186796157062400,
+      "service": "safety"
+    },
+    {
+      "name": "http.client",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "e473d55d21fdf90e",
+      "parent_id": "539b55542646f539",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "http.status_code": 200
+      },
+      "start": 1792186796172918700,
+      "end": 1792186805557597300,
+      "service": "analysis-1"
+    },
+    {
+      "name": "tool",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "7faddd92dfcab869",
+      "parent_id": "b542e8d752220a57",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "agent": "analysis",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "prompt_version": "v4"
+      },
+      "start": 1792186805566745000,
+      "end": 1792186805567652400,
+      "service": "analysis-1"
+    },
+    {
+      "name": "plan",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "c78cb1afb3a90860",
+      "parent_id": "b542e8d752220a57",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "agent": "analysis",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "prompt_version": "v4"
+      },
+      "start": 1792186805573545100,
+      "end": 1792186813577704400,
+      "service": "analysis-1"
+    },
+    {
+      "name": "http.client",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "b22eb415d4e210de",
+      "parent_id": "c78cb1afb3a90860",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "http.status_code": 200
+      },
+      "start": 1792186805603661600,
+      "end": 1792186813573496300,
+      "service": "analysis-1"
+    },
+    {
+      "name": "draft",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "c8fab6d895458fb8",
+      "parent_id": "b542e8d752220a57",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "agent": "analysis",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "prompt_version": "v4"
+      },
+      "start": 1792186813582544400,
+      "end": 1792186813586109200,
+      "service": "analysis-1"
+    },
+    {
+      "name": "agent.verification",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "950a647242967b30",
+      "parent_id": "b542e8d752220a57",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2"
+      },
+      "start": 1792186813629093100,
+      "end": 1792186815936590100,
+      "service": "verification"
+    },
+    {
+      "name": "verify",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "01764e0aaab4511c",
+      "parent_id": "950a647242967b30",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "agent": "verification",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "prompt_version": "v4"
+      },
+      "start": 1792186813649110800,
+      "end": 1792186815914326800,
+      "service": "verification"
+    },
+    {
+      "name": "http.client",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "3ac4e808aad4e743",
+      "parent_id": "01764e0aaab4511c",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "http.status_code": 200
+      },
+      "start": 1792186813650359500,
+      "end": 1792186815609830000,
+      "service": "verification"
+    },
+    {
+      "name": "POST /screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "a4be787414361680",
+      "parent_id": "3ac4e808aad4e743",
+      "attributes": {
+        "server.address": "127.0.0.1",
+        "server.port": 18763,
+        "url.path": "/screen",
+        "url.scheme": "http",
+        "http.request.method": "POST",
+        "network.protocol.version": "1.1",
+        "http.route": "/screen",
+        "http.response.status_code": 200
+      },
+      "start": 1792186815591662000,
+      "end": 1792186815606894300,
+      "service": "safety"
+    },
+    {
+      "name": "safety./screen",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "6bb859a2672761f2",
+      "parent_id": "3ac4e808aad4e743",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2"
+      },
+      "start": 1792186815592318300,
+      "end": 1792186815603504900,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.dependencies",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "335366ae3823ddff",
+      "parent_id": "6bb859a2672761f2",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186815593663100,
+      "end": 1792186815593809700,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.endpoint",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "12f2a0d12923485f",
+      "parent_id": "6bb859a2672761f2",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186815596936000,
+      "end": 1792186815597112800,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.serialization",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "c2244dcd8453302d",
+      "parent_id": "6bb859a2672761f2",
+      "attributes": {
+        "code.function.name": "app.safety_service.scan"
+      },
+      "start": 1792186815600754300,
+      "end": 1792186815600906000,
+      "service": "safety"
+    },
+    {
+      "name": "http.client",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "de56e38e3e7376d0",
+      "parent_id": "01764e0aaab4511c",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "http.status_code": 200
+      },
+      "start": 1792186815617395300,
+      "end": 1792186815911960500,
+      "service": "verification"
+    },
+    {
+      "name": "POST /entail",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "38a171e8fc166adf",
+      "parent_id": "de56e38e3e7376d0",
+      "attributes": {
+        "server.address": "127.0.0.1",
+        "server.port": 18763,
+        "url.path": "/entail",
+        "url.scheme": "http",
+        "http.request.method": "POST",
+        "network.protocol.version": "1.1",
+        "http.route": "/entail",
+        "http.response.status_code": 200
+      },
+      "start": 1792186815620166400,
+      "end": 1792186815910946900,
+      "service": "safety"
+    },
+    {
+      "name": "safety./entail",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "4229f9aae44d835d",
+      "parent_id": "de56e38e3e7376d0",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2"
+      },
+      "start": 1792186815620966000,
+      "end": 1792186815907893600,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.dependencies",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "0644785c0b5aebcc",
+      "parent_id": "4229f9aae44d835d",
+      "attributes": {
+        "code.function.name": "app.safety_service.nli"
+      },
+      "start": 1792186815622504800,
+      "end": 1792186815622678600,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.endpoint",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "dcf742e0d66caa1c",
+      "parent_id": "4229f9aae44d835d",
+      "attributes": {
+        "code.function.name": "app.safety_service.nli"
+      },
+      "start": 1792186815625288500,
+      "end": 1792186815903155700,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.serialization",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "f0f1ee38cc4772e5",
+      "parent_id": "4229f9aae44d835d",
+      "attributes": {
+        "code.function.name": "app.safety_service.nli"
+      },
+      "start": 1792186815905641500,
+      "end": 1792186815905750300,
+      "service": "safety"
+    },
+    {
+      "name": "agent.quality",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "9a312e6ab5c82ac9",
+      "parent_id": "950a647242967b30",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2"
+      },
+      "start": 1792186815975779100,
+      "end": 1792186817354153600,
+      "service": "verification"
+    },
+    {
+      "name": "http.client",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "e0676aa4c7dad203",
+      "parent_id": "9a312e6ab5c82ac9",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2",
+        "http.status_code": 200
+      },
+      "start": 1792186815976343500,
+      "end": 1792186817351688400,
+      "service": "verification"
+    },
+    {
+      "name": "POST /relevance",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "dc0ea5449175ead4",
+      "parent_id": "e0676aa4c7dad203",
+      "attributes": {
+        "server.address": "127.0.0.1",
+        "server.port": 18763,
+        "url.path": "/relevance",
+        "url.scheme": "http",
+        "http.request.method": "POST",
+        "network.protocol.version": "1.1",
+        "http.route": "/relevance",
+        "http.response.status_code": 200
+      },
+      "start": 1792186815979720400,
+      "end": 1792186817350647500,
+      "service": "safety"
+    },
+    {
+      "name": "safety./relevance",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "e4e67ca8a3883955",
+      "parent_id": "e0676aa4c7dad203",
+      "attributes": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "correlation_id": "7349c96b-325d-4f38-9ccc-9030c08668c2"
+      },
+      "start": 1792186815980472600,
+      "end": 1792186817347593600,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.dependencies",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "f1b1a703b2e6f0e8",
+      "parent_id": "e4e67ca8a3883955",
+      "attributes": {
+        "code.function.name": "app.safety_service.context_relevance"
+      },
+      "start": 1792186815982923100,
+      "end": 1792186815983213800,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.endpoint",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "acb5b8b0d0ba489d",
+      "parent_id": "e4e67ca8a3883955",
+      "attributes": {
+        "code.function.name": "app.safety_service.context_relevance"
+      },
+      "start": 1792186815985984800,
+      "end": 1792186817342010300,
+      "service": "safety"
+    },
+    {
+      "name": "fastapi.serialization",
+      "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+      "span_id": "abb7672a60775b42",
+      "parent_id": "e4e67ca8a3883955",
+      "attributes": {
+        "code.function.name": "app.safety_service.context_relevance"
+      },
+      "start": 1792186817345048000,
+      "end": 1792186817345210700,
+      "service": "safety"
+    }
+  ]
+}

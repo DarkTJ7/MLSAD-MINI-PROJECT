@@ -1,0 +1,22 @@
+{
+  "policy_number": "DEMO-001",
+  "vehicle_registration": "KA01AB1234",
+  "insurer": "HDFC ERGO",
+  "product": "private_car_package",
+  "policy_start": "2026-01-01",
+  "policy_end": "2026-12-31",
+  "loss_date": "2026-10-01",
+  "reported_date": "2026-10-02",
+  "description": "I was making a food delivery run in my own car when the accident happened.",
+  "location": "Bengaluru",
+  "country": "India",
+  "vehicle_use": "personal",
+  "estimated_repair": 12000,
+  "idv": 500000,
+  "network_garage": true,
+  "driver_licensed": true,
+  "intoxicated": false,
+  "third_party_involved": false,
+  "police_report": false,
+  "retrieval_version": "v4"
+}

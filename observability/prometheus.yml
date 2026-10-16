@@ -1,0 +1,42 @@
+global:
+  scrape_interval: 5s
+scrape_configs:
+  - job_name: api
+    static_configs:
+      - targets: ['API_TARGET']
+  - job_name: analysis
+    dns_sd_configs:
+      - names: ['ANALYSIS_DNS']
+        type: A
+        port: 9101
+  - job_name: verification
+    dns_sd_configs:
+      - names: ['VERIFICATION_DNS']
+        type: A
+        port: 9102
+  - job_name: stub
+    static_configs:
+      - targets: ['STUB_TARGET']
+  - job_name: safety
+    static_configs:
+      - targets: ['SAFETY_TARGET']
+  - job_name: containers
+    static_configs:
+      - targets: ['CADVISOR_TARGET']
+  - job_name: redis
+    static_configs:
+      - targets: ['REDIS_EXPORTER_TARGET']
+  - job_name: tracing
+    static_configs:
+      - targets: ['JAEGER_TARGET']
+  - job_name: dashboard
+    static_configs:
+      - targets: ['GRAFANA_TARGET']
+  - job_name: prometheus
+    static_configs:
+      - targets: ['PROMETHEUS_TARGET']
+  - job_name: local-model
+    dns_sd_configs:
+      - names: ['LOCAL_MODEL_DNS']
+        type: A
+        port: 8003

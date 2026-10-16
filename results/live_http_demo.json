@@ -1,0 +1,2698 @@
+{
+  "environment": "native Windows processes, Redis community Windows port; NOT Docker",
+  "base_url": "http://127.0.0.1:18766",
+  "checks": [
+    {
+      "case": "malformed",
+      "status_code": 422,
+      "passed": true,
+      "body": {
+        "quarantine_id": "8414a566-0dac-4d49-adf0-6848a4b34869",
+        "errors": [
+          {
+            "type": "greater_than_equal",
+            "loc": [
+              "body",
+              "estimated_repair"
+            ],
+            "msg": "Input should be greater than or equal to 0",
+            "ctx": {
+              "ge": 0.0
+            }
+          }
+        ],
+        "agent_started": false
+      }
+    },
+    {
+      "case": "injection",
+      "status_code": 422,
+      "passed": true,
+      "body": {
+        "detail": {
+          "quarantine_id": "cafc9e1b-18c1-4a66-bde9-288742248f7c",
+          "reason": "prompt_injection",
+          "agent_started": false
+        }
+      }
+    },
+    {
+      "case": "valid",
+      "status": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "status": "completed",
+        "result": {
+          "recommendation_only": true,
+          "classification": "own_damage",
+          "coverage_position": "potentially_covered",
+          "queue": "fast-track",
+          "reason": "A listed cover may apply, subject to exclusions, the schedule and human verification.",
+          "requires_human": true,
+          "escalation": "A human handler must verify the schedule, facts and applicable endorsements.",
+          "citations": [
+            {
+              "clause_id": "hdfc_private_car_package:p2:c0",
+              "document": "hdfc_private_car_package.pdf",
+              "page": 2,
+              "quote": "Whereas the insured by a proposal and declaration dated as stated in the Schedule which shall be the basis of this contract and is deemed to be incorporated herein has applied to the Company for the insurance hereinafter contained and has paid the premium mentioned in the schedule as consideration for such insurance in respect of accidental loss or damage occurring during the period of insurance. NOW THIS POLICY WITNESSETH: That subject to the terms exceptions and conditions contained herein or endorsed or expressed hereon; The Company will indemnify the insured against loss or damage to the vehicle insured hereunder and/ or its accessories whilst thereon I. by fire explosion self ignition or lightning II. by burglary housebreaking or theft III. by riot and strike IV. by earthquake (fire and shock damage) V. by flood typhoon hurricane storm tempest inundation cyclone hailstorm frost VI. by accidental external means VII. by malicious act VIII. by terrorist activity IX. whilst in transit"
+            },
+            {
+              "clause_id": "hdfc_private_car_package:p3:c1",
+              "document": "hdfc_private_car_package.pdf",
+              "page": 3,
+              "quote": "vehicle insured herein is a. being used otherwise than in accordance with the \u2018Limitations as to Use\u2019 or b. being driven by or is for the purpose of being driven by him/her in the charge of any person other than a Driver as stated in the Driver's Clause 4. i. any accidental loss or damage to any property whatsoever or any loss or expense whatsoever resulting or arising there from or any consequential loss ii. any liability of whatsoever nature directly or indirectly caused by or contributed to by or arising from ionising radiations or contamination by radioactivity from any nuclear fuel or from any nuclear waste from the combustion of nuclear fuel. For the purpose of this exception combustion shall include any self-sustaining process of nuclear fission 5. any accidental loss or damage or liability directly or indirectly caused by or contributed to by or arising from nuclear weapons material. 6. any accidental loss damage and/or liability directly or indirectly or proximately or"
+            },
+            {
+              "clause_id": "hdfc_private_car_package:p1:c2",
+              "document": "hdfc_private_car_package.pdf",
+              "page": 1,
+              "quote": "for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or theft unless the vehicle is stolen at the same time (applicable to all commercial vehicles & two wheelers) HOW DO I FILE A CLAIM? For Accidental Damage to Insured Vehicle (Own Damage Claims): \u00a1Call our customer care Toll-free 1800-2-700-700 (Accessible from India only) if the vehicle meets with an accident and provide your policy number for reference and register the claim \u00a1Alternatively, you can visit and register on IPO (available on website/Download IPO app on your smart phone) by providing personal details, link your policy and register your claim under \"Claims\" tab Please keep the following details handy while intimating a claim a. Policy No. b. Registration details/ RC copy c. Drivers details at the time of accident including driving license number d. FIR on a case to case basis e. Repair estimate WHAT"
+            }
+          ],
+          "verified": true,
+          "prompt_version": "v4",
+          "limitations": [
+            "Policy schedule and activated endorsements are not in this public corpus.",
+            "Fast-track threshold is an operational demo assumption, not a policy entitlement.",
+            "Local lexical embeddings and rule-based drafting have limited language understanding."
+          ]
+        },
+        "trace_path": "/runs/57130783-f470-477a-9571-5b39ad309330/trace",
+        "elapsed_seconds": 27.023149490356445
+      },
+      "trace": {
+        "run_id": "57130783-f470-477a-9571-5b39ad309330",
+        "events": [
+          {
+            "run_id": "57130783-f470-477a-9571-5b39ad309330",
+            "agent": "analysis",
+            "step": "plan",
+            "seconds": 2.1783910000231117,
+            "outcome": "success",
+            "details": {
+              "stage": "initial"
+            },
+            "time": 1792186791.1449585,
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "57130783-f470-477a-9571-5b39ad309330",
+            "agent": "analysis",
+            "step": "tool",
+            "seconds": 0.00044249999336898327,
+            "outcome": "success",
+            "details": {
+              "tool": "request_fields",
+              "fields": {
+                "vehicle_use": "personal",
+                "country": "India",
+                "driver_licensed": true,
+                "intoxicated": false,
+                "estimated_repair": 12000.0,
+                "idv": 500000.0
+              }
+            },
+            "time": 1792186791.152057,
+            "prompt_version": "v4"
+          },
+          {
+            "agent": "analysis",
+            "step": "provider",
+            "seconds": 2.5210594000527635,
+            "attempts": 1,
+            "errors": [],
+            "prompt_tokens": 225,
+            "completion_tokens": 9,
+            "cost_usd": 0.0,
+            "usage_source": "provider",
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "57130783-f470-477a-9571-5b39ad309330",
+            "agent": "analysis",
+            "step": "plan",
+            "seconds": 2.5254459000425413,
+            "outcome": "success",
+            "details": {
+              "stage": "fields_read"
+            },
+            "time": 1792186793.6827211,
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "57130783-f470-477a-9571-5b39ad309330",
+            "agent": "analysis",
+            "step": "tool",
+            "seconds": 0.0054847999708727,
+            "outcome": "success",
+            "details": {
+              "tool": "corpus_search",
+              "query": "SECTION I loss damage vehicle accidental external means",
+              "passages": [
+                {
+                  "clause_id": "hdfc_private_car_package:p1:c1",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 1,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "for owner driver and optional cover for passengers covering accidental death and permanent total disability a. General aging, wear & tear, mechanical or electrical breakdown, failure, depreciation, any consequential loss b. Damage by a person driving without a valid license c. Damage by a person driving under the influence of liquor or drugs d. Loss/damage attributable to war, mutiny, nuclear risks e. Damage to tyres and tubes, unless damaged during an accident f. Usage on hire & reward (applicable for all classes except public commercial vehicles) g. Loss or damage to bonnet side parts, mudguard, bumpers, lamps, tyres, tubes, headlights, paint work (applicable for all commercial vehicles; unless opted additionally) h. Loss or damage resulting from overturning arising out of operation as a tool (applicable for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or",
+                  "score": 1.542879581451416
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p1:c0",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 1,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "* supports smart phone based on Blackberry, iPhone, Windows 8 & Android platform. Manage Your @ hdfcergo.com / Smartphones* Portfolio Download IPO mobile application from IPO website post log in WHAT ARE THE MAJOR COVERS UNDER THE POLICY? WHAT ARE THE MAJOR EXCLUSIONS OF THE POLICY? Loss or Damage to the Insured Vehicle caused due to: a. Fire, explosion, self ignition or lightning. b Burglary, housebreaking or theft c All act of God perils like earthquake, flood, cyclone etc d Accidental external means, terrorism, riot and strike Liability to Third Parties: Provides cover for any legal liability arising out of the use of the vehicle for a Accidental death / injury to any third party b Any damage to property owned by third party Personal Accident Cover: The policy provides for a mandatory Personal Accident cover for owner driver and optional cover for passengers covering accidental death and permanent total disability a. General aging, wear & tear, mechanical or electrical breakdown,",
+                  "score": 1.6166200637817383
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p1:c2",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 1,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or theft unless the vehicle is stolen at the same time (applicable to all commercial vehicles & two wheelers) HOW DO I FILE A CLAIM? For Accidental Damage to Insured Vehicle (Own Damage Claims): \u00a1Call our customer care Toll-free 1800-2-700-700 (Accessible from India only) if the vehicle meets with an accident and provide your policy number for reference and register the claim \u00a1Alternatively, you can visit and register on IPO (available on website/Download IPO app on your smart phone) by providing personal details, link your policy and register your claim under \"Claims\" tab Please keep the following details handy while intimating a claim a. Policy No. b. Registration details/ RC copy c. Drivers details at the time of accident including driving license number d. FIR on a case to case basis e. Repair estimate WHAT",
+                  "score": 1.694455862045288
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p2:c2",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 2,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "painting charges, the material component shall be considered as 25% of total painting charges for the purpose of applying the depreciation. The Company shall not be liable to make any payment in respect of:- a. consequential loss, depreciation, wear and tear, mechanical or electrical breakdown, failures or breakages; b. damage to tyres and tubes unless the vehicle is damaged at the same time in which case the liability of the company shall be limited to 50% of the cost of replacement. And c. any accidental loss or damage suffered whilst the insured or any person driving the vehicle with the knowledge and consent of the insured is under the influence of intoxicating liquor or drugs. In the event of the vehicle being disabled by reason of loss or damage covered under this Policy the Company will bear the reasonable cost of protection and removal to SECTION I. LOSS OF OR DAMAGE TO THE VEHICLE INSURED HDFC ERGO General Insurance Company Limited STANDARD FORM FOR PRIVATE CAR PACKAGE POLICY",
+                  "score": 1.7031073570251465
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p3:c1",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 3,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "vehicle insured herein is a. being used otherwise than in accordance with the \u2018Limitations as to Use\u2019 or b. being driven by or is for the purpose of being driven by him/her in the charge of any person other than a Driver as stated in the Driver's Clause 4. i. any accidental loss or damage to any property whatsoever or any loss or expense whatsoever resulting or arising there from or any consequential loss ii. any liability of whatsoever nature directly or indirectly caused by or contributed to by or arising from ionising radiations or contamination by radioactivity from any nuclear fuel or from any nuclear waste from the combustion of nuclear fuel. For the purpose of this exception combustion shall include any self-sustaining process of nuclear fission 5. any accidental loss or damage or liability directly or indirectly caused by or contributed to by or arising from nuclear weapons material. 6. any accidental loss damage and/or liability directly or indirectly or proximately or",
+                  "score": 1.704608678817749
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p2:c0",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 2,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "Whereas the insured by a proposal and declaration dated as stated in the Schedule which shall be the basis of this contract and is deemed to be incorporated herein has applied to the Company for the insurance hereinafter contained and has paid the premium mentioned in the schedule as consideration for such insurance in respect of accidental loss or damage occurring during the period of insurance. NOW THIS POLICY WITNESSETH: That subject to the terms exceptions and conditions contained herein or endorsed or expressed hereon; The Company will indemnify the insured against loss or damage to the vehicle insured hereunder and/ or its accessories whilst thereon I. by fire explosion self ignition or lightning II. by burglary housebreaking or theft III. by riot and strike IV. by earthquake (fire and shock damage) V. by flood typhoon hurricane storm tempest inundation cyclone hailstorm frost VI. by accidental external means VII. by malicious act VIII. by terrorist activity IX. whilst in transit",
+                  "score": 1.7252657413482666
+                }
+              ]
+            },
+            "time": 1792186793.6933143,
+            "prompt_version": "v4"
+          },
+          {
+            "agent": "analysis",
+            "step": "provider",
+            "seconds": 2.065693199983798,
+            "attempts": 1,
+            "errors": [],
+            "prompt_tokens": 382,
+            "completion_tokens": 16,
+            "cost_usd": 0.0,
+            "usage_source": "provider",
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "57130783-f470-477a-9571-5b39ad309330",
+            "agent": "analysis",
+            "step": "plan",
+            "seconds": 2.21956430003047,
+            "outcome": "success",
+            "details": {
+              "stage": "base_read"
+            },
+            "time": 1792186795.9176311,
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "57130783-f470-477a-9571-5b39ad309330",
+            "agent": "analysis",
+            "step": "tool",
+            "seconds": 0.005232900031842291,
+            "outcome": "success",
+            "details": {
+              "tool": "corpus_search",
+              "query": "terms exceptions conditions general exceptions limitations as to use hire reward licence intoxicating mechanical breakdown claims process",
+              "passages": [
+                {
+                  "clause_id": "hdfc_private_car_package:p8:c3",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 8,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "otherwise to the terms, conditions limitations and exceptions of this policy. * Delete in the case of Liability to the public risks only policies. ** Insert value of trailer as declared at inception of insurance or any renewal thereof. 26. IMT.31. Reliability Trials and Rallies. (Applicable to Private Cars) In consideration of the payment of an additional premium it is hereby understood and agreed that the indemnity granted by this policy is extended to apply whilst the vehicle insured is engaged in ....\u2026\u2026.... ......*. to be held at \u2026\u2026..**... on or about the date of ..../\u2026/ \u2026 ..... under the auspices of ............\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026.# Provided that, a. No indemnity shall be granted by this Endorsement to \u2026\u2026\u2026\u2026\u2026.... # b. This policy does not cover use for organised racing, pace making or speed testing. c. During the course of the \u2026\u2026\u2026\u2026\u2026\u2026\u2026* the Insurer shall not be liable in respect of death of or bodily injury to any person being carried in or upon or entering or getting on to or alighting from",
+                  "score": 1.6242765188217163
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p1:c2",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 1,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or theft unless the vehicle is stolen at the same time (applicable to all commercial vehicles & two wheelers) HOW DO I FILE A CLAIM? For Accidental Damage to Insured Vehicle (Own Damage Claims): \u00a1Call our customer care Toll-free 1800-2-700-700 (Accessible from India only) if the vehicle meets with an accident and provide your policy number for reference and register the claim \u00a1Alternatively, you can visit and register on IPO (available on website/Download IPO app on your smart phone) by providing personal details, link your policy and register your claim under \"Claims\" tab Please keep the following details handy while intimating a claim a. Policy No. b. Registration details/ RC copy c. Drivers details at the time of accident including driving license number d. FIR on a case to case basis e. Repair estimate WHAT",
+                  "score": 1.6275725364685059
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p5:c3",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 5,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "DAMAGE TO THE SAID VEHICLE CAUSED BY FIRE EXPLOSION SELF-IGNITION OR LIGHTNING OR BURGLARY, HOUSEBREAKING, THEFT OR RIOT STRIKE MALICIOUS DAMAGE TERRORISM OR STORM TEMPEST FLOOD INUNDATION OR EARTHQUAKE PERILS. Subject otherwise to the terms exceptions conditions and limitations of this Policy. NB.1. In case of Liability Only Policies the words in CAPITALS should be deleted. NB.2. In case of policies covering Liability Only and a. Fire risks, the words \u201c BURGLARY HOUSEBREAKING OR THEFT\u201d are to be deleted; b. Theft risks, the words\u2019 \u201cFIRE EXPLOSION SELF IGNITION OR LIGHTNING\u201d are to be deleted. c. Fire and Theft risks no part of the words in capitals are to be deleted. 10. IMT. 11(C). Termination of the UNDECLARED Period of Vehicle Laid up. It is hereby understood and agreed that the insurance by this Policy in respect of vehicle no. \u2026\u2026\u2026.. insured hereunder is reinstated in full from \u2026\u2026./\u2026\u2026/\u2026\u2026and the Endorsement IMT 11(B) attaching to this policy shall be deemed to be cancelled. It is",
+                  "score": 1.6473228931427002
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p4:c2",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 4,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "in the business or profession of \u2026\u2026\u2026\u2026\u2026. who shall be deemed to be the insured and whose proposal and declaration dated .. /\u2026/\u2026. shall be deemed to be incorporated in and to be the basis of this contract. Provided always that for the purpose of the No Claim Bonus, no period during which the interest in this policy has been vested in any previous Insured shall accrue to the benefit of.................. Subject otherwise to the terms exceptions conditions and limitations of this policy. 3. IMT.4. Change of Vehicle It is hereby understood and agreed that as from \u2026/\u2026../ \u2026... the vehicle bearing Registration Number \u2026\u2026\u2026\u2026.. is deemed to be deleted from the Schedule of the Policy and the vehicle with details specified hereunder is deemed to be included therein- In consequence of this change, an extra / refund premium of Rs\u2026.... is charged/allowed to the insured. Subject otherwise to the terms exceptions conditions and limitations of this policy. 4. IMT.6. Lease Agreement It is hereby",
+                  "score": 1.6512033939361572
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p1:c0",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 1,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "* supports smart phone based on Blackberry, iPhone, Windows 8 & Android platform. Manage Your @ hdfcergo.com / Smartphones* Portfolio Download IPO mobile application from IPO website post log in WHAT ARE THE MAJOR COVERS UNDER THE POLICY? WHAT ARE THE MAJOR EXCLUSIONS OF THE POLICY? Loss or Damage to the Insured Vehicle caused due to: a. Fire, explosion, self ignition or lightning. b Burglary, housebreaking or theft c All act of God perils like earthquake, flood, cyclone etc d Accidental external means, terrorism, riot and strike Liability to Third Parties: Provides cover for any legal liability arising out of the use of the vehicle for a Accidental death / injury to any third party b Any damage to property owned by third party Personal Accident Cover: The policy provides for a mandatory Personal Accident cover for owner driver and optional cover for passengers covering accidental death and permanent total disability a. General aging, wear & tear, mechanical or electrical breakdown,",
+                  "score": 1.6563959121704102
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p6:c2",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 6,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "self injury suicide or attempted suicide physical defect or infirmity or b. an accident happening whilst such person is under the influence of intoxicating liquor or drugs. 3. such compensation shall be payable only with the approval of the insured named in the policy and directly to the injured person or his/her legal representative(s) whose receipt shall be a full discharge in respect of the injury of such person. 4. not more than....** persons/passengers are in the vehicle insured at the time of occurrence of such injury. Subject otherwise to the terms exceptions conditions and limitations of this policy. * The Capital Sum Insured (CSI) per passenger is to be inserted. ** The registered sitting capacity of the vehicle insured is to be inserted. 14. IMT 17. Personal Accident Cover to Paid Drivers, Cleaners and Conductors: (Applicable to all classes of vehicles) In consideration of the payment of an additional premium, it is hereby understood and agreed that the insurer undertakes to",
+                  "score": 1.6571431159973145
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p8:c9",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 8,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "reasonable precautions to prevent accidents and shall comply with all statutory obligations; records on demand. *3. the insured shall keep record of the name of each paid driver conductor cleaner or persons employed in loading and/or unloading and the amount of wages and salaries and other earnings paid to such employees and shall at all times allow the insurer to inspect such records on demand. 4. in the event of the policy being cancelled at the request of the insured no refund of the premium paid in respect of this Endorsement will be allowed. Subject otherwise to the terms conditions limitations and exceptions of the policy except so far as necessary to meet the requirements of the Motor Vehicles Act, 1988. * In case of Private cars/ motorised two wheelers (not used for hire or",
+                  "score": 1.6689645051956177
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p1:c5",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 1,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "Andheri (East), Mumbai - 400 059 IPO :Raise a service request on Insurance Portfolio Organiser (IPO) For any endorsments on your policy you can contact us through any of the below mentioned modes: E mail us at : care@hdfcergo.com OR Call Toll-free: 1800 2 700 700 (Accessible from India only) OR Fax your request at: 022 6638 3669 OR Raise a service request on Insurance Portfolio Organizer (IPO) from www.hdfcergo.com NO CLAIM BONUS (NCB): NCB is provided for every claim free year basis the slab as provided by Tariff. How can I get No Claim Bonus Reserving Letter? NCB Reserving letter can be provided only on Sale of vehicle evidenced by transferred RC copy OR Sale Deed and Form 29 & 30. The OD section of the policy needs to be transferred to the new owner or cancelled. CLAIMS DOCUMENTS - For ACCIDENTAL DAMAGE TO INSURED VEHICLE a. Duly filled and signed claim form & satisfaction voucher b. Registration Certificate (RC) c. Driving license of the person driving at the time of the accident",
+                  "score": 1.6821470260620117
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p8:c5",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 8,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "the amount for which the insured is so responsible. 21. IMT.26. Fire and/or Theft Risks Only (Not applicable for Miscellaneous and Special Types of vehicles rateable under Class -D and Motor Trade Policies under Classes- E, F and G of the Commercial Vehicles Tariff) Notwithstanding anything to the contrary contained in the policy it is hereby understood and agreed that Section II of the Policy is deemed to be cancelled and under Section I thereof the insurer shall only be liable to indemnify the insured against loss or damage by fire explosion self ignition lightning and/or burglary housebreaking theft and riot strike malicious damage terrorism storm tempest flood inundation and earthquake perils whilst the vehicle is laid up in garage and not in use. Subject otherwise to the terms conditions limitations and exceptions of this policy. NB.i. In case of Fire Risk only, the words \u201cburglary housebreaking theft\u201d are to be deleted. NB.ii. In case of Theft Risk only, the words \u201cfire",
+                  "score": 1.6833651065826416
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p5:c8",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 5,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "Device (Not applicable to Motor Trade Policies) In consideration of certification by \u2026\u2026\u2026\u2026\u2026\u2026\u2026* that an Anti-Theft device approved by Automobile Research Association of India (ARAI), Pune has been installed in the vehicle insured herein a premium discount of Rs\u2026\u2026\u2026\u2026** is hereby allowed to the insured. It is hereby understood and agreed that the insured shall ensure at all times that this Anti-theft device installed in the vehicle insured is maintained in efficient condition till the expiry of this policy. Subject otherwise to the terms, exceptions, conditions and limitations of the policy * The name of the certifying Automobile Association is to be inserted. ** Premium discount calculated as per tariff provision is to be inserted. For mid term certification of installation of Anti Theft device pro-rata proportion of tariff discount for the unexpired period is to be inserted. 8. IMT. 11.A. Vehicle Laid Up (Lay up period declared) Notwithstanding anything to the contrary contained herein",
+                  "score": 1.6866848468780518
+                }
+              ]
+            },
+            "time": 1792186795.92886,
+            "prompt_version": "v4"
+          },
+          {
+            "agent": "analysis",
+            "step": "provider",
+            "seconds": 9.38837760000024,
+            "attempts": 1,
+            "errors": [],
+            "prompt_tokens": 381,
+            "completion_tokens": 8,
+            "cost_usd": 0.0,
+            "usage_source": "provider",
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "57130783-f470-477a-9571-5b39ad309330",
+            "agent": "analysis",
+            "step": "plan",
+            "seconds": 9.626296999980696,
+            "outcome": "success",
+            "details": {
+              "stage": "modifiers_read"
+            },
+            "time": 1792186805.5609186,
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "57130783-f470-477a-9571-5b39ad309330",
+            "agent": "analysis",
+            "step": "tool",
+            "seconds": 0.0006181999342516065,
+            "outcome": "success",
+            "details": {
+              "tool": "clause_lookup",
+              "clause_id": "hdfc_private_car_package:p1:c1",
+              "result": {
+                "clause_id": "hdfc_private_car_package:p1:c1",
+                "document": "hdfc_private_car_package.pdf",
+                "page": 1,
+                "text": "for owner driver and optional cover for passengers covering accidental death and permanent total disability a. General aging, wear & tear, mechanical or electrical breakdown, failure, depreciation, any consequential loss b. Damage by a person driving without a valid license c. Damage by a person driving under the influence of liquor or drugs d. Loss/damage attributable to war, mutiny, nuclear risks e. Damage to tyres and tubes, unless damaged during an accident f. Usage on hire & reward (applicable for all classes except public commercial vehicles) g. Loss or damage to bonnet side parts, mudguard, bumpers, lamps, tyres, tubes, headlights, paint work (applicable for all commercial vehicles; unless opted additionally) h. Loss or damage resulting from overturning arising out of operation as a tool (applicable for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or",
+                "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1"
+              }
+            },
+            "time": 1792186805.5670173,
+            "prompt_version": "v4"
+          },
+          {
+            "agent": "analysis",
+            "step": "provider",
+            "seconds": 7.973782100016251,
+            "attempts": 1,
+            "errors": [],
+            "prompt_tokens": 375,
+            "completion_tokens": 7,
+            "cost_usd": 0.0,
+            "usage_source": "provider",
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "57130783-f470-477a-9571-5b39ad309330",
+            "agent": "analysis",
+            "step": "plan",
+            "seconds": 8.004326099995524,
+            "outcome": "success",
+            "details": {
+              "stage": "clause_read"
+            },
+            "time": 1792186813.5772018,
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "57130783-f470-477a-9571-5b39ad309330",
+            "agent": "analysis",
+            "step": "draft",
+            "seconds": 0.00323150004260242,
+            "outcome": "success",
+            "details": {},
+            "time": 1792186813.5855188,
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "57130783-f470-477a-9571-5b39ad309330",
+            "agent": "verification",
+            "step": "verify",
+            "seconds": 2.265302099986002,
+            "outcome": "success",
+            "details": {
+              "initial_checks": true,
+              "template_mismatches": [],
+              "semantic": {
+                "passed": true,
+                "claims": [
+                  {
+                    "hypothesis": "The policy covers accidental damage to the insured vehicle.",
+                    "supported": true,
+                    "scores": {
+                      "contradiction": 0.003174313634475339,
+                      "entailment": 0.9747419113847618,
+                      "neutral": 0.022083774980762694
+                    },
+                    "method": "nli-deberta-cpu"
+                  }
+                ],
+                "method": "independent-nli"
+              },
+              "verified": true,
+              "citations_checked": 3
+            },
+            "time": 1792186815.913726,
+            "prompt_version": "v4"
+          }
+        ],
+        "retrieved_passages": [
+          {
+            "clause_id": "hdfc_private_car_package:p1:c1",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 1,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "for owner driver and optional cover for passengers covering accidental death and permanent total disability a. General aging, wear & tear, mechanical or electrical breakdown, failure, depreciation, any consequential loss b. Damage by a person driving without a valid license c. Damage by a person driving under the influence of liquor or drugs d. Loss/damage attributable to war, mutiny, nuclear risks e. Damage to tyres and tubes, unless damaged during an accident f. Usage on hire & reward (applicable for all classes except public commercial vehicles) g. Loss or damage to bonnet side parts, mudguard, bumpers, lamps, tyres, tubes, headlights, paint work (applicable for all commercial vehicles; unless opted additionally) h. Loss or damage resulting from overturning arising out of operation as a tool (applicable for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or",
+            "score": 1.542879581451416
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p1:c0",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 1,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "* supports smart phone based on Blackberry, iPhone, Windows 8 & Android platform. Manage Your @ hdfcergo.com / Smartphones* Portfolio Download IPO mobile application from IPO website post log in WHAT ARE THE MAJOR COVERS UNDER THE POLICY? WHAT ARE THE MAJOR EXCLUSIONS OF THE POLICY? Loss or Damage to the Insured Vehicle caused due to: a. Fire, explosion, self ignition or lightning. b Burglary, housebreaking or theft c All act of God perils like earthquake, flood, cyclone etc d Accidental external means, terrorism, riot and strike Liability to Third Parties: Provides cover for any legal liability arising out of the use of the vehicle for a Accidental death / injury to any third party b Any damage to property owned by third party Personal Accident Cover: The policy provides for a mandatory Personal Accident cover for owner driver and optional cover for passengers covering accidental death and permanent total disability a. General aging, wear & tear, mechanical or electrical breakdown,",
+            "score": 1.6563959121704102
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p1:c2",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 1,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or theft unless the vehicle is stolen at the same time (applicable to all commercial vehicles & two wheelers) HOW DO I FILE A CLAIM? For Accidental Damage to Insured Vehicle (Own Damage Claims): \u00a1Call our customer care Toll-free 1800-2-700-700 (Accessible from India only) if the vehicle meets with an accident and provide your policy number for reference and register the claim \u00a1Alternatively, you can visit and register on IPO (available on website/Download IPO app on your smart phone) by providing personal details, link your policy and register your claim under \"Claims\" tab Please keep the following details handy while intimating a claim a. Policy No. b. Registration details/ RC copy c. Drivers details at the time of accident including driving license number d. FIR on a case to case basis e. Repair estimate WHAT",
+            "score": 1.6275725364685059
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p2:c2",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 2,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "painting charges, the material component shall be considered as 25% of total painting charges for the purpose of applying the depreciation. The Company shall not be liable to make any payment in respect of:- a. consequential loss, depreciation, wear and tear, mechanical or electrical breakdown, failures or breakages; b. damage to tyres and tubes unless the vehicle is damaged at the same time in which case the liability of the company shall be limited to 50% of the cost of replacement. And c. any accidental loss or damage suffered whilst the insured or any person driving the vehicle with the knowledge and consent of the insured is under the influence of intoxicating liquor or drugs. In the event of the vehicle being disabled by reason of loss or damage covered under this Policy the Company will bear the reasonable cost of protection and removal to SECTION I. LOSS OF OR DAMAGE TO THE VEHICLE INSURED HDFC ERGO General Insurance Company Limited STANDARD FORM FOR PRIVATE CAR PACKAGE POLICY",
+            "score": 1.7031073570251465
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p3:c1",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 3,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "vehicle insured herein is a. being used otherwise than in accordance with the \u2018Limitations as to Use\u2019 or b. being driven by or is for the purpose of being driven by him/her in the charge of any person other than a Driver as stated in the Driver's Clause 4. i. any accidental loss or damage to any property whatsoever or any loss or expense whatsoever resulting or arising there from or any consequential loss ii. any liability of whatsoever nature directly or indirectly caused by or contributed to by or arising from ionising radiations or contamination by radioactivity from any nuclear fuel or from any nuclear waste from the combustion of nuclear fuel. For the purpose of this exception combustion shall include any self-sustaining process of nuclear fission 5. any accidental loss or damage or liability directly or indirectly caused by or contributed to by or arising from nuclear weapons material. 6. any accidental loss damage and/or liability directly or indirectly or proximately or",
+            "score": 1.704608678817749
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p2:c0",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 2,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "Whereas the insured by a proposal and declaration dated as stated in the Schedule which shall be the basis of this contract and is deemed to be incorporated herein has applied to the Company for the insurance hereinafter contained and has paid the premium mentioned in the schedule as consideration for such insurance in respect of accidental loss or damage occurring during the period of insurance. NOW THIS POLICY WITNESSETH: That subject to the terms exceptions and conditions contained herein or endorsed or expressed hereon; The Company will indemnify the insured against loss or damage to the vehicle insured hereunder and/ or its accessories whilst thereon I. by fire explosion self ignition or lightning II. by burglary housebreaking or theft III. by riot and strike IV. by earthquake (fire and shock damage) V. by flood typhoon hurricane storm tempest inundation cyclone hailstorm frost VI. by accidental external means VII. by malicious act VIII. by terrorist activity IX. whilst in transit",
+            "score": 1.7252657413482666
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p8:c3",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 8,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "otherwise to the terms, conditions limitations and exceptions of this policy. * Delete in the case of Liability to the public risks only policies. ** Insert value of trailer as declared at inception of insurance or any renewal thereof. 26. IMT.31. Reliability Trials and Rallies. (Applicable to Private Cars) In consideration of the payment of an additional premium it is hereby understood and agreed that the indemnity granted by this policy is extended to apply whilst the vehicle insured is engaged in ....\u2026\u2026.... ......*. to be held at \u2026\u2026..**... on or about the date of ..../\u2026/ \u2026 ..... under the auspices of ............\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026.# Provided that, a. No indemnity shall be granted by this Endorsement to \u2026\u2026\u2026\u2026\u2026.... # b. This policy does not cover use for organised racing, pace making or speed testing. c. During the course of the \u2026\u2026\u2026\u2026\u2026\u2026\u2026* the Insurer shall not be liable in respect of death of or bodily injury to any person being carried in or upon or entering or getting on to or alighting from",
+            "score": 1.6242765188217163
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p5:c3",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 5,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "DAMAGE TO THE SAID VEHICLE CAUSED BY FIRE EXPLOSION SELF-IGNITION OR LIGHTNING OR BURGLARY, HOUSEBREAKING, THEFT OR RIOT STRIKE MALICIOUS DAMAGE TERRORISM OR STORM TEMPEST FLOOD INUNDATION OR EARTHQUAKE PERILS. Subject otherwise to the terms exceptions conditions and limitations of this Policy. NB.1. In case of Liability Only Policies the words in CAPITALS should be deleted. NB.2. In case of policies covering Liability Only and a. Fire risks, the words \u201c BURGLARY HOUSEBREAKING OR THEFT\u201d are to be deleted; b. Theft risks, the words\u2019 \u201cFIRE EXPLOSION SELF IGNITION OR LIGHTNING\u201d are to be deleted. c. Fire and Theft risks no part of the words in capitals are to be deleted. 10. IMT. 11(C). Termination of the UNDECLARED Period of Vehicle Laid up. It is hereby understood and agreed that the insurance by this Policy in respect of vehicle no. \u2026\u2026\u2026.. insured hereunder is reinstated in full from \u2026\u2026./\u2026\u2026/\u2026\u2026and the Endorsement IMT 11(B) attaching to this policy shall be deemed to be cancelled. It is",
+            "score": 1.6473228931427002
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p4:c2",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 4,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "in the business or profession of \u2026\u2026\u2026\u2026\u2026. who shall be deemed to be the insured and whose proposal and declaration dated .. /\u2026/\u2026. shall be deemed to be incorporated in and to be the basis of this contract. Provided always that for the purpose of the No Claim Bonus, no period during which the interest in this policy has been vested in any previous Insured shall accrue to the benefit of.................. Subject otherwise to the terms exceptions conditions and limitations of this policy. 3. IMT.4. Change of Vehicle It is hereby understood and agreed that as from \u2026/\u2026../ \u2026... the vehicle bearing Registration Number \u2026\u2026\u2026\u2026.. is deemed to be deleted from the Schedule of the Policy and the vehicle with details specified hereunder is deemed to be included therein- In consequence of this change, an extra / refund premium of Rs\u2026.... is charged/allowed to the insured. Subject otherwise to the terms exceptions conditions and limitations of this policy. 4. IMT.6. Lease Agreement It is hereby",
+            "score": 1.6512033939361572
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p6:c2",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 6,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "self injury suicide or attempted suicide physical defect or infirmity or b. an accident happening whilst such person is under the influence of intoxicating liquor or drugs. 3. such compensation shall be payable only with the approval of the insured named in the policy and directly to the injured person or his/her legal representative(s) whose receipt shall be a full discharge in respect of the injury of such person. 4. not more than....** persons/passengers are in the vehicle insured at the time of occurrence of such injury. Subject otherwise to the terms exceptions conditions and limitations of this policy. * The Capital Sum Insured (CSI) per passenger is to be inserted. ** The registered sitting capacity of the vehicle insured is to be inserted. 14. IMT 17. Personal Accident Cover to Paid Drivers, Cleaners and Conductors: (Applicable to all classes of vehicles) In consideration of the payment of an additional premium, it is hereby understood and agreed that the insurer undertakes to",
+            "score": 1.6571431159973145
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p8:c9",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 8,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "reasonable precautions to prevent accidents and shall comply with all statutory obligations; records on demand. *3. the insured shall keep record of the name of each paid driver conductor cleaner or persons employed in loading and/or unloading and the amount of wages and salaries and other earnings paid to such employees and shall at all times allow the insurer to inspect such records on demand. 4. in the event of the policy being cancelled at the request of the insured no refund of the premium paid in respect of this Endorsement will be allowed. Subject otherwise to the terms conditions limitations and exceptions of the policy except so far as necessary to meet the requirements of the Motor Vehicles Act, 1988. * In case of Private cars/ motorised two wheelers (not used for hire or",
+            "score": 1.6689645051956177
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p1:c5",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 1,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "Andheri (East), Mumbai - 400 059 IPO :Raise a service request on Insurance Portfolio Organiser (IPO) For any endorsments on your policy you can contact us through any of the below mentioned modes: E mail us at : care@hdfcergo.com OR Call Toll-free: 1800 2 700 700 (Accessible from India only) OR Fax your request at: 022 6638 3669 OR Raise a service request on Insurance Portfolio Organizer (IPO) from www.hdfcergo.com NO CLAIM BONUS (NCB): NCB is provided for every claim free year basis the slab as provided by Tariff. How can I get No Claim Bonus Reserving Letter? NCB Reserving letter can be provided only on Sale of vehicle evidenced by transferred RC copy OR Sale Deed and Form 29 & 30. The OD section of the policy needs to be transferred to the new owner or cancelled. CLAIMS DOCUMENTS - For ACCIDENTAL DAMAGE TO INSURED VEHICLE a. Duly filled and signed claim form & satisfaction voucher b. Registration Certificate (RC) c. Driving license of the person driving at the time of the accident",
+            "score": 1.6821470260620117
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p8:c5",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 8,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "the amount for which the insured is so responsible. 21. IMT.26. Fire and/or Theft Risks Only (Not applicable for Miscellaneous and Special Types of vehicles rateable under Class -D and Motor Trade Policies under Classes- E, F and G of the Commercial Vehicles Tariff) Notwithstanding anything to the contrary contained in the policy it is hereby understood and agreed that Section II of the Policy is deemed to be cancelled and under Section I thereof the insurer shall only be liable to indemnify the insured against loss or damage by fire explosion self ignition lightning and/or burglary housebreaking theft and riot strike malicious damage terrorism storm tempest flood inundation and earthquake perils whilst the vehicle is laid up in garage and not in use. Subject otherwise to the terms conditions limitations and exceptions of this policy. NB.i. In case of Fire Risk only, the words \u201cburglary housebreaking theft\u201d are to be deleted. NB.ii. In case of Theft Risk only, the words \u201cfire",
+            "score": 1.6833651065826416
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p5:c8",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 5,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "Device (Not applicable to Motor Trade Policies) In consideration of certification by \u2026\u2026\u2026\u2026\u2026\u2026\u2026* that an Anti-Theft device approved by Automobile Research Association of India (ARAI), Pune has been installed in the vehicle insured herein a premium discount of Rs\u2026\u2026\u2026\u2026** is hereby allowed to the insured. It is hereby understood and agreed that the insured shall ensure at all times that this Anti-theft device installed in the vehicle insured is maintained in efficient condition till the expiry of this policy. Subject otherwise to the terms, exceptions, conditions and limitations of the policy * The name of the certifying Automobile Association is to be inserted. ** Premium discount calculated as per tariff provision is to be inserted. For mid term certification of installation of Anti Theft device pro-rata proportion of tariff discount for the unexpired period is to be inserted. 8. IMT. 11.A. Vehicle Laid Up (Lay up period declared) Notwithstanding anything to the contrary contained herein",
+            "score": 1.6866848468780518
+          }
+        ],
+        "verified": true,
+        "cost_usd": 0.0,
+        "trace_id": "f8e05fbb808313d196ea895b06d36e21",
+        "semantic_report": {
+          "passed": true,
+          "claims": [
+            {
+              "hypothesis": "The policy covers accidental damage to the insured vehicle.",
+              "supported": true,
+              "scores": {
+                "contradiction": 0.003174313634475339,
+                "entailment": 0.9747419113847618,
+                "neutral": 0.022083774980762694
+              },
+              "method": "nli-deberta-cpu"
+            }
+          ],
+          "method": "independent-nli"
+        },
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      "seconds": 30.681969200028107,
+      "feedback_code": 201,
+      "passed": true
+    },
+    {
+      "case": "food_delivery",
+      "status": {
+        "run_id": "345c168a-335c-445e-992c-38873f953e57",
+        "status": "completed",
+        "result": {
+          "recommendation_only": true,
+          "classification": "own_damage",
+          "coverage_position": "coverage_concern",
+          "queue": "investigation",
+          "reason": "Review required for restricted_use. Retrieved cover is subject to restrictions; this is not a claim determination.",
+          "requires_human": true,
+          "escalation": "A human handler must verify the schedule, facts and applicable endorsements.",
+          "citations": [
+            {
+              "clause_id": "hdfc_private_car_package:p2:c0",
+              "document": "hdfc_private_car_package.pdf",
+              "page": 2,
+              "quote": "Whereas the insured by a proposal and declaration dated as stated in the Schedule which shall be the basis of this contract and is deemed to be incorporated herein has applied to the Company for the insurance hereinafter contained and has paid the premium mentioned in the schedule as consideration for such insurance in respect of accidental loss or damage occurring during the period of insurance. NOW THIS POLICY WITNESSETH: That subject to the terms exceptions and conditions contained herein or endorsed or expressed hereon; The Company will indemnify the insured against loss or damage to the vehicle insured hereunder and/ or its accessories whilst thereon I. by fire explosion self ignition or lightning II. by burglary housebreaking or theft III. by riot and strike IV. by earthquake (fire and shock damage) V. by flood typhoon hurricane storm tempest inundation cyclone hailstorm frost VI. by accidental external means VII. by malicious act VIII. by terrorist activity IX. whilst in transit"
+            },
+            {
+              "clause_id": "hdfc_private_car_package:p3:c1",
+              "document": "hdfc_private_car_package.pdf",
+              "page": 3,
+              "quote": "vehicle insured herein is a. being used otherwise than in accordance with the \u2018Limitations as to Use\u2019 or b. being driven by or is for the purpose of being driven by him/her in the charge of any person other than a Driver as stated in the Driver's Clause 4. i. any accidental loss or damage to any property whatsoever or any loss or expense whatsoever resulting or arising there from or any consequential loss ii. any liability of whatsoever nature directly or indirectly caused by or contributed to by or arising from ionising radiations or contamination by radioactivity from any nuclear fuel or from any nuclear waste from the combustion of nuclear fuel. For the purpose of this exception combustion shall include any self-sustaining process of nuclear fission 5. any accidental loss or damage or liability directly or indirectly caused by or contributed to by or arising from nuclear weapons material. 6. any accidental loss damage and/or liability directly or indirectly or proximately or"
+            },
+            {
+              "clause_id": "hdfc_private_car_package:p1:c2",
+              "document": "hdfc_private_car_package.pdf",
+              "page": 1,
+              "quote": "for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or theft unless the vehicle is stolen at the same time (applicable to all commercial vehicles & two wheelers) HOW DO I FILE A CLAIM? For Accidental Damage to Insured Vehicle (Own Damage Claims): \u00a1Call our customer care Toll-free 1800-2-700-700 (Accessible from India only) if the vehicle meets with an accident and provide your policy number for reference and register the claim \u00a1Alternatively, you can visit and register on IPO (available on website/Download IPO app on your smart phone) by providing personal details, link your policy and register your claim under \"Claims\" tab Please keep the following details handy while intimating a claim a. Policy No. b. Registration details/ RC copy c. Drivers details at the time of accident including driving license number d. FIR on a case to case basis e. Repair estimate WHAT"
+            },
+            {
+              "clause_id": "hdfc_private_car_package:p1:c1",
+              "document": "hdfc_private_car_package.pdf",
+              "page": 1,
+              "quote": "for owner driver and optional cover for passengers covering accidental death and permanent total disability a. General aging, wear & tear, mechanical or electrical breakdown, failure, depreciation, any consequential loss b. Damage by a person driving without a valid license c. Damage by a person driving under the influence of liquor or drugs d. Loss/damage attributable to war, mutiny, nuclear risks e. Damage to tyres and tubes, unless damaged during an accident f. Usage on hire & reward (applicable for all classes except public commercial vehicles) g. Loss or damage to bonnet side parts, mudguard, bumpers, lamps, tyres, tubes, headlights, paint work (applicable for all commercial vehicles; unless opted additionally) h. Loss or damage resulting from overturning arising out of operation as a tool (applicable for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or"
+            }
+          ],
+          "verified": true,
+          "prompt_version": "v4",
+          "limitations": [
+            "Policy schedule and activated endorsements are not in this public corpus.",
+            "Fast-track threshold is an operational demo assumption, not a policy entitlement.",
+            "Local lexical embeddings and rule-based drafting have limited language understanding."
+          ]
+        },
+        "trace_path": "/runs/345c168a-335c-445e-992c-38873f953e57/trace",
+        "elapsed_seconds": 27.062901973724365
+      },
+      "trace": {
+        "run_id": "345c168a-335c-445e-992c-38873f953e57",
+        "events": [
+          {
+            "run_id": "345c168a-335c-445e-992c-38873f953e57",
+            "agent": "analysis",
+            "step": "plan",
+            "seconds": 0.02626760001294315,
+            "outcome": "success",
+            "details": {
+              "stage": "initial"
+            },
+            "time": 1792186817.645226,
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "345c168a-335c-445e-992c-38873f953e57",
+            "agent": "analysis",
+            "step": "tool",
+            "seconds": 0.0003450000658631325,
+            "outcome": "success",
+            "details": {
+              "tool": "request_fields",
+              "fields": {
+                "vehicle_use": "personal",
+                "country": "India",
+                "driver_licensed": true,
+                "intoxicated": false,
+                "estimated_repair": 12000.0,
+                "idv": 500000.0
+              }
+            },
+            "time": 1792186817.6535084,
+            "prompt_version": "v4"
+          },
+          {
+            "agent": "analysis",
+            "step": "provider",
+            "seconds": 4.178692999994382,
+            "attempts": 1,
+            "errors": [],
+            "prompt_tokens": 234,
+            "completion_tokens": 9,
+            "cost_usd": 0.0,
+            "usage_source": "provider",
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "345c168a-335c-445e-992c-38873f953e57",
+            "agent": "analysis",
+            "step": "plan",
+            "seconds": 4.181962599977851,
+            "outcome": "success",
+            "details": {
+              "stage": "fields_read"
+            },
+            "time": 1792186821.8394125,
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "345c168a-335c-445e-992c-38873f953e57",
+            "agent": "analysis",
+            "step": "tool",
+            "seconds": 0.0006451999070122838,
+            "outcome": "success",
+            "details": {
+              "tool": "corpus_search",
+              "query": "SECTION I loss damage vehicle accidental external means",
+              "passages": [
+                {
+                  "clause_id": "hdfc_private_car_package:p1:c1",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 1,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "for owner driver and optional cover for passengers covering accidental death and permanent total disability a. General aging, wear & tear, mechanical or electrical breakdown, failure, depreciation, any consequential loss b. Damage by a person driving without a valid license c. Damage by a person driving under the influence of liquor or drugs d. Loss/damage attributable to war, mutiny, nuclear risks e. Damage to tyres and tubes, unless damaged during an accident f. Usage on hire & reward (applicable for all classes except public commercial vehicles) g. Loss or damage to bonnet side parts, mudguard, bumpers, lamps, tyres, tubes, headlights, paint work (applicable for all commercial vehicles; unless opted additionally) h. Loss or damage resulting from overturning arising out of operation as a tool (applicable for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or",
+                  "score": 1.542879581451416
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p1:c0",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 1,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "* supports smart phone based on Blackberry, iPhone, Windows 8 & Android platform. Manage Your @ hdfcergo.com / Smartphones* Portfolio Download IPO mobile application from IPO website post log in WHAT ARE THE MAJOR COVERS UNDER THE POLICY? WHAT ARE THE MAJOR EXCLUSIONS OF THE POLICY? Loss or Damage to the Insured Vehicle caused due to: a. Fire, explosion, self ignition or lightning. b Burglary, housebreaking or theft c All act of God perils like earthquake, flood, cyclone etc d Accidental external means, terrorism, riot and strike Liability to Third Parties: Provides cover for any legal liability arising out of the use of the vehicle for a Accidental death / injury to any third party b Any damage to property owned by third party Personal Accident Cover: The policy provides for a mandatory Personal Accident cover for owner driver and optional cover for passengers covering accidental death and permanent total disability a. General aging, wear & tear, mechanical or electrical breakdown,",
+                  "score": 1.6166200637817383
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p1:c2",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 1,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or theft unless the vehicle is stolen at the same time (applicable to all commercial vehicles & two wheelers) HOW DO I FILE A CLAIM? For Accidental Damage to Insured Vehicle (Own Damage Claims): \u00a1Call our customer care Toll-free 1800-2-700-700 (Accessible from India only) if the vehicle meets with an accident and provide your policy number for reference and register the claim \u00a1Alternatively, you can visit and register on IPO (available on website/Download IPO app on your smart phone) by providing personal details, link your policy and register your claim under \"Claims\" tab Please keep the following details handy while intimating a claim a. Policy No. b. Registration details/ RC copy c. Drivers details at the time of accident including driving license number d. FIR on a case to case basis e. Repair estimate WHAT",
+                  "score": 1.694455862045288
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p2:c2",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 2,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "painting charges, the material component shall be considered as 25% of total painting charges for the purpose of applying the depreciation. The Company shall not be liable to make any payment in respect of:- a. consequential loss, depreciation, wear and tear, mechanical or electrical breakdown, failures or breakages; b. damage to tyres and tubes unless the vehicle is damaged at the same time in which case the liability of the company shall be limited to 50% of the cost of replacement. And c. any accidental loss or damage suffered whilst the insured or any person driving the vehicle with the knowledge and consent of the insured is under the influence of intoxicating liquor or drugs. In the event of the vehicle being disabled by reason of loss or damage covered under this Policy the Company will bear the reasonable cost of protection and removal to SECTION I. LOSS OF OR DAMAGE TO THE VEHICLE INSURED HDFC ERGO General Insurance Company Limited STANDARD FORM FOR PRIVATE CAR PACKAGE POLICY",
+                  "score": 1.7031073570251465
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p3:c1",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 3,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "vehicle insured herein is a. being used otherwise than in accordance with the \u2018Limitations as to Use\u2019 or b. being driven by or is for the purpose of being driven by him/her in the charge of any person other than a Driver as stated in the Driver's Clause 4. i. any accidental loss or damage to any property whatsoever or any loss or expense whatsoever resulting or arising there from or any consequential loss ii. any liability of whatsoever nature directly or indirectly caused by or contributed to by or arising from ionising radiations or contamination by radioactivity from any nuclear fuel or from any nuclear waste from the combustion of nuclear fuel. For the purpose of this exception combustion shall include any self-sustaining process of nuclear fission 5. any accidental loss or damage or liability directly or indirectly caused by or contributed to by or arising from nuclear weapons material. 6. any accidental loss damage and/or liability directly or indirectly or proximately or",
+                  "score": 1.704608678817749
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p2:c0",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 2,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "Whereas the insured by a proposal and declaration dated as stated in the Schedule which shall be the basis of this contract and is deemed to be incorporated herein has applied to the Company for the insurance hereinafter contained and has paid the premium mentioned in the schedule as consideration for such insurance in respect of accidental loss or damage occurring during the period of insurance. NOW THIS POLICY WITNESSETH: That subject to the terms exceptions and conditions contained herein or endorsed or expressed hereon; The Company will indemnify the insured against loss or damage to the vehicle insured hereunder and/ or its accessories whilst thereon I. by fire explosion self ignition or lightning II. by burglary housebreaking or theft III. by riot and strike IV. by earthquake (fire and shock damage) V. by flood typhoon hurricane storm tempest inundation cyclone hailstorm frost VI. by accidental external means VII. by malicious act VIII. by terrorist activity IX. whilst in transit",
+                  "score": 1.7252657413482666
+                }
+              ]
+            },
+            "time": 1792186821.8464568,
+            "prompt_version": "v4"
+          },
+          {
+            "agent": "analysis",
+            "step": "provider",
+            "seconds": 9.002357900026254,
+            "attempts": 1,
+            "errors": [],
+            "prompt_tokens": 391,
+            "completion_tokens": 16,
+            "cost_usd": 0.0,
+            "usage_source": "provider",
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "345c168a-335c-445e-992c-38873f953e57",
+            "agent": "analysis",
+            "step": "plan",
+            "seconds": 9.017952000023797,
+            "outcome": "success",
+            "details": {
+              "stage": "base_read"
+            },
+            "time": 1792186830.8793173,
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "345c168a-335c-445e-992c-38873f953e57",
+            "agent": "analysis",
+            "step": "tool",
+            "seconds": 0.000687599997036159,
+            "outcome": "success",
+            "details": {
+              "tool": "corpus_search",
+              "query": "terms exceptions conditions general exceptions limitations as to use hire reward licence intoxicating mechanical breakdown claims process",
+              "passages": [
+                {
+                  "clause_id": "hdfc_private_car_package:p8:c3",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 8,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "otherwise to the terms, conditions limitations and exceptions of this policy. * Delete in the case of Liability to the public risks only policies. ** Insert value of trailer as declared at inception of insurance or any renewal thereof. 26. IMT.31. Reliability Trials and Rallies. (Applicable to Private Cars) In consideration of the payment of an additional premium it is hereby understood and agreed that the indemnity granted by this policy is extended to apply whilst the vehicle insured is engaged in ....\u2026\u2026.... ......*. to be held at \u2026\u2026..**... on or about the date of ..../\u2026/ \u2026 ..... under the auspices of ............\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026.# Provided that, a. No indemnity shall be granted by this Endorsement to \u2026\u2026\u2026\u2026\u2026.... # b. This policy does not cover use for organised racing, pace making or speed testing. c. During the course of the \u2026\u2026\u2026\u2026\u2026\u2026\u2026* the Insurer shall not be liable in respect of death of or bodily injury to any person being carried in or upon or entering or getting on to or alighting from",
+                  "score": 1.6242765188217163
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p1:c2",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 1,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or theft unless the vehicle is stolen at the same time (applicable to all commercial vehicles & two wheelers) HOW DO I FILE A CLAIM? For Accidental Damage to Insured Vehicle (Own Damage Claims): \u00a1Call our customer care Toll-free 1800-2-700-700 (Accessible from India only) if the vehicle meets with an accident and provide your policy number for reference and register the claim \u00a1Alternatively, you can visit and register on IPO (available on website/Download IPO app on your smart phone) by providing personal details, link your policy and register your claim under \"Claims\" tab Please keep the following details handy while intimating a claim a. Policy No. b. Registration details/ RC copy c. Drivers details at the time of accident including driving license number d. FIR on a case to case basis e. Repair estimate WHAT",
+                  "score": 1.6275725364685059
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p5:c3",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 5,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "DAMAGE TO THE SAID VEHICLE CAUSED BY FIRE EXPLOSION SELF-IGNITION OR LIGHTNING OR BURGLARY, HOUSEBREAKING, THEFT OR RIOT STRIKE MALICIOUS DAMAGE TERRORISM OR STORM TEMPEST FLOOD INUNDATION OR EARTHQUAKE PERILS. Subject otherwise to the terms exceptions conditions and limitations of this Policy. NB.1. In case of Liability Only Policies the words in CAPITALS should be deleted. NB.2. In case of policies covering Liability Only and a. Fire risks, the words \u201c BURGLARY HOUSEBREAKING OR THEFT\u201d are to be deleted; b. Theft risks, the words\u2019 \u201cFIRE EXPLOSION SELF IGNITION OR LIGHTNING\u201d are to be deleted. c. Fire and Theft risks no part of the words in capitals are to be deleted. 10. IMT. 11(C). Termination of the UNDECLARED Period of Vehicle Laid up. It is hereby understood and agreed that the insurance by this Policy in respect of vehicle no. \u2026\u2026\u2026.. insured hereunder is reinstated in full from \u2026\u2026./\u2026\u2026/\u2026\u2026and the Endorsement IMT 11(B) attaching to this policy shall be deemed to be cancelled. It is",
+                  "score": 1.6473228931427002
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p4:c2",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 4,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "in the business or profession of \u2026\u2026\u2026\u2026\u2026. who shall be deemed to be the insured and whose proposal and declaration dated .. /\u2026/\u2026. shall be deemed to be incorporated in and to be the basis of this contract. Provided always that for the purpose of the No Claim Bonus, no period during which the interest in this policy has been vested in any previous Insured shall accrue to the benefit of.................. Subject otherwise to the terms exceptions conditions and limitations of this policy. 3. IMT.4. Change of Vehicle It is hereby understood and agreed that as from \u2026/\u2026../ \u2026... the vehicle bearing Registration Number \u2026\u2026\u2026\u2026.. is deemed to be deleted from the Schedule of the Policy and the vehicle with details specified hereunder is deemed to be included therein- In consequence of this change, an extra / refund premium of Rs\u2026.... is charged/allowed to the insured. Subject otherwise to the terms exceptions conditions and limitations of this policy. 4. IMT.6. Lease Agreement It is hereby",
+                  "score": 1.6512033939361572
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p1:c0",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 1,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "* supports smart phone based on Blackberry, iPhone, Windows 8 & Android platform. Manage Your @ hdfcergo.com / Smartphones* Portfolio Download IPO mobile application from IPO website post log in WHAT ARE THE MAJOR COVERS UNDER THE POLICY? WHAT ARE THE MAJOR EXCLUSIONS OF THE POLICY? Loss or Damage to the Insured Vehicle caused due to: a. Fire, explosion, self ignition or lightning. b Burglary, housebreaking or theft c All act of God perils like earthquake, flood, cyclone etc d Accidental external means, terrorism, riot and strike Liability to Third Parties: Provides cover for any legal liability arising out of the use of the vehicle for a Accidental death / injury to any third party b Any damage to property owned by third party Personal Accident Cover: The policy provides for a mandatory Personal Accident cover for owner driver and optional cover for passengers covering accidental death and permanent total disability a. General aging, wear & tear, mechanical or electrical breakdown,",
+                  "score": 1.6563959121704102
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p6:c2",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 6,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "self injury suicide or attempted suicide physical defect or infirmity or b. an accident happening whilst such person is under the influence of intoxicating liquor or drugs. 3. such compensation shall be payable only with the approval of the insured named in the policy and directly to the injured person or his/her legal representative(s) whose receipt shall be a full discharge in respect of the injury of such person. 4. not more than....** persons/passengers are in the vehicle insured at the time of occurrence of such injury. Subject otherwise to the terms exceptions conditions and limitations of this policy. * The Capital Sum Insured (CSI) per passenger is to be inserted. ** The registered sitting capacity of the vehicle insured is to be inserted. 14. IMT 17. Personal Accident Cover to Paid Drivers, Cleaners and Conductors: (Applicable to all classes of vehicles) In consideration of the payment of an additional premium, it is hereby understood and agreed that the insurer undertakes to",
+                  "score": 1.6571431159973145
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p8:c9",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 8,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "reasonable precautions to prevent accidents and shall comply with all statutory obligations; records on demand. *3. the insured shall keep record of the name of each paid driver conductor cleaner or persons employed in loading and/or unloading and the amount of wages and salaries and other earnings paid to such employees and shall at all times allow the insurer to inspect such records on demand. 4. in the event of the policy being cancelled at the request of the insured no refund of the premium paid in respect of this Endorsement will be allowed. Subject otherwise to the terms conditions limitations and exceptions of the policy except so far as necessary to meet the requirements of the Motor Vehicles Act, 1988. * In case of Private cars/ motorised two wheelers (not used for hire or",
+                  "score": 1.6689645051956177
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p1:c5",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 1,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "Andheri (East), Mumbai - 400 059 IPO :Raise a service request on Insurance Portfolio Organiser (IPO) For any endorsments on your policy you can contact us through any of the below mentioned modes: E mail us at : care@hdfcergo.com OR Call Toll-free: 1800 2 700 700 (Accessible from India only) OR Fax your request at: 022 6638 3669 OR Raise a service request on Insurance Portfolio Organizer (IPO) from www.hdfcergo.com NO CLAIM BONUS (NCB): NCB is provided for every claim free year basis the slab as provided by Tariff. How can I get No Claim Bonus Reserving Letter? NCB Reserving letter can be provided only on Sale of vehicle evidenced by transferred RC copy OR Sale Deed and Form 29 & 30. The OD section of the policy needs to be transferred to the new owner or cancelled. CLAIMS DOCUMENTS - For ACCIDENTAL DAMAGE TO INSURED VEHICLE a. Duly filled and signed claim form & satisfaction voucher b. Registration Certificate (RC) c. Driving license of the person driving at the time of the accident",
+                  "score": 1.6821470260620117
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p8:c5",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 8,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "the amount for which the insured is so responsible. 21. IMT.26. Fire and/or Theft Risks Only (Not applicable for Miscellaneous and Special Types of vehicles rateable under Class -D and Motor Trade Policies under Classes- E, F and G of the Commercial Vehicles Tariff) Notwithstanding anything to the contrary contained in the policy it is hereby understood and agreed that Section II of the Policy is deemed to be cancelled and under Section I thereof the insurer shall only be liable to indemnify the insured against loss or damage by fire explosion self ignition lightning and/or burglary housebreaking theft and riot strike malicious damage terrorism storm tempest flood inundation and earthquake perils whilst the vehicle is laid up in garage and not in use. Subject otherwise to the terms conditions limitations and exceptions of this policy. NB.i. In case of Fire Risk only, the words \u201cburglary housebreaking theft\u201d are to be deleted. NB.ii. In case of Theft Risk only, the words \u201cfire",
+                  "score": 1.6833651065826416
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p5:c8",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 5,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "Device (Not applicable to Motor Trade Policies) In consideration of certification by \u2026\u2026\u2026\u2026\u2026\u2026\u2026* that an Anti-Theft device approved by Automobile Research Association of India (ARAI), Pune has been installed in the vehicle insured herein a premium discount of Rs\u2026\u2026\u2026\u2026** is hereby allowed to the insured. It is hereby understood and agreed that the insured shall ensure at all times that this Anti-theft device installed in the vehicle insured is maintained in efficient condition till the expiry of this policy. Subject otherwise to the terms, exceptions, conditions and limitations of the policy * The name of the certifying Automobile Association is to be inserted. ** Premium discount calculated as per tariff provision is to be inserted. For mid term certification of installation of Anti Theft device pro-rata proportion of tariff discount for the unexpired period is to be inserted. 8. IMT. 11.A. Vehicle Laid Up (Lay up period declared) Notwithstanding anything to the contrary contained herein",
+                  "score": 1.6866848468780518
+                }
+              ]
+            },
+            "time": 1792186830.8843725,
+            "prompt_version": "v4"
+          },
+          {
+            "agent": "analysis",
+            "step": "provider",
+            "seconds": 4.68396360008046,
+            "attempts": 1,
+            "errors": [],
+            "prompt_tokens": 390,
+            "completion_tokens": 8,
+            "cost_usd": 0.0,
+            "usage_source": "provider",
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "345c168a-335c-445e-992c-38873f953e57",
+            "agent": "analysis",
+            "step": "plan",
+            "seconds": 4.706756699946709,
+            "outcome": "success",
+            "details": {
+              "stage": "modifiers_read"
+            },
+            "time": 1792186835.5970993,
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "345c168a-335c-445e-992c-38873f953e57",
+            "agent": "analysis",
+            "step": "tool",
+            "seconds": 0.0002796000335365534,
+            "outcome": "success",
+            "details": {
+              "tool": "clause_lookup",
+              "clause_id": "hdfc_private_car_package:p1:c1",
+              "result": {
+                "clause_id": "hdfc_private_car_package:p1:c1",
+                "document": "hdfc_private_car_package.pdf",
+                "page": 1,
+                "text": "for owner driver and optional cover for passengers covering accidental death and permanent total disability a. General aging, wear & tear, mechanical or electrical breakdown, failure, depreciation, any consequential loss b. Damage by a person driving without a valid license c. Damage by a person driving under the influence of liquor or drugs d. Loss/damage attributable to war, mutiny, nuclear risks e. Damage to tyres and tubes, unless damaged during an accident f. Usage on hire & reward (applicable for all classes except public commercial vehicles) g. Loss or damage to bonnet side parts, mudguard, bumpers, lamps, tyres, tubes, headlights, paint work (applicable for all commercial vehicles; unless opted additionally) h. Loss or damage resulting from overturning arising out of operation as a tool (applicable for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or",
+                "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1"
+              }
+            },
+            "time": 1792186835.6016176,
+            "prompt_version": "v4"
+          },
+          {
+            "agent": "analysis",
+            "step": "provider",
+            "seconds": 8.148913600016385,
+            "attempts": 1,
+            "errors": [],
+            "prompt_tokens": 384,
+            "completion_tokens": 7,
+            "cost_usd": 0.0,
+            "usage_source": "provider",
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "345c168a-335c-445e-992c-38873f953e57",
+            "agent": "analysis",
+            "step": "plan",
+            "seconds": 8.171631200006232,
+            "outcome": "success",
+            "details": {
+              "stage": "clause_read"
+            },
+            "time": 1792186843.7782848,
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "345c168a-335c-445e-992c-38873f953e57",
+            "agent": "analysis",
+            "step": "draft",
+            "seconds": 0.002494900021702051,
+            "outcome": "success",
+            "details": {},
+            "time": 1792186843.7860394,
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "345c168a-335c-445e-992c-38873f953e57",
+            "agent": "verification",
+            "step": "verify",
+            "seconds": 0.7798485000384971,
+            "outcome": "success",
+            "details": {
+              "initial_checks": true,
+              "template_mismatches": [],
+              "semantic": {
+                "passed": true,
+                "claims": [
+                  {
+                    "hypothesis": "The policy covers accidental damage to the insured vehicle.",
+                    "supported": true,
+                    "scores": {
+                      "contradiction": 0.003174313634475339,
+                      "entailment": 0.9747419113847618,
+                      "neutral": 0.022083774980762694
+                    },
+                    "method": "nli-deberta-cpu"
+                  },
+                  {
+                    "hypothesis": "The policy contains restrictions on the use of the insured vehicle.",
+                    "supported": true,
+                    "scores": {
+                      "contradiction": 0.006857798674106149,
+                      "entailment": 0.911369912281063,
+                      "neutral": 0.08177228904483093
+                    },
+                    "method": "nli-deberta-cpu"
+                  }
+                ],
+                "method": "independent-nli"
+              },
+              "verified": true,
+              "citations_checked": 4
+            },
+            "time": 1792186844.598283,
+            "prompt_version": "v4"
+          }
+        ],
+        "retrieved_passages": [
+          {
+            "clause_id": "hdfc_private_car_package:p1:c1",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 1,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "for owner driver and optional cover for passengers covering accidental death and permanent total disability a. General aging, wear & tear, mechanical or electrical breakdown, failure, depreciation, any consequential loss b. Damage by a person driving without a valid license c. Damage by a person driving under the influence of liquor or drugs d. Loss/damage attributable to war, mutiny, nuclear risks e. Damage to tyres and tubes, unless damaged during an accident f. Usage on hire & reward (applicable for all classes except public commercial vehicles) g. Loss or damage to bonnet side parts, mudguard, bumpers, lamps, tyres, tubes, headlights, paint work (applicable for all commercial vehicles; unless opted additionally) h. Loss or damage resulting from overturning arising out of operation as a tool (applicable for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or",
+            "score": 1.542879581451416
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p1:c0",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 1,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "* supports smart phone based on Blackberry, iPhone, Windows 8 & Android platform. Manage Your @ hdfcergo.com / Smartphones* Portfolio Download IPO mobile application from IPO website post log in WHAT ARE THE MAJOR COVERS UNDER THE POLICY? WHAT ARE THE MAJOR EXCLUSIONS OF THE POLICY? Loss or Damage to the Insured Vehicle caused due to: a. Fire, explosion, self ignition or lightning. b Burglary, housebreaking or theft c All act of God perils like earthquake, flood, cyclone etc d Accidental external means, terrorism, riot and strike Liability to Third Parties: Provides cover for any legal liability arising out of the use of the vehicle for a Accidental death / injury to any third party b Any damage to property owned by third party Personal Accident Cover: The policy provides for a mandatory Personal Accident cover for owner driver and optional cover for passengers covering accidental death and permanent total disability a. General aging, wear & tear, mechanical or electrical breakdown,",
+            "score": 1.6563959121704102
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p1:c2",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 1,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or theft unless the vehicle is stolen at the same time (applicable to all commercial vehicles & two wheelers) HOW DO I FILE A CLAIM? For Accidental Damage to Insured Vehicle (Own Damage Claims): \u00a1Call our customer care Toll-free 1800-2-700-700 (Accessible from India only) if the vehicle meets with an accident and provide your policy number for reference and register the claim \u00a1Alternatively, you can visit and register on IPO (available on website/Download IPO app on your smart phone) by providing personal details, link your policy and register your claim under \"Claims\" tab Please keep the following details handy while intimating a claim a. Policy No. b. Registration details/ RC copy c. Drivers details at the time of accident including driving license number d. FIR on a case to case basis e. Repair estimate WHAT",
+            "score": 1.6275725364685059
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p2:c2",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 2,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "painting charges, the material component shall be considered as 25% of total painting charges for the purpose of applying the depreciation. The Company shall not be liable to make any payment in respect of:- a. consequential loss, depreciation, wear and tear, mechanical or electrical breakdown, failures or breakages; b. damage to tyres and tubes unless the vehicle is damaged at the same time in which case the liability of the company shall be limited to 50% of the cost of replacement. And c. any accidental loss or damage suffered whilst the insured or any person driving the vehicle with the knowledge and consent of the insured is under the influence of intoxicating liquor or drugs. In the event of the vehicle being disabled by reason of loss or damage covered under this Policy the Company will bear the reasonable cost of protection and removal to SECTION I. LOSS OF OR DAMAGE TO THE VEHICLE INSURED HDFC ERGO General Insurance Company Limited STANDARD FORM FOR PRIVATE CAR PACKAGE POLICY",
+            "score": 1.7031073570251465
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p3:c1",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 3,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "vehicle insured herein is a. being used otherwise than in accordance with the \u2018Limitations as to Use\u2019 or b. being driven by or is for the purpose of being driven by him/her in the charge of any person other than a Driver as stated in the Driver's Clause 4. i. any accidental loss or damage to any property whatsoever or any loss or expense whatsoever resulting or arising there from or any consequential loss ii. any liability of whatsoever nature directly or indirectly caused by or contributed to by or arising from ionising radiations or contamination by radioactivity from any nuclear fuel or from any nuclear waste from the combustion of nuclear fuel. For the purpose of this exception combustion shall include any self-sustaining process of nuclear fission 5. any accidental loss or damage or liability directly or indirectly caused by or contributed to by or arising from nuclear weapons material. 6. any accidental loss damage and/or liability directly or indirectly or proximately or",
+            "score": 1.704608678817749
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p2:c0",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 2,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "Whereas the insured by a proposal and declaration dated as stated in the Schedule which shall be the basis of this contract and is deemed to be incorporated herein has applied to the Company for the insurance hereinafter contained and has paid the premium mentioned in the schedule as consideration for such insurance in respect of accidental loss or damage occurring during the period of insurance. NOW THIS POLICY WITNESSETH: That subject to the terms exceptions and conditions contained herein or endorsed or expressed hereon; The Company will indemnify the insured against loss or damage to the vehicle insured hereunder and/ or its accessories whilst thereon I. by fire explosion self ignition or lightning II. by burglary housebreaking or theft III. by riot and strike IV. by earthquake (fire and shock damage) V. by flood typhoon hurricane storm tempest inundation cyclone hailstorm frost VI. by accidental external means VII. by malicious act VIII. by terrorist activity IX. whilst in transit",
+            "score": 1.7252657413482666
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p8:c3",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 8,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "otherwise to the terms, conditions limitations and exceptions of this policy. * Delete in the case of Liability to the public risks only policies. ** Insert value of trailer as declared at inception of insurance or any renewal thereof. 26. IMT.31. Reliability Trials and Rallies. (Applicable to Private Cars) In consideration of the payment of an additional premium it is hereby understood and agreed that the indemnity granted by this policy is extended to apply whilst the vehicle insured is engaged in ....\u2026\u2026.... ......*. to be held at \u2026\u2026..**... on or about the date of ..../\u2026/ \u2026 ..... under the auspices of ............\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026.# Provided that, a. No indemnity shall be granted by this Endorsement to \u2026\u2026\u2026\u2026\u2026.... # b. This policy does not cover use for organised racing, pace making or speed testing. c. During the course of the \u2026\u2026\u2026\u2026\u2026\u2026\u2026* the Insurer shall not be liable in respect of death of or bodily injury to any person being carried in or upon or entering or getting on to or alighting from",
+            "score": 1.6242765188217163
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p5:c3",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 5,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "DAMAGE TO THE SAID VEHICLE CAUSED BY FIRE EXPLOSION SELF-IGNITION OR LIGHTNING OR BURGLARY, HOUSEBREAKING, THEFT OR RIOT STRIKE MALICIOUS DAMAGE TERRORISM OR STORM TEMPEST FLOOD INUNDATION OR EARTHQUAKE PERILS. Subject otherwise to the terms exceptions conditions and limitations of this Policy. NB.1. In case of Liability Only Policies the words in CAPITALS should be deleted. NB.2. In case of policies covering Liability Only and a. Fire risks, the words \u201c BURGLARY HOUSEBREAKING OR THEFT\u201d are to be deleted; b. Theft risks, the words\u2019 \u201cFIRE EXPLOSION SELF IGNITION OR LIGHTNING\u201d are to be deleted. c. Fire and Theft risks no part of the words in capitals are to be deleted. 10. IMT. 11(C). Termination of the UNDECLARED Period of Vehicle Laid up. It is hereby understood and agreed that the insurance by this Policy in respect of vehicle no. \u2026\u2026\u2026.. insured hereunder is reinstated in full from \u2026\u2026./\u2026\u2026/\u2026\u2026and the Endorsement IMT 11(B) attaching to this policy shall be deemed to be cancelled. It is",
+            "score": 1.6473228931427002
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p4:c2",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 4,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "in the business or profession of \u2026\u2026\u2026\u2026\u2026. who shall be deemed to be the insured and whose proposal and declaration dated .. /\u2026/\u2026. shall be deemed to be incorporated in and to be the basis of this contract. Provided always that for the purpose of the No Claim Bonus, no period during which the interest in this policy has been vested in any previous Insured shall accrue to the benefit of.................. Subject otherwise to the terms exceptions conditions and limitations of this policy. 3. IMT.4. Change of Vehicle It is hereby understood and agreed that as from \u2026/\u2026../ \u2026... the vehicle bearing Registration Number \u2026\u2026\u2026\u2026.. is deemed to be deleted from the Schedule of the Policy and the vehicle with details specified hereunder is deemed to be included therein- In consequence of this change, an extra / refund premium of Rs\u2026.... is charged/allowed to the insured. Subject otherwise to the terms exceptions conditions and limitations of this policy. 4. IMT.6. Lease Agreement It is hereby",
+            "score": 1.6512033939361572
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p6:c2",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 6,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "self injury suicide or attempted suicide physical defect or infirmity or b. an accident happening whilst such person is under the influence of intoxicating liquor or drugs. 3. such compensation shall be payable only with the approval of the insured named in the policy and directly to the injured person or his/her legal representative(s) whose receipt shall be a full discharge in respect of the injury of such person. 4. not more than....** persons/passengers are in the vehicle insured at the time of occurrence of such injury. Subject otherwise to the terms exceptions conditions and limitations of this policy. * The Capital Sum Insured (CSI) per passenger is to be inserted. ** The registered sitting capacity of the vehicle insured is to be inserted. 14. IMT 17. Personal Accident Cover to Paid Drivers, Cleaners and Conductors: (Applicable to all classes of vehicles) In consideration of the payment of an additional premium, it is hereby understood and agreed that the insurer undertakes to",
+            "score": 1.6571431159973145
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p8:c9",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 8,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "reasonable precautions to prevent accidents and shall comply with all statutory obligations; records on demand. *3. the insured shall keep record of the name of each paid driver conductor cleaner or persons employed in loading and/or unloading and the amount of wages and salaries and other earnings paid to such employees and shall at all times allow the insurer to inspect such records on demand. 4. in the event of the policy being cancelled at the request of the insured no refund of the premium paid in respect of this Endorsement will be allowed. Subject otherwise to the terms conditions limitations and exceptions of the policy except so far as necessary to meet the requirements of the Motor Vehicles Act, 1988. * In case of Private cars/ motorised two wheelers (not used for hire or",
+            "score": 1.6689645051956177
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p1:c5",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 1,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "Andheri (East), Mumbai - 400 059 IPO :Raise a service request on Insurance Portfolio Organiser (IPO) For any endorsments on your policy you can contact us through any of the below mentioned modes: E mail us at : care@hdfcergo.com OR Call Toll-free: 1800 2 700 700 (Accessible from India only) OR Fax your request at: 022 6638 3669 OR Raise a service request on Insurance Portfolio Organizer (IPO) from www.hdfcergo.com NO CLAIM BONUS (NCB): NCB is provided for every claim free year basis the slab as provided by Tariff. How can I get No Claim Bonus Reserving Letter? NCB Reserving letter can be provided only on Sale of vehicle evidenced by transferred RC copy OR Sale Deed and Form 29 & 30. The OD section of the policy needs to be transferred to the new owner or cancelled. CLAIMS DOCUMENTS - For ACCIDENTAL DAMAGE TO INSURED VEHICLE a. Duly filled and signed claim form & satisfaction voucher b. Registration Certificate (RC) c. Driving license of the person driving at the time of the accident",
+            "score": 1.6821470260620117
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p8:c5",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 8,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "the amount for which the insured is so responsible. 21. IMT.26. Fire and/or Theft Risks Only (Not applicable for Miscellaneous and Special Types of vehicles rateable under Class -D and Motor Trade Policies under Classes- E, F and G of the Commercial Vehicles Tariff) Notwithstanding anything to the contrary contained in the policy it is hereby understood and agreed that Section II of the Policy is deemed to be cancelled and under Section I thereof the insurer shall only be liable to indemnify the insured against loss or damage by fire explosion self ignition lightning and/or burglary housebreaking theft and riot strike malicious damage terrorism storm tempest flood inundation and earthquake perils whilst the vehicle is laid up in garage and not in use. Subject otherwise to the terms conditions limitations and exceptions of this policy. NB.i. In case of Fire Risk only, the words \u201cburglary housebreaking theft\u201d are to be deleted. NB.ii. In case of Theft Risk only, the words \u201cfire",
+            "score": 1.6833651065826416
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p5:c8",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 5,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "Device (Not applicable to Motor Trade Policies) In consideration of certification by \u2026\u2026\u2026\u2026\u2026\u2026\u2026* that an Anti-Theft device approved by Automobile Research Association of India (ARAI), Pune has been installed in the vehicle insured herein a premium discount of Rs\u2026\u2026\u2026\u2026** is hereby allowed to the insured. It is hereby understood and agreed that the insured shall ensure at all times that this Anti-theft device installed in the vehicle insured is maintained in efficient condition till the expiry of this policy. Subject otherwise to the terms, exceptions, conditions and limitations of the policy * The name of the certifying Automobile Association is to be inserted. ** Premium discount calculated as per tariff provision is to be inserted. For mid term certification of installation of Anti Theft device pro-rata proportion of tariff discount for the unexpired period is to be inserted. 8. IMT. 11.A. Vehicle Laid Up (Lay up period declared) Notwithstanding anything to the contrary contained herein",
+            "score": 1.6866848468780518
+          }
+        ],
+        "verified": true,
+        "cost_usd": 0.0,
+        "trace_id": "f0d45378d98a36cfdcebc141a0aa077b",
+        "semantic_report": {
+          "passed": true,
+          "claims": [
+            {
+              "hypothesis": "The policy covers accidental damage to the insured vehicle.",
+              "supported": true,
+              "scores": {
+                "contradiction": 0.003174313634475339,
+                "entailment": 0.9747419113847618,
+                "neutral": 0.022083774980762694
+              },
+              "method": "nli-deberta-cpu"
+            },
+            {
+              "hypothesis": "The policy contains restrictions on the use of the insured vehicle.",
+              "supported": true,
+              "scores": {
+                "contradiction": 0.006857798674106149,
+                "entailment": 0.911369912281063,
+                "neutral": 0.08177228904483093
+              },
+              "method": "nli-deberta-cpu"
+            }
+          ],
+          "method": "independent-nli"
+        },
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9430559118329125,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.13084849675319024
+        }
+      },
+      "seconds": 28.87210859998595,
+      "feedback_code": 201,
+      "passed": true
+    },
+    {
+      "case": "surveyor",
+      "status": {
+        "run_id": "04dc38f5-d387-47d8-8bed-a8a5eab28816",
+        "status": "completed",
+        "result": {
+          "recommendation_only": true,
+          "classification": "own_damage",
+          "coverage_position": "potentially_covered",
+          "queue": "surveyor assignment",
+          "reason": "A listed cover may apply, subject to exclusions, the schedule and human verification.",
+          "requires_human": true,
+          "escalation": "A human handler must verify the schedule, facts and applicable endorsements.",
+          "citations": [
+            {
+              "clause_id": "hdfc_private_car_package:p2:c0",
+              "document": "hdfc_private_car_package.pdf",
+              "page": 2,
+              "quote": "Whereas the insured by a proposal and declaration dated as stated in the Schedule which shall be the basis of this contract and is deemed to be incorporated herein has applied to the Company for the insurance hereinafter contained and has paid the premium mentioned in the schedule as consideration for such insurance in respect of accidental loss or damage occurring during the period of insurance. NOW THIS POLICY WITNESSETH: That subject to the terms exceptions and conditions contained herein or endorsed or expressed hereon; The Company will indemnify the insured against loss or damage to the vehicle insured hereunder and/ or its accessories whilst thereon I. by fire explosion self ignition or lightning II. by burglary housebreaking or theft III. by riot and strike IV. by earthquake (fire and shock damage) V. by flood typhoon hurricane storm tempest inundation cyclone hailstorm frost VI. by accidental external means VII. by malicious act VIII. by terrorist activity IX. whilst in transit"
+            },
+            {
+              "clause_id": "hdfc_private_car_package:p3:c1",
+              "document": "hdfc_private_car_package.pdf",
+              "page": 3,
+              "quote": "vehicle insured herein is a. being used otherwise than in accordance with the \u2018Limitations as to Use\u2019 or b. being driven by or is for the purpose of being driven by him/her in the charge of any person other than a Driver as stated in the Driver's Clause 4. i. any accidental loss or damage to any property whatsoever or any loss or expense whatsoever resulting or arising there from or any consequential loss ii. any liability of whatsoever nature directly or indirectly caused by or contributed to by or arising from ionising radiations or contamination by radioactivity from any nuclear fuel or from any nuclear waste from the combustion of nuclear fuel. For the purpose of this exception combustion shall include any self-sustaining process of nuclear fission 5. any accidental loss or damage or liability directly or indirectly caused by or contributed to by or arising from nuclear weapons material. 6. any accidental loss damage and/or liability directly or indirectly or proximately or"
+            },
+            {
+              "clause_id": "hdfc_private_car_package:p1:c2",
+              "document": "hdfc_private_car_package.pdf",
+              "page": 1,
+              "quote": "for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or theft unless the vehicle is stolen at the same time (applicable to all commercial vehicles & two wheelers) HOW DO I FILE A CLAIM? For Accidental Damage to Insured Vehicle (Own Damage Claims): \u00a1Call our customer care Toll-free 1800-2-700-700 (Accessible from India only) if the vehicle meets with an accident and provide your policy number for reference and register the claim \u00a1Alternatively, you can visit and register on IPO (available on website/Download IPO app on your smart phone) by providing personal details, link your policy and register your claim under \"Claims\" tab Please keep the following details handy while intimating a claim a. Policy No. b. Registration details/ RC copy c. Drivers details at the time of accident including driving license number d. FIR on a case to case basis e. Repair estimate WHAT"
+            }
+          ],
+          "verified": true,
+          "prompt_version": "v4",
+          "limitations": [
+            "Policy schedule and activated endorsements are not in this public corpus.",
+            "Fast-track threshold is an operational demo assumption, not a policy entitlement.",
+            "Local lexical embeddings and rule-based drafting have limited language understanding."
+          ]
+        },
+        "trace_path": "/runs/04dc38f5-d387-47d8-8bed-a8a5eab28816/trace",
+        "elapsed_seconds": 27.072034120559692
+      },
+      "trace": {
+        "run_id": "04dc38f5-d387-47d8-8bed-a8a5eab28816",
+        "events": [
+          {
+            "run_id": "04dc38f5-d387-47d8-8bed-a8a5eab28816",
+            "agent": "analysis",
+            "step": "plan",
+            "seconds": 0.0010950000723823905,
+            "outcome": "success",
+            "details": {
+              "stage": "initial"
+            },
+            "time": 1792186846.4553246,
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "04dc38f5-d387-47d8-8bed-a8a5eab28816",
+            "agent": "analysis",
+            "step": "tool",
+            "seconds": 0.0003602999495342374,
+            "outcome": "success",
+            "details": {
+              "tool": "request_fields",
+              "fields": {
+                "vehicle_use": "personal",
+                "country": "India",
+                "driver_licensed": true,
+                "intoxicated": false,
+                "estimated_repair": 65000.0,
+                "idv": 500000.0
+              }
+            },
+            "time": 1792186846.4618766,
+            "prompt_version": "v4"
+          },
+          {
+            "agent": "analysis",
+            "step": "provider",
+            "seconds": 10.037844299920835,
+            "attempts": 1,
+            "errors": [],
+            "prompt_tokens": 225,
+            "completion_tokens": 16,
+            "cost_usd": 0.0,
+            "usage_source": "provider",
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "04dc38f5-d387-47d8-8bed-a8a5eab28816",
+            "agent": "analysis",
+            "step": "plan",
+            "seconds": 10.041752599994652,
+            "outcome": "success",
+            "details": {
+              "stage": "fields_read"
+            },
+            "time": 1792186856.5086496,
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "04dc38f5-d387-47d8-8bed-a8a5eab28816",
+            "agent": "analysis",
+            "step": "tool",
+            "seconds": 0.0004126999992877245,
+            "outcome": "success",
+            "details": {
+              "tool": "corpus_search",
+              "query": "SECTION I loss damage vehicle accidental external means",
+              "passages": [
+                {
+                  "clause_id": "hdfc_private_car_package:p1:c1",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 1,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "for owner driver and optional cover for passengers covering accidental death and permanent total disability a. General aging, wear & tear, mechanical or electrical breakdown, failure, depreciation, any consequential loss b. Damage by a person driving without a valid license c. Damage by a person driving under the influence of liquor or drugs d. Loss/damage attributable to war, mutiny, nuclear risks e. Damage to tyres and tubes, unless damaged during an accident f. Usage on hire & reward (applicable for all classes except public commercial vehicles) g. Loss or damage to bonnet side parts, mudguard, bumpers, lamps, tyres, tubes, headlights, paint work (applicable for all commercial vehicles; unless opted additionally) h. Loss or damage resulting from overturning arising out of operation as a tool (applicable for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or",
+                  "score": 1.542879581451416
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p1:c0",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 1,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "* supports smart phone based on Blackberry, iPhone, Windows 8 & Android platform. Manage Your @ hdfcergo.com / Smartphones* Portfolio Download IPO mobile application from IPO website post log in WHAT ARE THE MAJOR COVERS UNDER THE POLICY? WHAT ARE THE MAJOR EXCLUSIONS OF THE POLICY? Loss or Damage to the Insured Vehicle caused due to: a. Fire, explosion, self ignition or lightning. b Burglary, housebreaking or theft c All act of God perils like earthquake, flood, cyclone etc d Accidental external means, terrorism, riot and strike Liability to Third Parties: Provides cover for any legal liability arising out of the use of the vehicle for a Accidental death / injury to any third party b Any damage to property owned by third party Personal Accident Cover: The policy provides for a mandatory Personal Accident cover for owner driver and optional cover for passengers covering accidental death and permanent total disability a. General aging, wear & tear, mechanical or electrical breakdown,",
+                  "score": 1.6166200637817383
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p1:c2",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 1,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or theft unless the vehicle is stolen at the same time (applicable to all commercial vehicles & two wheelers) HOW DO I FILE A CLAIM? For Accidental Damage to Insured Vehicle (Own Damage Claims): \u00a1Call our customer care Toll-free 1800-2-700-700 (Accessible from India only) if the vehicle meets with an accident and provide your policy number for reference and register the claim \u00a1Alternatively, you can visit and register on IPO (available on website/Download IPO app on your smart phone) by providing personal details, link your policy and register your claim under \"Claims\" tab Please keep the following details handy while intimating a claim a. Policy No. b. Registration details/ RC copy c. Drivers details at the time of accident including driving license number d. FIR on a case to case basis e. Repair estimate WHAT",
+                  "score": 1.694455862045288
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p2:c2",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 2,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "painting charges, the material component shall be considered as 25% of total painting charges for the purpose of applying the depreciation. The Company shall not be liable to make any payment in respect of:- a. consequential loss, depreciation, wear and tear, mechanical or electrical breakdown, failures or breakages; b. damage to tyres and tubes unless the vehicle is damaged at the same time in which case the liability of the company shall be limited to 50% of the cost of replacement. And c. any accidental loss or damage suffered whilst the insured or any person driving the vehicle with the knowledge and consent of the insured is under the influence of intoxicating liquor or drugs. In the event of the vehicle being disabled by reason of loss or damage covered under this Policy the Company will bear the reasonable cost of protection and removal to SECTION I. LOSS OF OR DAMAGE TO THE VEHICLE INSURED HDFC ERGO General Insurance Company Limited STANDARD FORM FOR PRIVATE CAR PACKAGE POLICY",
+                  "score": 1.7031073570251465
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p3:c1",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 3,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "vehicle insured herein is a. being used otherwise than in accordance with the \u2018Limitations as to Use\u2019 or b. being driven by or is for the purpose of being driven by him/her in the charge of any person other than a Driver as stated in the Driver's Clause 4. i. any accidental loss or damage to any property whatsoever or any loss or expense whatsoever resulting or arising there from or any consequential loss ii. any liability of whatsoever nature directly or indirectly caused by or contributed to by or arising from ionising radiations or contamination by radioactivity from any nuclear fuel or from any nuclear waste from the combustion of nuclear fuel. For the purpose of this exception combustion shall include any self-sustaining process of nuclear fission 5. any accidental loss or damage or liability directly or indirectly caused by or contributed to by or arising from nuclear weapons material. 6. any accidental loss damage and/or liability directly or indirectly or proximately or",
+                  "score": 1.704608678817749
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p2:c0",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 2,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "Whereas the insured by a proposal and declaration dated as stated in the Schedule which shall be the basis of this contract and is deemed to be incorporated herein has applied to the Company for the insurance hereinafter contained and has paid the premium mentioned in the schedule as consideration for such insurance in respect of accidental loss or damage occurring during the period of insurance. NOW THIS POLICY WITNESSETH: That subject to the terms exceptions and conditions contained herein or endorsed or expressed hereon; The Company will indemnify the insured against loss or damage to the vehicle insured hereunder and/ or its accessories whilst thereon I. by fire explosion self ignition or lightning II. by burglary housebreaking or theft III. by riot and strike IV. by earthquake (fire and shock damage) V. by flood typhoon hurricane storm tempest inundation cyclone hailstorm frost VI. by accidental external means VII. by malicious act VIII. by terrorist activity IX. whilst in transit",
+                  "score": 1.7252657413482666
+                }
+              ]
+            },
+            "time": 1792186856.514422,
+            "prompt_version": "v4"
+          },
+          {
+            "agent": "analysis",
+            "step": "provider",
+            "seconds": 3.256626999936998,
+            "attempts": 1,
+            "errors": [],
+            "prompt_tokens": 382,
+            "completion_tokens": 16,
+            "cost_usd": 0.0,
+            "usage_source": "provider",
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "04dc38f5-d387-47d8-8bed-a8a5eab28816",
+            "agent": "analysis",
+            "step": "plan",
+            "seconds": 3.2720090000657365,
+            "outcome": "success",
+            "details": {
+              "stage": "base_read"
+            },
+            "time": 1792186859.791716,
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "04dc38f5-d387-47d8-8bed-a8a5eab28816",
+            "agent": "analysis",
+            "step": "tool",
+            "seconds": 0.0006186000537127256,
+            "outcome": "success",
+            "details": {
+              "tool": "corpus_search",
+              "query": "terms exceptions conditions general exceptions limitations as to use hire reward licence intoxicating mechanical breakdown claims process",
+              "passages": [
+                {
+                  "clause_id": "hdfc_private_car_package:p8:c3",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 8,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "otherwise to the terms, conditions limitations and exceptions of this policy. * Delete in the case of Liability to the public risks only policies. ** Insert value of trailer as declared at inception of insurance or any renewal thereof. 26. IMT.31. Reliability Trials and Rallies. (Applicable to Private Cars) In consideration of the payment of an additional premium it is hereby understood and agreed that the indemnity granted by this policy is extended to apply whilst the vehicle insured is engaged in ....\u2026\u2026.... ......*. to be held at \u2026\u2026..**... on or about the date of ..../\u2026/ \u2026 ..... under the auspices of ............\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026.# Provided that, a. No indemnity shall be granted by this Endorsement to \u2026\u2026\u2026\u2026\u2026.... # b. This policy does not cover use for organised racing, pace making or speed testing. c. During the course of the \u2026\u2026\u2026\u2026\u2026\u2026\u2026* the Insurer shall not be liable in respect of death of or bodily injury to any person being carried in or upon or entering or getting on to or alighting from",
+                  "score": 1.6242765188217163
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p1:c2",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 1,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or theft unless the vehicle is stolen at the same time (applicable to all commercial vehicles & two wheelers) HOW DO I FILE A CLAIM? For Accidental Damage to Insured Vehicle (Own Damage Claims): \u00a1Call our customer care Toll-free 1800-2-700-700 (Accessible from India only) if the vehicle meets with an accident and provide your policy number for reference and register the claim \u00a1Alternatively, you can visit and register on IPO (available on website/Download IPO app on your smart phone) by providing personal details, link your policy and register your claim under \"Claims\" tab Please keep the following details handy while intimating a claim a. Policy No. b. Registration details/ RC copy c. Drivers details at the time of accident including driving license number d. FIR on a case to case basis e. Repair estimate WHAT",
+                  "score": 1.6275725364685059
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p5:c3",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 5,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "DAMAGE TO THE SAID VEHICLE CAUSED BY FIRE EXPLOSION SELF-IGNITION OR LIGHTNING OR BURGLARY, HOUSEBREAKING, THEFT OR RIOT STRIKE MALICIOUS DAMAGE TERRORISM OR STORM TEMPEST FLOOD INUNDATION OR EARTHQUAKE PERILS. Subject otherwise to the terms exceptions conditions and limitations of this Policy. NB.1. In case of Liability Only Policies the words in CAPITALS should be deleted. NB.2. In case of policies covering Liability Only and a. Fire risks, the words \u201c BURGLARY HOUSEBREAKING OR THEFT\u201d are to be deleted; b. Theft risks, the words\u2019 \u201cFIRE EXPLOSION SELF IGNITION OR LIGHTNING\u201d are to be deleted. c. Fire and Theft risks no part of the words in capitals are to be deleted. 10. IMT. 11(C). Termination of the UNDECLARED Period of Vehicle Laid up. It is hereby understood and agreed that the insurance by this Policy in respect of vehicle no. \u2026\u2026\u2026.. insured hereunder is reinstated in full from \u2026\u2026./\u2026\u2026/\u2026\u2026and the Endorsement IMT 11(B) attaching to this policy shall be deemed to be cancelled. It is",
+                  "score": 1.6473228931427002
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p4:c2",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 4,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "in the business or profession of \u2026\u2026\u2026\u2026\u2026. who shall be deemed to be the insured and whose proposal and declaration dated .. /\u2026/\u2026. shall be deemed to be incorporated in and to be the basis of this contract. Provided always that for the purpose of the No Claim Bonus, no period during which the interest in this policy has been vested in any previous Insured shall accrue to the benefit of.................. Subject otherwise to the terms exceptions conditions and limitations of this policy. 3. IMT.4. Change of Vehicle It is hereby understood and agreed that as from \u2026/\u2026../ \u2026... the vehicle bearing Registration Number \u2026\u2026\u2026\u2026.. is deemed to be deleted from the Schedule of the Policy and the vehicle with details specified hereunder is deemed to be included therein- In consequence of this change, an extra / refund premium of Rs\u2026.... is charged/allowed to the insured. Subject otherwise to the terms exceptions conditions and limitations of this policy. 4. IMT.6. Lease Agreement It is hereby",
+                  "score": 1.6512033939361572
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p1:c0",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 1,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "* supports smart phone based on Blackberry, iPhone, Windows 8 & Android platform. Manage Your @ hdfcergo.com / Smartphones* Portfolio Download IPO mobile application from IPO website post log in WHAT ARE THE MAJOR COVERS UNDER THE POLICY? WHAT ARE THE MAJOR EXCLUSIONS OF THE POLICY? Loss or Damage to the Insured Vehicle caused due to: a. Fire, explosion, self ignition or lightning. b Burglary, housebreaking or theft c All act of God perils like earthquake, flood, cyclone etc d Accidental external means, terrorism, riot and strike Liability to Third Parties: Provides cover for any legal liability arising out of the use of the vehicle for a Accidental death / injury to any third party b Any damage to property owned by third party Personal Accident Cover: The policy provides for a mandatory Personal Accident cover for owner driver and optional cover for passengers covering accidental death and permanent total disability a. General aging, wear & tear, mechanical or electrical breakdown,",
+                  "score": 1.6563959121704102
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p6:c2",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 6,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "self injury suicide or attempted suicide physical defect or infirmity or b. an accident happening whilst such person is under the influence of intoxicating liquor or drugs. 3. such compensation shall be payable only with the approval of the insured named in the policy and directly to the injured person or his/her legal representative(s) whose receipt shall be a full discharge in respect of the injury of such person. 4. not more than....** persons/passengers are in the vehicle insured at the time of occurrence of such injury. Subject otherwise to the terms exceptions conditions and limitations of this policy. * The Capital Sum Insured (CSI) per passenger is to be inserted. ** The registered sitting capacity of the vehicle insured is to be inserted. 14. IMT 17. Personal Accident Cover to Paid Drivers, Cleaners and Conductors: (Applicable to all classes of vehicles) In consideration of the payment of an additional premium, it is hereby understood and agreed that the insurer undertakes to",
+                  "score": 1.6571431159973145
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p8:c9",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 8,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "reasonable precautions to prevent accidents and shall comply with all statutory obligations; records on demand. *3. the insured shall keep record of the name of each paid driver conductor cleaner or persons employed in loading and/or unloading and the amount of wages and salaries and other earnings paid to such employees and shall at all times allow the insurer to inspect such records on demand. 4. in the event of the policy being cancelled at the request of the insured no refund of the premium paid in respect of this Endorsement will be allowed. Subject otherwise to the terms conditions limitations and exceptions of the policy except so far as necessary to meet the requirements of the Motor Vehicles Act, 1988. * In case of Private cars/ motorised two wheelers (not used for hire or",
+                  "score": 1.6689645051956177
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p1:c5",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 1,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "Andheri (East), Mumbai - 400 059 IPO :Raise a service request on Insurance Portfolio Organiser (IPO) For any endorsments on your policy you can contact us through any of the below mentioned modes: E mail us at : care@hdfcergo.com OR Call Toll-free: 1800 2 700 700 (Accessible from India only) OR Fax your request at: 022 6638 3669 OR Raise a service request on Insurance Portfolio Organizer (IPO) from www.hdfcergo.com NO CLAIM BONUS (NCB): NCB is provided for every claim free year basis the slab as provided by Tariff. How can I get No Claim Bonus Reserving Letter? NCB Reserving letter can be provided only on Sale of vehicle evidenced by transferred RC copy OR Sale Deed and Form 29 & 30. The OD section of the policy needs to be transferred to the new owner or cancelled. CLAIMS DOCUMENTS - For ACCIDENTAL DAMAGE TO INSURED VEHICLE a. Duly filled and signed claim form & satisfaction voucher b. Registration Certificate (RC) c. Driving license of the person driving at the time of the accident",
+                  "score": 1.6821470260620117
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p8:c5",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 8,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "the amount for which the insured is so responsible. 21. IMT.26. Fire and/or Theft Risks Only (Not applicable for Miscellaneous and Special Types of vehicles rateable under Class -D and Motor Trade Policies under Classes- E, F and G of the Commercial Vehicles Tariff) Notwithstanding anything to the contrary contained in the policy it is hereby understood and agreed that Section II of the Policy is deemed to be cancelled and under Section I thereof the insurer shall only be liable to indemnify the insured against loss or damage by fire explosion self ignition lightning and/or burglary housebreaking theft and riot strike malicious damage terrorism storm tempest flood inundation and earthquake perils whilst the vehicle is laid up in garage and not in use. Subject otherwise to the terms conditions limitations and exceptions of this policy. NB.i. In case of Fire Risk only, the words \u201cburglary housebreaking theft\u201d are to be deleted. NB.ii. In case of Theft Risk only, the words \u201cfire",
+                  "score": 1.6833651065826416
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p5:c8",
+                  "document": "hdfc_private_car_package.pdf",
+                  "page": 5,
+                  "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                  "text": "Device (Not applicable to Motor Trade Policies) In consideration of certification by \u2026\u2026\u2026\u2026\u2026\u2026\u2026* that an Anti-Theft device approved by Automobile Research Association of India (ARAI), Pune has been installed in the vehicle insured herein a premium discount of Rs\u2026\u2026\u2026\u2026** is hereby allowed to the insured. It is hereby understood and agreed that the insured shall ensure at all times that this Anti-theft device installed in the vehicle insured is maintained in efficient condition till the expiry of this policy. Subject otherwise to the terms, exceptions, conditions and limitations of the policy * The name of the certifying Automobile Association is to be inserted. ** Premium discount calculated as per tariff provision is to be inserted. For mid term certification of installation of Anti Theft device pro-rata proportion of tariff discount for the unexpired period is to be inserted. 8. IMT. 11.A. Vehicle Laid Up (Lay up period declared) Notwithstanding anything to the contrary contained herein",
+                  "score": 1.6866848468780518
+                }
+              ]
+            },
+            "time": 1792186859.7965171,
+            "prompt_version": "v4"
+          },
+          {
+            "agent": "analysis",
+            "step": "provider",
+            "seconds": 6.722907299990766,
+            "attempts": 1,
+            "errors": [],
+            "prompt_tokens": 381,
+            "completion_tokens": 8,
+            "cost_usd": 0.0,
+            "usage_source": "provider",
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "04dc38f5-d387-47d8-8bed-a8a5eab28816",
+            "agent": "analysis",
+            "step": "plan",
+            "seconds": 6.7487254999578,
+            "outcome": "success",
+            "details": {
+              "stage": "modifiers_read"
+            },
+            "time": 1792186866.5514028,
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "04dc38f5-d387-47d8-8bed-a8a5eab28816",
+            "agent": "analysis",
+            "step": "tool",
+            "seconds": 0.000421399949118495,
+            "outcome": "success",
+            "details": {
+              "tool": "clause_lookup",
+              "clause_id": "hdfc_private_car_package:p1:c1",
+              "result": {
+                "clause_id": "hdfc_private_car_package:p1:c1",
+                "document": "hdfc_private_car_package.pdf",
+                "page": 1,
+                "text": "for owner driver and optional cover for passengers covering accidental death and permanent total disability a. General aging, wear & tear, mechanical or electrical breakdown, failure, depreciation, any consequential loss b. Damage by a person driving without a valid license c. Damage by a person driving under the influence of liquor or drugs d. Loss/damage attributable to war, mutiny, nuclear risks e. Damage to tyres and tubes, unless damaged during an accident f. Usage on hire & reward (applicable for all classes except public commercial vehicles) g. Loss or damage to bonnet side parts, mudguard, bumpers, lamps, tyres, tubes, headlights, paint work (applicable for all commercial vehicles; unless opted additionally) h. Loss or damage resulting from overturning arising out of operation as a tool (applicable for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or",
+                "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1"
+              }
+            },
+            "time": 1792186866.571541,
+            "prompt_version": "v4"
+          },
+          {
+            "agent": "analysis",
+            "step": "provider",
+            "seconds": 6.420916299917735,
+            "attempts": 1,
+            "errors": [],
+            "prompt_tokens": 375,
+            "completion_tokens": 7,
+            "cost_usd": 0.0,
+            "usage_source": "provider",
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "04dc38f5-d387-47d8-8bed-a8a5eab28816",
+            "agent": "analysis",
+            "step": "plan",
+            "seconds": 6.448689699987881,
+            "outcome": "success",
+            "details": {
+              "stage": "clause_read"
+            },
+            "time": 1792186873.0282307,
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "04dc38f5-d387-47d8-8bed-a8a5eab28816",
+            "agent": "analysis",
+            "step": "draft",
+            "seconds": 0.0010383999906480312,
+            "outcome": "success",
+            "details": {},
+            "time": 1792186873.0334332,
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "04dc38f5-d387-47d8-8bed-a8a5eab28816",
+            "agent": "verification",
+            "step": "verify",
+            "seconds": 0.3828926000278443,
+            "outcome": "success",
+            "details": {
+              "initial_checks": true,
+              "template_mismatches": [],
+              "semantic": {
+                "passed": true,
+                "claims": [
+                  {
+                    "hypothesis": "The policy covers accidental damage to the insured vehicle.",
+                    "supported": true,
+                    "scores": {
+                      "contradiction": 0.003174313634475339,
+                      "entailment": 0.9747419113847618,
+                      "neutral": 0.022083774980762694
+                    },
+                    "method": "nli-deberta-cpu"
+                  }
+                ],
+                "method": "independent-nli"
+              },
+              "verified": true,
+              "citations_checked": 3
+            },
+            "time": 1792186873.450097,
+            "prompt_version": "v4"
+          }
+        ],
+        "retrieved_passages": [
+          {
+            "clause_id": "hdfc_private_car_package:p1:c1",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 1,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "for owner driver and optional cover for passengers covering accidental death and permanent total disability a. General aging, wear & tear, mechanical or electrical breakdown, failure, depreciation, any consequential loss b. Damage by a person driving without a valid license c. Damage by a person driving under the influence of liquor or drugs d. Loss/damage attributable to war, mutiny, nuclear risks e. Damage to tyres and tubes, unless damaged during an accident f. Usage on hire & reward (applicable for all classes except public commercial vehicles) g. Loss or damage to bonnet side parts, mudguard, bumpers, lamps, tyres, tubes, headlights, paint work (applicable for all commercial vehicles; unless opted additionally) h. Loss or damage resulting from overturning arising out of operation as a tool (applicable for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or",
+            "score": 1.542879581451416
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p1:c0",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 1,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "* supports smart phone based on Blackberry, iPhone, Windows 8 & Android platform. Manage Your @ hdfcergo.com / Smartphones* Portfolio Download IPO mobile application from IPO website post log in WHAT ARE THE MAJOR COVERS UNDER THE POLICY? WHAT ARE THE MAJOR EXCLUSIONS OF THE POLICY? Loss or Damage to the Insured Vehicle caused due to: a. Fire, explosion, self ignition or lightning. b Burglary, housebreaking or theft c All act of God perils like earthquake, flood, cyclone etc d Accidental external means, terrorism, riot and strike Liability to Third Parties: Provides cover for any legal liability arising out of the use of the vehicle for a Accidental death / injury to any third party b Any damage to property owned by third party Personal Accident Cover: The policy provides for a mandatory Personal Accident cover for owner driver and optional cover for passengers covering accidental death and permanent total disability a. General aging, wear & tear, mechanical or electrical breakdown,",
+            "score": 1.6563959121704102
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p1:c2",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 1,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or theft unless the vehicle is stolen at the same time (applicable to all commercial vehicles & two wheelers) HOW DO I FILE A CLAIM? For Accidental Damage to Insured Vehicle (Own Damage Claims): \u00a1Call our customer care Toll-free 1800-2-700-700 (Accessible from India only) if the vehicle meets with an accident and provide your policy number for reference and register the claim \u00a1Alternatively, you can visit and register on IPO (available on website/Download IPO app on your smart phone) by providing personal details, link your policy and register your claim under \"Claims\" tab Please keep the following details handy while intimating a claim a. Policy No. b. Registration details/ RC copy c. Drivers details at the time of accident including driving license number d. FIR on a case to case basis e. Repair estimate WHAT",
+            "score": 1.6275725364685059
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p2:c2",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 2,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "painting charges, the material component shall be considered as 25% of total painting charges for the purpose of applying the depreciation. The Company shall not be liable to make any payment in respect of:- a. consequential loss, depreciation, wear and tear, mechanical or electrical breakdown, failures or breakages; b. damage to tyres and tubes unless the vehicle is damaged at the same time in which case the liability of the company shall be limited to 50% of the cost of replacement. And c. any accidental loss or damage suffered whilst the insured or any person driving the vehicle with the knowledge and consent of the insured is under the influence of intoxicating liquor or drugs. In the event of the vehicle being disabled by reason of loss or damage covered under this Policy the Company will bear the reasonable cost of protection and removal to SECTION I. LOSS OF OR DAMAGE TO THE VEHICLE INSURED HDFC ERGO General Insurance Company Limited STANDARD FORM FOR PRIVATE CAR PACKAGE POLICY",
+            "score": 1.7031073570251465
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p3:c1",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 3,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "vehicle insured herein is a. being used otherwise than in accordance with the \u2018Limitations as to Use\u2019 or b. being driven by or is for the purpose of being driven by him/her in the charge of any person other than a Driver as stated in the Driver's Clause 4. i. any accidental loss or damage to any property whatsoever or any loss or expense whatsoever resulting or arising there from or any consequential loss ii. any liability of whatsoever nature directly or indirectly caused by or contributed to by or arising from ionising radiations or contamination by radioactivity from any nuclear fuel or from any nuclear waste from the combustion of nuclear fuel. For the purpose of this exception combustion shall include any self-sustaining process of nuclear fission 5. any accidental loss or damage or liability directly or indirectly caused by or contributed to by or arising from nuclear weapons material. 6. any accidental loss damage and/or liability directly or indirectly or proximately or",
+            "score": 1.704608678817749
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p2:c0",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 2,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "Whereas the insured by a proposal and declaration dated as stated in the Schedule which shall be the basis of this contract and is deemed to be incorporated herein has applied to the Company for the insurance hereinafter contained and has paid the premium mentioned in the schedule as consideration for such insurance in respect of accidental loss or damage occurring during the period of insurance. NOW THIS POLICY WITNESSETH: That subject to the terms exceptions and conditions contained herein or endorsed or expressed hereon; The Company will indemnify the insured against loss or damage to the vehicle insured hereunder and/ or its accessories whilst thereon I. by fire explosion self ignition or lightning II. by burglary housebreaking or theft III. by riot and strike IV. by earthquake (fire and shock damage) V. by flood typhoon hurricane storm tempest inundation cyclone hailstorm frost VI. by accidental external means VII. by malicious act VIII. by terrorist activity IX. whilst in transit",
+            "score": 1.7252657413482666
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p8:c3",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 8,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "otherwise to the terms, conditions limitations and exceptions of this policy. * Delete in the case of Liability to the public risks only policies. ** Insert value of trailer as declared at inception of insurance or any renewal thereof. 26. IMT.31. Reliability Trials and Rallies. (Applicable to Private Cars) In consideration of the payment of an additional premium it is hereby understood and agreed that the indemnity granted by this policy is extended to apply whilst the vehicle insured is engaged in ....\u2026\u2026.... ......*. to be held at \u2026\u2026..**... on or about the date of ..../\u2026/ \u2026 ..... under the auspices of ............\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026.# Provided that, a. No indemnity shall be granted by this Endorsement to \u2026\u2026\u2026\u2026\u2026.... # b. This policy does not cover use for organised racing, pace making or speed testing. c. During the course of the \u2026\u2026\u2026\u2026\u2026\u2026\u2026* the Insurer shall not be liable in respect of death of or bodily injury to any person being carried in or upon or entering or getting on to or alighting from",
+            "score": 1.6242765188217163
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p5:c3",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 5,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "DAMAGE TO THE SAID VEHICLE CAUSED BY FIRE EXPLOSION SELF-IGNITION OR LIGHTNING OR BURGLARY, HOUSEBREAKING, THEFT OR RIOT STRIKE MALICIOUS DAMAGE TERRORISM OR STORM TEMPEST FLOOD INUNDATION OR EARTHQUAKE PERILS. Subject otherwise to the terms exceptions conditions and limitations of this Policy. NB.1. In case of Liability Only Policies the words in CAPITALS should be deleted. NB.2. In case of policies covering Liability Only and a. Fire risks, the words \u201c BURGLARY HOUSEBREAKING OR THEFT\u201d are to be deleted; b. Theft risks, the words\u2019 \u201cFIRE EXPLOSION SELF IGNITION OR LIGHTNING\u201d are to be deleted. c. Fire and Theft risks no part of the words in capitals are to be deleted. 10. IMT. 11(C). Termination of the UNDECLARED Period of Vehicle Laid up. It is hereby understood and agreed that the insurance by this Policy in respect of vehicle no. \u2026\u2026\u2026.. insured hereunder is reinstated in full from \u2026\u2026./\u2026\u2026/\u2026\u2026and the Endorsement IMT 11(B) attaching to this policy shall be deemed to be cancelled. It is",
+            "score": 1.6473228931427002
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p4:c2",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 4,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "in the business or profession of \u2026\u2026\u2026\u2026\u2026. who shall be deemed to be the insured and whose proposal and declaration dated .. /\u2026/\u2026. shall be deemed to be incorporated in and to be the basis of this contract. Provided always that for the purpose of the No Claim Bonus, no period during which the interest in this policy has been vested in any previous Insured shall accrue to the benefit of.................. Subject otherwise to the terms exceptions conditions and limitations of this policy. 3. IMT.4. Change of Vehicle It is hereby understood and agreed that as from \u2026/\u2026../ \u2026... the vehicle bearing Registration Number \u2026\u2026\u2026\u2026.. is deemed to be deleted from the Schedule of the Policy and the vehicle with details specified hereunder is deemed to be included therein- In consequence of this change, an extra / refund premium of Rs\u2026.... is charged/allowed to the insured. Subject otherwise to the terms exceptions conditions and limitations of this policy. 4. IMT.6. Lease Agreement It is hereby",
+            "score": 1.6512033939361572
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p6:c2",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 6,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "self injury suicide or attempted suicide physical defect or infirmity or b. an accident happening whilst such person is under the influence of intoxicating liquor or drugs. 3. such compensation shall be payable only with the approval of the insured named in the policy and directly to the injured person or his/her legal representative(s) whose receipt shall be a full discharge in respect of the injury of such person. 4. not more than....** persons/passengers are in the vehicle insured at the time of occurrence of such injury. Subject otherwise to the terms exceptions conditions and limitations of this policy. * The Capital Sum Insured (CSI) per passenger is to be inserted. ** The registered sitting capacity of the vehicle insured is to be inserted. 14. IMT 17. Personal Accident Cover to Paid Drivers, Cleaners and Conductors: (Applicable to all classes of vehicles) In consideration of the payment of an additional premium, it is hereby understood and agreed that the insurer undertakes to",
+            "score": 1.6571431159973145
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p8:c9",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 8,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "reasonable precautions to prevent accidents and shall comply with all statutory obligations; records on demand. *3. the insured shall keep record of the name of each paid driver conductor cleaner or persons employed in loading and/or unloading and the amount of wages and salaries and other earnings paid to such employees and shall at all times allow the insurer to inspect such records on demand. 4. in the event of the policy being cancelled at the request of the insured no refund of the premium paid in respect of this Endorsement will be allowed. Subject otherwise to the terms conditions limitations and exceptions of the policy except so far as necessary to meet the requirements of the Motor Vehicles Act, 1988. * In case of Private cars/ motorised two wheelers (not used for hire or",
+            "score": 1.6689645051956177
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p1:c5",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 1,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "Andheri (East), Mumbai - 400 059 IPO :Raise a service request on Insurance Portfolio Organiser (IPO) For any endorsments on your policy you can contact us through any of the below mentioned modes: E mail us at : care@hdfcergo.com OR Call Toll-free: 1800 2 700 700 (Accessible from India only) OR Fax your request at: 022 6638 3669 OR Raise a service request on Insurance Portfolio Organizer (IPO) from www.hdfcergo.com NO CLAIM BONUS (NCB): NCB is provided for every claim free year basis the slab as provided by Tariff. How can I get No Claim Bonus Reserving Letter? NCB Reserving letter can be provided only on Sale of vehicle evidenced by transferred RC copy OR Sale Deed and Form 29 & 30. The OD section of the policy needs to be transferred to the new owner or cancelled. CLAIMS DOCUMENTS - For ACCIDENTAL DAMAGE TO INSURED VEHICLE a. Duly filled and signed claim form & satisfaction voucher b. Registration Certificate (RC) c. Driving license of the person driving at the time of the accident",
+            "score": 1.6821470260620117
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p8:c5",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 8,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "the amount for which the insured is so responsible. 21. IMT.26. Fire and/or Theft Risks Only (Not applicable for Miscellaneous and Special Types of vehicles rateable under Class -D and Motor Trade Policies under Classes- E, F and G of the Commercial Vehicles Tariff) Notwithstanding anything to the contrary contained in the policy it is hereby understood and agreed that Section II of the Policy is deemed to be cancelled and under Section I thereof the insurer shall only be liable to indemnify the insured against loss or damage by fire explosion self ignition lightning and/or burglary housebreaking theft and riot strike malicious damage terrorism storm tempest flood inundation and earthquake perils whilst the vehicle is laid up in garage and not in use. Subject otherwise to the terms conditions limitations and exceptions of this policy. NB.i. In case of Fire Risk only, the words \u201cburglary housebreaking theft\u201d are to be deleted. NB.ii. In case of Theft Risk only, the words \u201cfire",
+            "score": 1.6833651065826416
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p5:c8",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 5,
+            "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+            "text": "Device (Not applicable to Motor Trade Policies) In consideration of certification by \u2026\u2026\u2026\u2026\u2026\u2026\u2026* that an Anti-Theft device approved by Automobile Research Association of India (ARAI), Pune has been installed in the vehicle insured herein a premium discount of Rs\u2026\u2026\u2026\u2026** is hereby allowed to the insured. It is hereby understood and agreed that the insured shall ensure at all times that this Anti-theft device installed in the vehicle insured is maintained in efficient condition till the expiry of this policy. Subject otherwise to the terms, exceptions, conditions and limitations of the policy * The name of the certifying Automobile Association is to be inserted. ** Premium discount calculated as per tariff provision is to be inserted. For mid term certification of installation of Anti Theft device pro-rata proportion of tariff discount for the unexpired period is to be inserted. 8. IMT. 11.A. Vehicle Laid Up (Lay up period declared) Notwithstanding anything to the contrary contained herein",
+            "score": 1.6866848468780518
+          }
+        ],
+        "verified": true,
+        "cost_usd": 0.0,
+        "trace_id": "0d8dd6ab2fb6e7aec6c26673f9adf6a2",
+        "semantic_report": {
+          "passed": true,
+          "claims": [
+            {
+              "hypothesis": "The policy covers accidental damage to the insured vehicle.",
+              "supported": true,
+              "scores": {
+                "contradiction": 0.003174313634475339,
+                "entailment": 0.9747419113847618,
+                "neutral": 0.022083774980762694
+              },
+              "method": "nli-deberta-cpu"
+            }
+          ],
+          "method": "independent-nli"
+        },
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      "seconds": 30.29824869998265,
+      "feedback_code": 201,
+      "passed": true
+    },
+    {
+      "case": "outside_corpus",
+      "status": {
+        "run_id": "6aa2dc57-ba53-4cc9-827d-ab484a6440c7",
+        "status": "escalated",
+        "result": {
+          "recommendation_only": true,
+          "classification": "own_damage",
+          "coverage_position": "insufficient_evidence",
+          "queue": "investigation",
+          "reason": "Human claims review required: outside_corpus. No claim determination is made.",
+          "requires_human": true,
+          "escalation": "Claims handler: obtain the policy schedule, endorsements and missing evidence.",
+          "citations": [],
+          "verified": false,
+          "prompt_version": "v4",
+          "limitations": [
+            "Advisory only. No approval, rejection or settlement calculation."
+          ]
+        },
+        "trace_path": "/runs/6aa2dc57-ba53-4cc9-827d-ab484a6440c7/trace",
+        "elapsed_seconds": 0.3467843532562256
+      },
+      "trace": {
+        "run_id": "6aa2dc57-ba53-4cc9-827d-ab484a6440c7",
+        "events": [
+          {
+            "run_id": "6aa2dc57-ba53-4cc9-827d-ab484a6440c7",
+            "agent": "analysis",
+            "step": "plan",
+            "seconds": 0.0617054000031203,
+            "outcome": "success",
+            "details": {
+              "stage": "initial"
+            },
+            "time": 1792186878.061379,
+            "prompt_version": "v4"
+          },
+          {
+            "run_id": "6aa2dc57-ba53-4cc9-827d-ab484a6440c7",
+            "agent": "verification",
+            "step": "verify",
+            "seconds": 0.00042779999785125256,
+            "outcome": "success",
+            "details": {},
+            "time": 1792186878.1139638,
+            "prompt_version": "v4"
+          }
+        ],
+        "retrieved_passages": [],
+        "verified": false,
+        "cost_usd": 0,
+        "trace_id": "9f71c3771aab8887897eaba2eadbfa7d",
+        "semantic_report": null,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": null,
+          "faithfulness": null,
+          "hallucination_rate": null,
+          "context_relevance": null
+        }
+      },
+      "seconds": 1.6849863000679761,
+      "feedback_code": 201,
+      "passed": true
+    }
+  ],
+  "quality": {
+    "feedback_count": 11,
+    "satisfactory": 6,
+    "points": [
+      {
+        "time": 1792185635.9174047,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185636.4312801,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185637.0182505,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185637.6577632,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185638.720564,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185639.183597,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185639.7281816,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      {
+        "time": 1792185642.3747418,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      {
+        "time": 1792185642.911248,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185643.3502128,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      {
+        "time": 1792185645.3702674,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      {
+        "time": 1792185647.100819,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185647.5399277,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185649.1627076,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185649.6071157,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185653.8499434,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185659.6580718,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185660.0368042,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185660.4372122,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      {
+        "time": 1792185663.0581665,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185663.5515273,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185664.033024,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185664.7114763,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185665.2673612,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185665.7190957,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185666.6131463,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185667.2954717,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      {
+        "time": 1792185667.9158626,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185671.1292388,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185671.5961096,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185672.2341776,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      {
+        "time": 1792185672.6897488,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      {
+        "time": 1792185673.2038586,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185673.684908,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185679.1019726,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      {
+        "time": 1792185679.6950047,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185680.1578977,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185680.6576502,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      {
+        "time": 1792185681.1554801,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185681.770517,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185682.2151465,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185682.6188836,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185683.1288657,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185685.4817772,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185685.90132,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185688.828895,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185689.5497253,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185690.1751652,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185691.0264964,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185691.8985977,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185692.7409403,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185693.283292,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185693.654923,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185694.024284,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185694.4668381,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      {
+        "time": 1792185694.981789,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185695.4080315,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185696.045261,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185696.6112998,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      {
+        "time": 1792185697.0274146,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      {
+        "time": 1792185697.6515229,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185700.1057062,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185700.6619964,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      {
+        "time": 1792185701.3192291,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185705.4674723,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      {
+        "time": 1792185705.88475,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185706.3788037,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185706.824555,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185707.2437518,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185707.6680999,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185710.1534085,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      {
+        "time": 1792185710.6809702,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      {
+        "time": 1792185711.219035,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      {
+        "time": 1792185711.9456756,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185712.4027338,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185712.8808725,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185715.6473536,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185716.1148794,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185716.589049,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185717.1902435,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      {
+        "time": 1792185717.6917877,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185718.272978,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      {
+        "time": 1792185724.3341758,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      {
+        "time": 1792185724.8973937,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185725.4002244,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185726.2235649,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185728.011533,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185729.9166698,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185730.8709478,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      {
+        "time": 1792185731.6010435,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185732.3251545,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185736.580284,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185737.937896,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185739.3928492,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792185740.3293295,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      {
+        "time": 1792185742.08094,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": false
+        }
+      },
+      {
+        "time": 1792186815.9179137,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      {
+        "time": 1792186844.6040251,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9430559118329125,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.13084849675319024
+        }
+      },
+      {
+        "time": 1792186873.4541163,
+        "verified": 1,
+        "cost_usd": 0.0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": 0.9747419113847618,
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "context_relevance": 0.08839028661272355
+        }
+      },
+      {
+        "time": 1792186878.1237593,
+        "verified": 0,
+        "cost_usd": 0,
+        "quality": {
+          "sampled": true,
+          "method": "reference-free-nli-and-embedding-v1",
+          "groundedness": null,
+          "faithfulness": null,
+          "hallucination_rate": null,
+          "context_relevance": null
+        }
+      }
+    ],
+    "note": "Sampled reference-free NLI and semantic relevance scores; not ground-truth claim accuracy."
+  }
+}

@@ -64,7 +64,7 @@ def health():
     if not (DATA/'index'/'metadata.json').exists():
         raise HTTPException(503,'Corpus index missing')
     return {'ok':True,'planner_mode':os.getenv('MODEL_MODE','stub'),
-            'semantic_required':os.getenv('SAFETY_REQUIRED','false').lower()=='true'}
+            'semantic_required':os.getenv('SAFETY_REQUIRED','true').lower()=='true'}
 
 @app.get('/metrics',include_in_schema=False)
 def metrics():
@@ -88,7 +88,7 @@ def submit(fnol:FNOL,request:Request):
     if issue:
         qid=str(uuid4())
         connection.set('quarantine:'+qid,json.dumps({'guardrail':issue,'time':time.time()}),ex=86400)
-        raise HTTPException(422,{'quarantine_id':qid,'reason':issue,'agent_started':False})
+        raise HTTPException(503 if issue=='safety_unavailable' else 422,{'quarantine_id':qid,'reason':issue,'agent_started':False})
     run_id=str(uuid4());now=time.time()
     state={'run_id':run_id,'fnol':f,'submitted_at':now,'deadline':now+float(os.getenv('RUN_TIMEOUT_SECONDS','45')),
            'events':[],'passages':[],'tool_calls':0,'steps':0,'correlation_id':request.state.correlation_id}
