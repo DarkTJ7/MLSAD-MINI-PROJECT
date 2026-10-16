@@ -11,7 +11,7 @@ def sample_score(state):
     selected=int(hashlib.sha256(state['run_id'].encode()).hexdigest()[:8],16)/0xffffffff<rate
     if not selected:return {'sampled':False}
     report={'sampled':True,'method':'reference-free-nli-and-embedding-v1'}
-    claims=state.get('semantic_report',{}).get('claims',[])
+    claims=state.get('semantic_report',{}).get('claims',[]) if state.get('proposed',{}).get('verified') else []
     if claims:
         entailments=[c.get('scores',{}).get('entailment',0) for c in claims]
         report.update(groundedness=sum(entailments)/len(claims),

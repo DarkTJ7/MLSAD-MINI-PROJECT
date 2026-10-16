@@ -14,7 +14,7 @@ from .contracts import FNOL, Feedback
 from .guardrails import inspect
 from .jobs import analyze, save
 from .telemetry import setup, INDEX, FRESH, INGEST
-from .telemetry import carry
+from .telemetry import carry,HTTP_REQUESTS
 from opentelemetry import trace
 
 setup()
@@ -46,7 +46,9 @@ async def correlation(request,call_next):
             span.set_attribute('http.status_code',response.status_code)
     except Exception as exc:
         logging.getLogger('triage').exception('request_failed correlation_id=%s',request.state.correlation_id)
-        return JSONResponse(status_code=503,content={'detail':'Service dependency unavailable','correlation_id':request.state.correlation_id})
+        response=JSONResponse(status_code=503,content={'detail':'Service dependency unavailable','correlation_id':request.state.correlation_id})
+    route=getattr(request.scope.get('route'),'path','unknown')
+    HTTP_REQUESTS.labels(request.method,route,str(response.status_code)).inc()
     response.headers['X-Correlation-ID']=request.state.correlation_id
     return response
 
@@ -57,10 +59,12 @@ def home(): return FileResponse(ROOT/'frontend'/'index.html')
 
 @app.get('/health')
 def health():
+    import os
     get_redis().ping()
     if not (DATA/'index'/'metadata.json').exists():
         raise HTTPException(503,'Corpus index missing')
-    return {'ok':True}
+    return {'ok':True,'planner_mode':os.getenv('MODEL_MODE','stub'),
+            'semantic_required':os.getenv('SAFETY_REQUIRED','false').lower()=='true'}
 
 @app.get('/metrics',include_in_schema=False)
 def metrics():

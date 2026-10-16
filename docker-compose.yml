@@ -79,6 +79,7 @@ services:
       indexer: {condition: service_completed_successfully}
       model-stub: {condition: service_healthy}
       safety: {condition: service_healthy}
+      local-model: {condition: service_healthy, required: false}
     healthcheck:
       test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:9101',timeout=2)"]
       interval: 10s
@@ -112,11 +113,35 @@ services:
       interval: 5s
       timeout: 3s
       retries: 10
+  local-model-assets:
+    <<: *app
+    profiles: [local-model]
+    command: [python, -m, app.model_assets]
+    environment:
+      <<: *environment
+      MODEL_ASSET_DIR: /models
+      MODEL_MANIFEST_PATH: /service/corpus/planner_manifest.json
+    volumes: [models:/models]
+    restart: 'no'
+  local-model:
+    image: ${LOCAL_MODEL_IMAGE}
+    profiles: [local-model]
+    command: [-m, /models/planner.gguf, --alias, '${LOCAL_MODEL_ALIAS}', --ctx-size, '8192', --threads, '4', --host, 0.0.0.0, --port, '8003', --metrics]
+    volumes: [models:/models:ro]
+    depends_on:
+      local-model-assets: {condition: service_completed_successfully}
+    healthcheck:
+      test: [CMD, curl, -f, 'http://127.0.0.1:8003/health']
+      interval: 5s
+      timeout: 5s
+      start_period: 60s
+      retries: 40
+    restart: unless-stopped
   prometheus:
     image: prom/prometheus:v3.5.0
     user: root
     entrypoint: [/bin/sh, -c]
-    command: ['cp /templates/prometheus.yml /tmp/prometheus.yml; for key in API_TARGET ANALYSIS_DNS VERIFICATION_DNS STUB_TARGET SAFETY_TARGET CADVISOR_TARGET REDIS_EXPORTER_TARGET JAEGER_TARGET GRAFANA_TARGET PROMETHEUS_TARGET; do value=$$(printenv "$$key"); sed -i "s|$$key|$$value|g" /tmp/prometheus.yml; done; exec /bin/prometheus --config.file=/tmp/prometheus.yml --web.listen-address=:9090']
+    command: ['cp /templates/prometheus.yml /tmp/prometheus.yml; for key in API_TARGET ANALYSIS_DNS VERIFICATION_DNS STUB_TARGET SAFETY_TARGET CADVISOR_TARGET REDIS_EXPORTER_TARGET JAEGER_TARGET GRAFANA_TARGET PROMETHEUS_TARGET LOCAL_MODEL_DNS; do value=$$(printenv "$$key"); sed -i "s|$$key|$$value|g" /tmp/prometheus.yml; done; exec /bin/prometheus --config.file=/tmp/prometheus.yml --web.listen-address=:9090']
     env_file: .env
     volumes: ['./observability/prometheus.yml:/templates/prometheus.yml:ro']
     ports: ['127.0.0.1:${PROMETHEUS_PORT}:9090']
@@ -137,14 +162,16 @@ services:
     environment: {COLLECTOR_OTLP_ENABLED: 'true'}
     ports: ['127.0.0.1:${JAEGER_PORT}:16686']
   cadvisor:
-    image: gcr.io/cadvisor/cadvisor:v0.49.1
+    image: ghcr.io/google/cadvisor:0.55.1
+    privileged: true
+    devices: [/dev/kmsg:/dev/kmsg]
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:ro
       - /sys:/sys:ro
       - /var/lib/docker:/var/lib/docker:ro
+      - /dev/disk:/dev/disk:ro
     command: [--docker_only=true, --housekeeping_interval=5s]
-    security_opt: [no-new-privileges:true]
   redis-exporter:
     image: oliver006/redis_exporter:v1.74.0
     environment:
@@ -167,3 +194,4 @@ volumes:
   index:
   redis-data:
   models:
+

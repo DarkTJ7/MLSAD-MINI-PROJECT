@@ -11,8 +11,12 @@ def client():
                         limits=httpx.Limits(max_connections=30,max_keepalive_connections=15))
 
 def post(*args,**kwargs):
+    parent=getattr(trace.get_current_span(),'attributes',{}) or {}
     with trace.get_tracer('triage').start_as_current_span('http.client',kind=trace.SpanKind.CLIENT) as span:
         headers=dict(kwargs.pop('headers',{}) or {});inject(headers)
+        for attribute,header in [('run_id','X-Run-ID'),('correlation_id','X-Correlation-ID')]:
+            if parent.get(attribute):
+                headers[header]=str(parent[attribute]);span.set_attribute(attribute,str(parent[attribute]))
         response=client().post(*args,headers=headers,**kwargs)
         span.set_attribute('http.status_code',response.status_code)
         return response

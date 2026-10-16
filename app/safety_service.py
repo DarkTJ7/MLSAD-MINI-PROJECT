@@ -11,7 +11,10 @@ setup()
 app=FastAPI(title='Independent safety and entailment service')
 @app.middleware('http')
 async def tracing(request,call_next):
-    with trace.get_tracer('triage').start_as_current_span('safety.'+request.url.path,context=extract(dict(request.headers)),kind=trace.SpanKind.SERVER):
+    with trace.get_tracer('triage').start_as_current_span('safety.'+request.url.path,context=extract(dict(request.headers)),kind=trace.SpanKind.SERVER) as span:
+        for key in ('run_id','correlation_id'):
+            value=request.headers.get('X-'+key.replace('_','-'))
+            if value:span.set_attribute(key,value)
         return await call_next(request)
 CALLS=Counter('triage_safety_calls_total','Safety inference calls',['kind','outcome'])
 SECONDS=Histogram('triage_safety_seconds','Safety inference latency',['kind'])

@@ -22,6 +22,7 @@ FRESH = Gauge('triage_index_built_seconds', 'Corpus build epoch')
 INGEST = Gauge('triage_ingest_chunks_per_second', 'Last indexing throughput')
 TASKS=Counter('triage_agent_tasks_total','Agent task outcomes',['agent','outcome'])
 QUALITY=Histogram('triage_live_quality','Sampled live quality metrics',['metric'],buckets=(0,.2,.4,.6,.8,1))
+HTTP_REQUESTS=Counter('triage_http_requests_total','API responses',['method','route','status'])
 
 def carry(state):
     carrier={};inject(carrier);state['trace_carrier']=carrier
@@ -65,6 +66,8 @@ def step(state, agent, name, details=None):
     with trace.get_tracer('triage').start_as_current_span(name) as span:
         span.set_attribute('run_id', state['run_id'])
         span.set_attribute('agent', agent)
+        span.set_attribute('correlation_id',state.get('correlation_id',state['run_id']))
+        span.set_attribute('prompt_version',state['fnol']['retrieval_version'])
         outcome = 'success'
         try:
             yield

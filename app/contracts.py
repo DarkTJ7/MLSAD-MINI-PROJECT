@@ -1,7 +1,7 @@
 from datetime import date
 from enum import Enum
 from typing import Literal
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, model_validator,field_validator
 
 class Kind(str, Enum):
     own_damage = 'own_damage'
@@ -10,15 +10,15 @@ class Kind(str, Enum):
     total_loss = 'total_loss'
 
 class FNOL(BaseModel):
-    model_config = ConfigDict(extra='forbid', strict=False)
+    model_config = ConfigDict(extra='forbid', strict=True)
     policy_number: str = Field(min_length=3, max_length=60, pattern=r'^[A-Za-z0-9/-]+$')
     vehicle_registration: str = Field(min_length=4, max_length=20, pattern=r'^[A-Z0-9 -]+$')
     insurer: str = Field(default='HDFC ERGO', max_length=100)
     product: str = Field(default='private_car_package', max_length=100)
-    policy_start: date
-    policy_end: date
-    loss_date: date
-    reported_date: date
+    policy_start: date = Field(strict=False)
+    policy_end: date = Field(strict=False)
+    loss_date: date = Field(strict=False)
+    reported_date: date = Field(strict=False)
     description: str = Field(min_length=12, max_length=4000)
     location: str = Field(min_length=2, max_length=200)
     country: str = Field(default='India', max_length=60)
@@ -30,7 +30,16 @@ class FNOL(BaseModel):
     intoxicated: bool | None = None
     third_party_involved: bool = False
     police_report: bool = False
-    retrieval_version: str = Field(default='v2', pattern=r'^v[12]$')
+    retrieval_version: str = Field(default='v3', pattern=r'^v[123]$')
+
+    @field_validator('policy_start','policy_end','loss_date','reported_date',mode='before')
+    @classmethod
+    def date_wire_format(cls,value):
+        import re
+        if isinstance(value,date):return value
+        if not isinstance(value,str) or not re.fullmatch(r'\d{4}-\d{2}-\d{2}',value):
+            raise ValueError('Date must be an ISO YYYY-MM-DD string')
+        return value
 
     @model_validator(mode='after')
     def chronology(self):
@@ -41,7 +50,7 @@ class FNOL(BaseModel):
         return self
 
 class Feedback(BaseModel):
-    model_config = ConfigDict(extra='forbid')
+    model_config = ConfigDict(extra='forbid',strict=True)
     satisfactory: bool
     reason: str = Field(min_length=3, max_length=1000)
 

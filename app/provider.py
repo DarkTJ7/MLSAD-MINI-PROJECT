@@ -76,6 +76,9 @@ class Gateway:
 
     def choose(self,state,available,context):
         from .config import ROOT
+        if len(available)==1 and os.getenv('MODEL_MODE','stub')!='stub':
+            # A single compulsory field read has no model decision to evaluate.
+            return available[0]
         version=state['fnol']['retrieval_version']
         from .guardrails import inspect
         if inspect(context['fnol']) or any(inspect({'passage':p['text']}) for p in context.get('passages',[])):

@@ -59,6 +59,7 @@ def _analyze(state):
         Queue('verification',connection=connection).enqueue(verify_job,state,job_timeout=60,
             retry=Retry(max=1,interval=[2]))
     except Exception as exc:
+        TASKS.labels('analysis','error').inc()
         terminal(connection,escalate(state,type(exc).__name__+': '+str(exc)[:100]))
 
 def verify_job(state):
@@ -73,7 +74,7 @@ def _verify_job(state):
         TASKS.labels('verification','success' if state.get('verified') else 'refused').inc()
         if not state.get('verified') and not state.get('failure') and not state.get('retried'):
             state['retried']=True
-            state['fnol']['retrieval_version']='v2'
+            state['fnol']['retrieval_version']='v3'
             state['stage']='base_read'
             Queue('analysis',connection=connection).enqueue(analyze,state,job_timeout=60,
                 retry=Retry(max=1,interval=[2]))
@@ -83,4 +84,5 @@ def _verify_job(state):
             state=escalate(state,state.get('failure','verification_failed'))
         terminal(connection,state)
     except Exception as exc:
+        TASKS.labels('verification','error').inc()
         terminal(connection,escalate(state,'verification_worker_error: '+type(exc).__name__))

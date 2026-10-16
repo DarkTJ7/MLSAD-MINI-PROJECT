@@ -47,7 +47,7 @@ def _screen_window(chunk):
             'toxicity':max(b.values(),default=0)}
 
 def entail(premise,hypothesis):
-    reports=[classifier('nli').score(chunk,hypothesis) for chunk in windows(premise)]
+    reports=[classifier('nli').score(chunk,hypothesis) for chunk in windows(premise,words=300,overlap=120)]
     best=max(reports,key=lambda r:r.get('entailment',0))
     return {'supported':best.get('entailment',0)>=float(os.getenv('ENTAILMENT_THRESHOLD','.65')) and
                         best.get('contradiction',1)<.2,'scores':best,'method':'nli-deberta-cpu'}

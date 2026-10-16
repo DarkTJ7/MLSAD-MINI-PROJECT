@@ -33,8 +33,20 @@ def verify_claims(state):
     reports=[]
     for hypothesis in hypotheses:
         chosen=premise
+        # Evaluate against the relevant clause, not an arbitrary concatenation of
+        # covers, exclusions and claims procedures with unrelated modifiers.
+        import re
+        if hypothesis==hypotheses[0]:
+            pattern={'own_damage':r'accidental external means','theft':r'by burglary housebreaking or theft',
+                     'third_party':r'legally liable','total_loss':r'exceeds 75%'}[kind]
+            matching=[c['quote'] for c in citations if re.search(pattern,c['quote'],re.I)]
+            if matching:chosen=' '.join(matching)
         if hypothesis=='The policy contains restrictions on the use of the insured vehicle.':
             chosen=' '.join(c['quote'] for c in citations if 'limitations as to use' in c['quote'].lower())
+        elif 'alcohol is excluded' in hypothesis:
+            chosen=' '.join(c['quote'] for c in citations if 'intoxicating' in c['quote'].lower())
+        elif hypothesis=='Mechanical breakdown is excluded.':
+            chosen=' '.join(c['quote'] for c in citations if 'mechanical or electrical breakdown' in c['quote'].lower())
         response=post(safety_url()+'/entail',json={'premise':chosen,'hypothesis':hypothesis},
                             timeout=float(os.getenv('SAFETY_TIMEOUT_SECONDS','15')))
         response.raise_for_status()
