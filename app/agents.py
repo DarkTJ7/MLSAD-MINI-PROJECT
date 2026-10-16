@@ -67,6 +67,7 @@ def out_of_scope(f):
         r'health insurance|hospital bill|crop|marine|travel insurance|battery degradation|engine protect|zero depreciation|\badd.on\b',f['description'],re.I))
 
 def escalate(state,reason):
+    state['verified']=False
     state['failure']=reason
     state['proposed']={'recommendation_only':True,'classification':state.get('classification',classify(state['fnol'])),
         'coverage_position':'insufficient_evidence','queue':'investigation',

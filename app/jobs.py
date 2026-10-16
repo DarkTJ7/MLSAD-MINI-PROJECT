@@ -8,7 +8,17 @@ from .provider import Gateway
 from .telemetry import RUN_LATENCY,run_span,carry,TASKS
 
 def save(connection,state,status):
-    connection.set('run:'+state['run_id'],json.dumps({'status':status,'state':state}),ex=86400)
+    from redis.exceptions import WatchError
+    while True:
+        with connection.pipeline() as pipe:
+            try:
+                pipe.watch('run:'+state['run_id'])
+                existing=pipe.get('run:'+state['run_id'])
+                if existing and json.loads(existing)['status'] in ('completed','escalated') and status not in ('completed','escalated'):
+                    return False
+                pipe.multi();pipe.set('run:'+state['run_id'],json.dumps({'status':status,'state':state}),ex=86400)
+                pipe.execute();return True
+            except WatchError:continue
 
 def terminal(connection,state):
     if state.get('verified') and time.time()>state['deadline']:
@@ -48,14 +58,14 @@ def analyze(state):
 
 def _analyze(state):
     connection=redis_connection()
-    save(connection,state,'analyzing')
+    if not save(connection,state,'analyzing'):return
     try:
         if time.time()>state['deadline']:
             raise TimeoutError('queue deadline exhausted')
         state=analysis_graph(gateway=Gateway(connection)).invoke(state)
         carry(state)
         TASKS.labels('analysis','escalated' if state.get('failure') else 'success').inc()
-        save(connection,state,'verifying')
+        if not save(connection,state,'verifying'):return
         Queue('verification',connection=connection).enqueue(verify_job,state,job_timeout=60,
             retry=Retry(max=1,interval=[2]))
     except Exception as exc:

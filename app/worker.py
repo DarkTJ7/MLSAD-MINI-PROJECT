@@ -9,6 +9,7 @@ if __name__=='__main__':
     # Readiness means corpus imports/index are warm, not merely a live process.
     from .retrieval import get_corpus
     get_corpus()
+    from . import jobs  # Warm graph/contract imports before consuming the first job.
     start_http_server(int(os.environ['METRICS_PORT']))
     # Single process per container keeps Prometheus observations in the exporter process.
     # Scale containers for concurrency; Unix RQ job timeout still bounds each job.
