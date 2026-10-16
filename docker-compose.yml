@@ -1,0 +1,169 @@
+x-app: &app
+  build: .
+  env_file: .env
+  environment: &environment
+    DATA_DIR: /data
+  volumes:
+    - index:/data
+  restart: unless-stopped
+
+services:
+  redis:
+    image: redis:7.4-alpine
+    command: [redis-server, --appendonly, 'yes']
+    volumes: [redis-data:/data]
+    healthcheck:
+      test: [CMD, redis-cli, ping]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+  indexer:
+    <<: *app
+    command: [python, -m, app.retrieval]
+    restart: 'no'
+  model-assets:
+    <<: *app
+    command: [python, -m, app.model_assets]
+    environment:
+      <<: *environment
+      MODEL_ASSET_DIR: /models
+      MODEL_MANIFEST_PATH: /service/corpus/model_manifest.json
+    volumes: [models:/models]
+    restart: 'no'
+  safety:
+    <<: *app
+    command: [python, -m, uvicorn, app.safety_service:app, --host, 0.0.0.0, --port, '8002']
+    environment:
+      <<: *environment
+      SERVICE_NAME: safety
+      SAFETY_NLI_PATH: /models/nli
+      SAFETY_INJECTION_PATH: /models/injection
+      SAFETY_TOXICITY_PATH: /models/toxicity
+      SAFETY_EMBEDDING_PATH: /models/embedding
+    volumes: [models:/models:ro]
+    depends_on:
+      model-assets: {condition: service_completed_successfully}
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8002/health',timeout=15)"]
+      interval: 15s
+      timeout: 20s
+      start_period: 60s
+      retries: 20
+  api:
+    <<: *app
+    environment:
+      <<: *environment
+      SERVICE_NAME: api
+    ports: ['127.0.0.1:${API_PORT}:8000']
+    depends_on:
+      redis: {condition: service_healthy}
+      indexer: {condition: service_completed_successfully}
+      safety: {condition: service_healthy}
+      agent-worker: {condition: service_healthy}
+      verification-worker: {condition: service_healthy}
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=2)"]
+      interval: 10s
+      timeout: 4s
+      retries: 20
+  agent-worker:
+    <<: *app
+    command: [python, -m, app.worker]
+    environment:
+      <<: *environment
+      SERVICE_NAME: analysis
+      AGENT_QUEUE: analysis
+      METRICS_PORT: '9101'
+    depends_on:
+      redis: {condition: service_healthy}
+      indexer: {condition: service_completed_successfully}
+      model-stub: {condition: service_healthy}
+      safety: {condition: service_healthy}
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:9101',timeout=2)"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+  verification-worker:
+    <<: *app
+    command: [python, -m, app.worker]
+    environment:
+      <<: *environment
+      SERVICE_NAME: verification
+      AGENT_QUEUE: verification
+      METRICS_PORT: '9102'
+    depends_on:
+      redis: {condition: service_healthy}
+      indexer: {condition: service_completed_successfully}
+      safety: {condition: service_healthy}
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:9102',timeout=2)"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+  model-stub:
+    <<: *app
+    command: [python, -m, uvicorn, app.stub:app, --host, 0.0.0.0, --port, '8001']
+    environment:
+      <<: *environment
+      SERVICE_NAME: model-stub
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8001/health',timeout=2)"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  prometheus:
+    image: prom/prometheus:v3.5.0
+    user: root
+    entrypoint: [/bin/sh, -c]
+    command: ['cp /templates/prometheus.yml /tmp/prometheus.yml; for key in API_TARGET ANALYSIS_DNS VERIFICATION_DNS STUB_TARGET SAFETY_TARGET CADVISOR_TARGET REDIS_EXPORTER_TARGET JAEGER_TARGET GRAFANA_TARGET PROMETHEUS_TARGET; do value=$$(printenv "$$key"); sed -i "s|$$key|$$value|g" /tmp/prometheus.yml; done; exec /bin/prometheus --config.file=/tmp/prometheus.yml --web.listen-address=:9090']
+    env_file: .env
+    volumes: ['./observability/prometheus.yml:/templates/prometheus.yml:ro']
+    ports: ['127.0.0.1:${PROMETHEUS_PORT}:9090']
+  grafana:
+    image: grafana/grafana:12.1.1
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD}
+      PROMETHEUS_URL: ${PROMETHEUS_URL}
+      GF_METRICS_ENABLED: 'true'
+    volumes:
+      - ./observability/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./observability/dashboard.json:/var/lib/grafana/dashboards/triage.json:ro
+    ports: ['127.0.0.1:${GRAFANA_PORT}:3000']
+    depends_on: [prometheus]
+  jaeger:
+    image: jaegertracing/all-in-one:1.71.0
+    environment: {COLLECTOR_OTLP_ENABLED: 'true'}
+    ports: ['127.0.0.1:${JAEGER_PORT}:16686']
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.49.1
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker:/var/lib/docker:ro
+    command: [--docker_only=true, --housekeeping_interval=5s]
+    security_opt: [no-new-privileges:true]
+  redis-exporter:
+    image: oliver006/redis_exporter:v1.74.0
+    environment:
+      REDIS_ADDR: ${REDIS_URL}
+    depends_on:
+      redis: {condition: service_healthy}
+  load:
+    <<: *app
+    profiles: [load]
+    command: [locust, -f, evaluation/locustfile.py, --headless, --users, '5', --spawn-rate, '1', --run-time, 60s, --csv, /results/load]
+    environment:
+      <<: *environment
+      LOCUST_HOST: ${LOAD_TARGET}
+    volumes:
+      - ./results:/results
+    depends_on:
+      api: {condition: service_healthy}
+
+volumes:
+  index:
+  redis-data:
+  models:

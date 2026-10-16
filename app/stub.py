@@ -1,0 +1,20 @@
+"""Delayed deterministic planner for system tests; never presented as an LLM."""
+import asyncio
+import os
+from fastapi import FastAPI, Response
+from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
+
+app=FastAPI(title='Fixed-response model stub')
+@app.get('/health')
+def health(): return {'ok':True,'mode':'stub'}
+@app.get('/metrics')
+def metrics(): return Response(generate_latest(),media_type=CONTENT_TYPE_LATEST)
+@app.post('/v1/chat/completions')
+async def complete(payload:dict):
+    await asyncio.sleep(float(os.getenv('STUB_DELAY_SECONDS','0.35')))
+    if os.getenv('STUB_FAIL','false').lower()=='true':
+        return Response(status_code=503)
+    stage=payload['stage'];version=payload['context']['version']
+    action={'initial':'request_fields','fields_read':'corpus_search','base_read':'corpus_search' if version=='v2' else 'finish',
+            'modifiers_read':'clause_lookup','clause_read':'finish','retry_read':'finish'}.get(stage,'escalate')
+    return {'action':action,'usage':{'prompt_tokens':0,'completion_tokens':0},'mode':'stub'}

@@ -1,0 +1,7 @@
+.env
+.env.native
+.native_runtime
+.git
+data
+__pycache__
+.pytest_cache

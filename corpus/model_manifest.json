@@ -1,0 +1,70 @@
+{
+  "files": [
+    {
+      "path": "nli/config.json",
+      "url": "https://huggingface.co/Xenova/nli-deberta-v3-xsmall/resolve/2a4f614a701367a02d51389039afc998faeda637/config.json",
+      "sha256": "ec0bd14cc28640326474399cd61d38ccd52b64900228799d0f81debda8c4bc53",
+      "bytes": 1038
+    },
+    {
+      "path": "nli/model.onnx",
+      "url": "https://huggingface.co/Xenova/nli-deberta-v3-xsmall/resolve/2a4f614a701367a02d51389039afc998faeda637/onnx/model_quantized.onnx",
+      "sha256": "3fac2500c45c75af42c7711de0d1b93d59577456100208be0dc1f9e8811946b6",
+      "bytes": 87246587
+    },
+    {
+      "path": "nli/tokenizer.json",
+      "url": "https://huggingface.co/Xenova/nli-deberta-v3-xsmall/resolve/2a4f614a701367a02d51389039afc998faeda637/tokenizer.json",
+      "sha256": "a86f883318afa11c8c10466f1bf4efaeb6ded28a52cbe57217a8fa0d0a2a87df",
+      "bytes": 8656551
+    },
+    {
+      "path": "injection/config.json",
+      "url": "https://huggingface.co/ProtectAI/deberta-v3-base-prompt-injection-v2/resolve/90c9989b1a342275dd0d1a95aad283c04e075671/config.json",
+      "sha256": "05079f4735092040b780d459027afab413faa6eeb66a548571a58832304b60bb",
+      "bytes": 994
+    },
+    {
+      "path": "injection/model.onnx",
+      "url": "https://huggingface.co/ProtectAI/deberta-v3-base-prompt-injection-v2/resolve/90c9989b1a342275dd0d1a95aad283c04e075671/onnx/model.onnx",
+      "sha256": "f0ea7f239f765aedbde7c9e163a7cb38a79c5b8853d3f76db5152172047b228c",
+      "bytes": 738563188
+    },
+    {
+      "path": "injection/tokenizer.json",
+      "url": "https://huggingface.co/ProtectAI/deberta-v3-base-prompt-injection-v2/resolve/90c9989b1a342275dd0d1a95aad283c04e075671/tokenizer.json",
+      "sha256": "f0a66ad0d735d8dca9ecac4ff50fcdef4bb6adbadd2941a926844844d2c2059b",
+      "bytes": 8656744
+    },
+    {
+      "path": "toxicity/config.json",
+      "url": "https://huggingface.co/Xenova/toxic-bert/resolve/65cbc2607cb7fad64f98d1e8a5a3d1f8577895fd/config.json",
+      "sha256": "e2c6937717530ce48ea753182c5558c8b285a0e1dd7824759d63a81adce28447",
+      "bytes": 986
+    },
+    {
+      "path": "toxicity/model.onnx",
+      "url": "https://huggingface.co/Xenova/toxic-bert/resolve/65cbc2607cb7fad64f98d1e8a5a3d1f8577895fd/onnx/model_quantized.onnx",
+      "sha256": "620012c9bed13e3c58b9c959d160d955ff033a1a27528212b9da5b0aa4ac3f73",
+      "bytes": 110720344
+    },
+    {
+      "path": "toxicity/tokenizer.json",
+      "url": "https://huggingface.co/Xenova/toxic-bert/resolve/65cbc2607cb7fad64f98d1e8a5a3d1f8577895fd/tokenizer.json",
+      "sha256": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66",
+      "bytes": 711396
+    },
+    {
+      "path": "embedding/model.onnx",
+      "url": "https://huggingface.co/Xenova/all-MiniLM-L6-v2/resolve/751bff37182d3f1213fa05d7196b954e230abad9/onnx/model_quantized.onnx",
+      "sha256": "afdb6f1a0e45b715d0bb9b11772f032c399babd23bfc31fed1c170afc848bdb1",
+      "bytes": 22972370
+    },
+    {
+      "path": "embedding/tokenizer.json",
+      "url": "https://huggingface.co/Xenova/all-MiniLM-L6-v2/resolve/751bff37182d3f1213fa05d7196b954e230abad9/tokenizer.json",
+      "sha256": "da0e79933b9ed51798a3ae27893d3c5fa4a201126cef75586296df9b4d2c62a0",
+      "bytes": 711661
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "id": "food-delivery",
+  "fnol": {
+    "policy_number": "DEMO-001",
+    "vehicle_registration": "KA01AB1234",
+    "insurer": "HDFC ERGO",
+    "product": "private_car_package",
+    "policy_start": "2026-01-01",
+    "policy_end": "2026-12-31",
+    "loss_date": "2026-10-01",
+    "reported_date": "2026-10-02",
+    "description": "I was making a food delivery run in my own car when the accident happened.",
+    "location": "Bengaluru",
+    "country": "India",
+    "vehicle_use": "personal",
+    "estimated_repair": 12000,
+    "idv": 500000,
+    "network_garage": true,
+    "driver_licensed": true,
+    "intoxicated": false,
+    "third_party_involved": false,
+    "police_report": false,
+    "retrieval_version": "v2"
+  },
+  "expected": {
+    "classification": "own_damage",
+    "coverage_position": "coverage_concern",
+    "queue": "investigation"
+  },
+  "support_concepts": [
+    "base",
+    "exclusion",
+    "procedure",
+    "restriction"
+  ],
+  "support_passages": [
+    {
+      "clause_id": "hdfc_private_car_package:p1:c0",
+      "page": 1,
+      "document": "hdfc_private_car_package.pdf",
+      "text": "* supports smart phone based on Blackberry, iPhone, Windows 8 & Android platform. Manage Your @ hdfcergo.com / Smartphones* Portfolio Download IPO mobile application from IPO website post log in WHAT ARE THE MAJOR COVERS UNDER THE POLICY? WHAT ARE THE MAJOR EXCLUSIONS OF THE POLICY? Loss or Damage to the Insured Vehicle caused due to: a. Fire, explosion, self ignition or lightning. b Burglary, housebreaking or theft c All act of God perils like earthquake, flood, cyclone etc d Accidental external means, terrorism, riot and strike Liability to Third Parties: Provides cover for any legal liability arising out of the use of the vehicle for a Accidental death / injury to any third party b Any damage to property owned by third party Personal Accident Cover: The policy provides for a mandatory Personal Accident cover for owner driver and optional cover for passengers covering accidental death and permanent total disability a. General aging, wear & tear, mechanical or electrical breakdown,"
+    },
+    {
+      "clause_id": "hdfc_private_car_package:p1:c1",
+      "page": 1,
+      "document": "hdfc_private_car_package.pdf",
+      "text": "for owner driver and optional cover for passengers covering accidental death and permanent total disability a. General aging, wear & tear, mechanical or electrical breakdown, failure, depreciation, any consequential loss b. Damage by a person driving without a valid license c. Damage by a person driving under the influence of liquor or drugs d. Loss/damage attributable to war, mutiny, nuclear risks e. Damage to tyres and tubes, unless damaged during an accident f. Usage on hire & reward (applicable for all classes except public commercial vehicles) g. Loss or damage to bonnet side parts, mudguard, bumpers, lamps, tyres, tubes, headlights, paint work (applicable for all commercial vehicles; unless opted additionally) h. Loss or damage resulting from overturning arising out of operation as a tool (applicable for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or"
+    },
+    {
+      "clause_id": "hdfc_private_car_package:p1:c2",
+      "page": 1,
+      "document": "hdfc_private_car_package.pdf",
+      "text": "for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or theft unless the vehicle is stolen at the same time (applicable to all commercial vehicles & two wheelers) HOW DO I FILE A CLAIM? For Accidental Damage to Insured Vehicle (Own Damage Claims): \u00a1Call our customer care Toll-free 1800-2-700-700 (Accessible from India only) if the vehicle meets with an accident and provide your policy number for reference and register the claim \u00a1Alternatively, you can visit and register on IPO (available on website/Download IPO app on your smart phone) by providing personal details, link your policy and register your claim under \"Claims\" tab Please keep the following details handy while intimating a claim a. Policy No. b. Registration details/ RC copy c. Drivers details at the time of accident including driving license number d. FIR on a case to case basis e. Repair estimate WHAT"
+    },
+    {
+      "clause_id": "hdfc_private_car_package:p1:c1",
+      "page": 1,
+      "document": "hdfc_private_car_package.pdf",
+      "text": "for owner driver and optional cover for passengers covering accidental death and permanent total disability a. General aging, wear & tear, mechanical or electrical breakdown, failure, depreciation, any consequential loss b. Damage by a person driving without a valid license c. Damage by a person driving under the influence of liquor or drugs d. Loss/damage attributable to war, mutiny, nuclear risks e. Damage to tyres and tubes, unless damaged during an accident f. Usage on hire & reward (applicable for all classes except public commercial vehicles) g. Loss or damage to bonnet side parts, mudguard, bumpers, lamps, tyres, tubes, headlights, paint work (applicable for all commercial vehicles; unless opted additionally) h. Loss or damage resulting from overturning arising out of operation as a tool (applicable for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or"
+    }
+  ]
+}

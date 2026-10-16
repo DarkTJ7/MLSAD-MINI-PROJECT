@@ -1,0 +1,5 @@
+Independent verifier specification v1: resolve every citation to retrieved text;
+check page, source and exact quote; require use restriction for delivery/hire;
+reject a potentially-covered answer when a risk flag exists; validate the output
+contract and guardrails; request one modifier-search retry then escalate.
+Implementation is deterministic verification, not an LLM-as-judge.
