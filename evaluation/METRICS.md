@@ -26,19 +26,20 @@ count as correct only if the expected safe abstention matches.
 Groundedness/hallucination inspect citations, not every narrative claim. Reference
 overlap may penalise an alternative valid chunk. These metrics are an equivalent
 small explicit harness, not TruLens or an independent LLM judge. Add expert
-annotation and semantic-claim scoring for stronger quality evidence.
+annotation for stronger quality evidence. Independent semantic-claim scoring is
+also supplied separately, with per-metric denominators.
 
-Deliberate change: v1 searches apparent cover and finishes; v3 adds a reference-
-driven modifier search and source lookup with explicit search-before-abstention
-instructions. A historical v2 regression and the first NLI input strategy are
-preserved under real_before_fix/. The current v1/v3 comparison holds the corrected
+Deliberate change: v1 searches apparent cover and finishes; v4 adds modifier
+search, source lookup, explicit tool descriptions and stage-specific objectives.
+Historical v2/v3 regressions and the first NLI input strategy are preserved.
+The current v1/v4 comparison holds the corrected
 clause-preserving verifier constant. Both still face independent verification.
 Report before/after for all four required metrics, citation denominators and
 structured accuracy. The stub has zero tokens/cost; it cannot predict live cost.
 Provider call events record actual usage and runtime prices in live mode.
 
 The original evaluation_v1/v2 JSON files preserve historical stub proxy results.
-Current real_model_v1/v3 files use an actual local generative model and required
+Current real_model_v1/v4 files use an actual local generative model and required
 independent safety/NLI. Native load and Docker load are separate environments;
 Docker remains unmeasured here. /quality now charts independently computed,
 sampled reference-free quality metrics, not ground-truth claim accuracy.
