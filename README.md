@@ -6,6 +6,11 @@ Course UE24AM342AA5, Mini Project 01. A runnable advisory prototype for a single
 HDFC ERGO private-car package corpus. Humans decide all claims. Start with the
 stub configuration; no model account or credentials are needed.
 
+## Team / Contributors
+
+- [@DarkTJ7](https://github.com/DarkTJ7) — project team member and repository owner.
+- [@vishalh06](https://github.com/vishalh06) — project team member.
+
 ## Deliverables
 
 - `docs/PROJECT_PLAN.md`: Evaluation 1 plan and corpus/reference-case confirmation.
