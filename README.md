@@ -10,6 +10,7 @@ stub configuration; no model account or credentials are needed.
 
 - [@DarkTJ7](https://github.com/DarkTJ7) — project team member and repository owner.
 - [@vishalh06](https://github.com/vishalh06) — project team member.
+- [@trishagshetty05-art](https://github.com/trishagshetty05-art) — project team member.
 
 ## Deliverables
 
