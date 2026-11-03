@@ -321,9 +321,9 @@
           },
           "retrieval_version": {
             "type": "string",
-            "pattern": "^v[1234]$",
+            "pattern": "^v[12345]$",
             "title": "Retrieval Version",
-            "default": "v4"
+            "default": "v5"
           }
         },
         "additionalProperties": false,

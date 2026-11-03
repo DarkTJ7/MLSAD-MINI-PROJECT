@@ -84,7 +84,9 @@ def _verify_job(state):
         TASKS.labels('verification','success' if state.get('verified') else 'refused').inc()
         if not state.get('verified') and not state.get('failure') and not state.get('retried'):
             state['retried']=True
-            state['fnol']['retrieval_version']='v4'
+            state['retry_searches']=state.get('searches',0)
+            if state['fnol']['retrieval_version']!='v5':
+                state['fnol']['retrieval_version']='v4'
             state['stage']='base_read'
             Queue('analysis',connection=connection).enqueue(analyze,state,job_timeout=max(1,int(state['deadline']-time.time())+5),
                 retry=Retry(max=1,interval=[2]))

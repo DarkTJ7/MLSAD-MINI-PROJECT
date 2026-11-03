@@ -92,3 +92,18 @@ regressions. Locust now also requires result.verified before counting success.
 The baseline verified-success count is corrected to32/44; original CSV/JSONL and
 as-recorded summary fields remain available. The four post-fix native trials have
 zero canonical-confidence discrepancies (terminal_confidence_audit.json).
+
+## Incident 008 — v5 research repetition
+
+1–3 November 2026. While replacing name-only tool selection with model-authored
+queries and clause IDs, the 0.5B local model repeatedly requested fields or repeated
+the same search. A 1.5B model also repeated an overbroad concatenated query when
+shown all evidence topics together. Runs exhausted their bounded research budget
+or escalated; no unsupported coverage recommendation was returned.
+
+Preserved evidence: agent_v5_initial_failure.json, agent_v5_small_model_failure.json,
+agent_v5_broad_query_failure.json. Changes: restrict field reads to one call, reject
+duplicate calls, supply only current missing evidence and a focused research
+objective, constrain argument length, and retain independent verification. The
+larger model uses a single processing slot to limit memory. See results/AGENT_V5.md
+for the subsequent measured smoke checks, not a claim of universal model accuracy.

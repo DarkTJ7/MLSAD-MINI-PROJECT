@@ -128,13 +128,13 @@ services:
     environment:
       <<: *environment
       MODEL_ASSET_DIR: /models
-      MODEL_MANIFEST_PATH: /service/corpus/planner_manifest.json
+      MODEL_MANIFEST_PATH: /service/corpus/agent_planner_manifest.json
     volumes: [models:/models]
     restart: 'no'
   local-model:
     image: ${LOCAL_MODEL_IMAGE}
     profiles: [local-model]
-    command: [-m, /models/planner.gguf, --alias, '${LOCAL_MODEL_ALIAS}', --ctx-size, '8192', --threads, '4', --host, 0.0.0.0, --port, '8003', --metrics]
+    command: [-m, /models/planner.gguf, --alias, '${LOCAL_MODEL_ALIAS}', --ctx-size, '8192', --threads, '4', --parallel, '1', --host, 0.0.0.0, --port, '8003', --metrics]
     volumes: [models:/models:ro]
     depends_on:
       local-model-assets: {condition: service_completed_successfully}

@@ -26,6 +26,17 @@ async def complete(payload:dict):
     if os.getenv('STUB_FAIL','false').lower()=='true':
         return Response(status_code=503)
     stage=payload['stage'];version=payload['context']['version']
+    if version=='v5':
+        context=payload['context'];history=context.get('history',[])
+        searches=sum(x['action']=='corpus_search' for x in history)
+        if not history:action,argument='request_fields','*'
+        elif not searches:action,argument='corpus_search','SECTION I accidental external means loss damage vehicle'
+        elif searches==1:action,argument='corpus_search','general exceptions limitations as to use hire reward claims documents repair estimate'
+        elif not any(x['action']=='clause_lookup' for x in history):
+            action,argument='clause_lookup',context['evidence'][0]['clause_id']
+        else:action,argument='finish',''
+        return {'action':action,'argument':argument,'purpose':'Deterministic system-test action; no AI reasoning.',
+                'usage':{'prompt_tokens':0,'completion_tokens':0},'mode':'stub'}
     action={'initial':'request_fields','fields_read':'corpus_search','base_read':'corpus_search' if version in ('v2','v3','v4') else 'finish',
             'modifiers_read':'clause_lookup','clause_read':'finish','retry_read':'finish'}.get(stage,'escalate')
     return {'action':action,'usage':{'prompt_tokens':0,'completion_tokens':0},'mode':'stub'}

@@ -34,6 +34,11 @@ class State(TypedDict, total=False):
     trace_carrier: dict
     trace_id: str
     quality: dict
+    decision: dict
+    research_history: list
+    observation: dict
+    searches: int
+    retry_searches: int
 
 def classify(f):
     text=f['description'].lower()
@@ -82,6 +87,9 @@ def analysis_graph(corpus=None,gateway=None):
     gateway=gateway or Gateway()
 
     def plan(state):
+        if state['fnol']['retrieval_version']=='v5':
+            from .research_agent import plan_research
+            return plan_research(state,corpus,gateway)
         state['steps']=state.get('steps',0)+1
         if time.time()>state['deadline'] or state['steps']>10 or state.get('tool_calls',0)>=7:
             return escalate(state,'loop_budget_exhausted')
@@ -108,6 +116,9 @@ def analysis_graph(corpus=None,gateway=None):
         return state
 
     def tools(state):
+        if state['fnol']['retrieval_version']=='v5':
+            from .research_agent import use_tool
+            return use_tool(state,corpus,gateway)
         name=state['action']
         state['tool_calls']=state.get('tool_calls',0)+1
         TOOLS.labels('analysis',name).inc()
@@ -163,9 +174,9 @@ def analysis_graph(corpus=None,gateway=None):
     graph.add_node('draft',draft)
     graph.set_entry_point('plan')
     graph.add_conditional_edges('plan',route,{'tools':'tools','draft':'draft',END:END})
-    graph.add_edge('tools','plan')
+    graph.add_conditional_edges('tools',lambda s: END if s.get('failure') else 'plan',{'plan':'plan',END:END})
     graph.add_edge('draft',END)
-    return graph.compile()
+    return graph.compile().with_config(recursion_limit=40)
 
 PATTERNS={
  'base':r'accidental external means|burglary housebreaking|loss or damage to the vehicle',
@@ -271,6 +282,13 @@ def verify(state,corpus=None):
         details['citations_checked']=len(proposal.get('citations',[]))
         if not passed:
             state['verification_reason']='unsupported_or_incomplete_evidence'
+            if state['fnol']['retrieval_version']=='v5':
+                state['verification_reason']=json.dumps({
+                    'request':'Search again using a different query; supply canonical clauses for these unsupported propositions or escalate.',
+                    'template_mismatches':details.get('template_mismatches',[]),
+                    'unsupported_propositions':[c.get('hypothesis') for c in state.get('semantic_report',{}).get('claims',[]) if not c.get('supported')],
+                    'citations_checked':details['citations_checked'],
+                    'reason':state.get('semantic_report',{}).get('reason','source_or_evidence_check_failed')})
     return state
 
 def verification_graph(corpus=None):
@@ -289,6 +307,7 @@ def run_local(fnol,run_id='local',gateway=None,corpus=None):
         state=verification_graph(corpus).invoke(state)
         if not state.get('verified') and not state.get('failure'):
             state['stage']='base_read';state['action']='corpus_search'
+            state['retry_searches']=state.get('searches',0)
             # Retry with modifier strategy by restarting planner with observed base passages.
             state=analysis_graph(corpus,gateway).invoke(state)
             state=verification_graph(corpus).invoke(state)

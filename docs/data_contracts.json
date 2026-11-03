@@ -124,8 +124,8 @@
         "type": "boolean"
       },
       "retrieval_version": {
-        "default": "v4",
-        "pattern": "^v[1234]$",
+        "default": "v5",
+        "pattern": "^v[12345]$",
         "title": "Retrieval Version",
         "type": "string"
       }

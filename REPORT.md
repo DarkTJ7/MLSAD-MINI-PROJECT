@@ -1,5 +1,9 @@
 # MLSAD MINI PROJECT
 
+Historical report: this document and its printable PDF describe v1-v4. For the
+November 2026 agent-first redesign, read docs/AGENT_GUIDE.md and results/AGENT_V5.md.
+Do not attribute the historical evaluation or load numbers below to v5.
+
 Motor Insurance Claim Intake and Triage - UE24AM342AA5, Mini Project 01.
 Report updated 17 October 2026. Repository: https://github.com/DarkTJ7/MLSAD-MINI-PROJECT
 

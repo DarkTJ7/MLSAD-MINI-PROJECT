@@ -1,10 +1,26 @@
 # MLSAD MINI PROJECT
 
-Motor Insurance Claim Intake and Triage
+Motor Insurance Claim Intake and Triage — AI agents
 
-Course UE24AM342AA5, Mini Project 01. A runnable advisory prototype for a single
-HDFC ERGO private-car package corpus. Humans decide all claims. Start with the
-stub configuration; no model account or credentials are needed.
+Course UE24AM342AA5, Mini Project 01. Two independently running agents research
+and verify claims against an HDFC ERGO private-car package corpus. Humans decide
+all claims. The primary interface is the terminal agent; the website is optional.
+
+## Start with the AI agent
+
+Read [the agent guide](docs/AGENT_GUIDE.md) for setup and the v5 redesign. With the
+real local model and worker services running:
+
+```powershell
+python -m app.cli --api-url http://127.0.0.1:18766 chat
+python -m app.cli --api-url http://127.0.0.1:18766 run examples/food_delivery.json
+```
+
+The model supplies its own tool arguments: search queries and clause identifiers.
+The terminal shows its actions and the independent verifier's response. No browser
+is required. Stub mode is explicitly refused by the agent client unless requested
+for system testing. Earlier v1-v4 performance/quality results are historical and
+do not measure the redesigned v5 agent.
 
 ## Team / Contributors
 
@@ -117,7 +133,8 @@ restore it for recovery. See runbook.md for exact recovery steps.
 
 Set MODEL_MODE=live, MODEL_URL, MODEL_ID, MODEL_API_KEY and input/output token prices
 in .env, then recreate API/workers. Endpoint must implement OpenAI-style chat JSON
-and return `choices[0].message.content` containing `{"action":"allowed_tool"}`
+and return `choices[0].message.content` containing the v5 JSON object with
+`action`, `argument`, and a brief public `purpose` (v1-v4 only used `action`)
 plus token usage. Unknown actions or missing usage/prices cause escalation.
 The adapter has been exercised with a real free local CPU model; see
 results/REAL_MODEL.md and real_model_v1/v4.json for measured outcomes. Constrained
@@ -129,11 +146,15 @@ For native reproduction, see docs/NATIVE_DEMO.md and .env.native.example.
 For an entirely containerised local planner, the optional `local-model` profile
 downloads the checksum-pinned GGUF into the models volume. Set MODEL_MODE=live,
 MODEL_URL to the local-model service's chat-completions endpoint (port 8003),
-MODEL_ID to LOCAL_MODEL_ALIAS, MODEL_TIMEOUT_SECONDS=45 and RUN_TIMEOUT_SECONDS=180,
+MODEL_ID to LOCAL_MODEL_ALIAS, MODEL_TIMEOUT_SECONDS=90 and RUN_TIMEOUT_SECONDS=360,
 then run `docker compose --profile local-model up --build`. Keep token prices at
 zero for local inference. The longer timeout is for model quality evaluation;
 it does not replace the 30-second stub SLO. This optional Docker profile is supplied
 but unexecuted here, like the rest of the Docker rehearsal.
+
+The v5 profile uses Qwen2.5-1.5B-Instruct Q4_K_M with one processing slot;
+`corpus/agent_planner_manifest.json` pins the source and checksum. The historical
+0.5B model manifest remains alongside the earlier evaluation evidence.
 
 ## Stop / preserve evidence
 

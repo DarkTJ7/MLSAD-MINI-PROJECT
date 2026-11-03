@@ -1,0 +1,497 @@
+{
+  "run": {
+    "run_id": "4d0df58e-3772-4275-97fd-702861bc1c0e",
+    "status": "escalated",
+    "result": {
+      "recommendation_only": true,
+      "classification": "own_damage",
+      "coverage_position": "insufficient_evidence",
+      "queue": "investigation",
+      "reason": "Human claims review required: research_budget_exhausted. No claim determination is made.",
+      "requires_human": true,
+      "escalation": "Claims handler: obtain the policy schedule, endorsements and missing evidence.",
+      "citations": [],
+      "verified": false,
+      "prompt_version": "v5",
+      "limitations": [
+        "Advisory only. No approval, rejection or settlement calculation."
+      ]
+    },
+    "trace_path": "/runs/4d0df58e-3772-4275-97fd-702861bc1c0e/trace",
+    "elapsed_seconds": 78.0134105682373
+  },
+  "trace": {
+    "run_id": "4d0df58e-3772-4275-97fd-702861bc1c0e",
+    "events": [
+      {
+        "agent": "analysis",
+        "step": "provider",
+        "seconds": 7.185183800000232,
+        "attempts": 1,
+        "errors": [],
+        "prompt_tokens": 570,
+        "completion_tokens": 125,
+        "cost_usd": 0.0,
+        "usage_source": "provider",
+        "prompt_version": "v5"
+      },
+      {
+        "run_id": "4d0df58e-3772-4275-97fd-702861bc1c0e",
+        "agent": "analysis",
+        "step": "decision",
+        "seconds": 7.507450999997673,
+        "outcome": "success",
+        "details": {
+          "action": "request_fields",
+          "argument": "claim.policy_number, claim.vehicle_registration, claim.insurer, claim.product, claim.loss_date, claim.location, claim.country, claim.vehicle_use, claim.repair_cost, claim.repair_date, claim.retrieval_version, claim.last_observation, claim.missing_evidence, missing_evidence",
+          "purpose": "To gather the necessary information for the claim, including the policy number, vehicle registration, insurer, product, loss date, location, country, vehicle use, repair cost, and,"
+        },
+        "time": 1793556160.4461608,
+        "prompt_version": "v5"
+      },
+      {
+        "run_id": "4d0df58e-3772-4275-97fd-702861bc1c0e",
+        "agent": "analysis",
+        "step": "tool",
+        "seconds": 0.00013299999409355223,
+        "outcome": "success",
+        "details": {
+          "tool": "request_fields",
+          "argument": "claim.policy_number, claim.vehicle_registration, claim.insurer, claim.product, claim.loss_date, claim.location, claim.country, claim.vehicle_use, claim.repair_cost, claim.repair_date, claim.retrieval_version, claim.last_observation, claim.missing_evidence, missing_evidence",
+          "purpose": "To gather the necessary information for the claim, including the policy number, vehicle registration, insurer, product, loss date, location, country, vehicle use, repair cost, and,",
+          "observation": {
+            "fields": {},
+            "unknown_fields": [
+              "claim.policy_number",
+              "claim.vehicle_registration",
+              "claim.insurer",
+              "claim.product",
+              "claim.loss_date",
+              "claim.location",
+              "claim.country",
+              "claim.vehicle_use",
+              "claim.repair_cost",
+              "claim.repair_date",
+              "claim.retrieval_version",
+              "claim.last_observation",
+              "claim.missing_evidence",
+              "missing_evidence"
+            ]
+          }
+        },
+        "time": 1793556160.451536,
+        "prompt_version": "v5"
+      },
+      {
+        "agent": "analysis",
+        "step": "provider",
+        "seconds": 4.648197899994557,
+        "attempts": 1,
+        "errors": [],
+        "prompt_tokens": 726,
+        "completion_tokens": 97,
+        "cost_usd": 0.0,
+        "usage_source": "provider",
+        "prompt_version": "v5"
+      },
+      {
+        "run_id": "4d0df58e-3772-4275-97fd-702861bc1c0e",
+        "agent": "analysis",
+        "step": "decision",
+        "seconds": 5.138716700006626,
+        "outcome": "success",
+        "details": {
+          "action": "request_fields",
+          "argument": "claim.policy_number, claim.vehicle_registration, claim.insurer, claim.product, claim.loss_date, claim.location, claim.country, claim.vehicle_use, claim.repair_cost, claim.repair_date, claim.retrieval_version, claim.last_observation, claim.missing_evidence, missing_evidence",
+          "purpose": "The verifier needs to identify missing fields in the claim data."
+        },
+        "time": 1793556165.5921469,
+        "prompt_version": "v5"
+      },
+      {
+        "run_id": "4d0df58e-3772-4275-97fd-702861bc1c0e",
+        "agent": "analysis",
+        "step": "tool",
+        "seconds": 0.00022499999613501132,
+        "outcome": "success",
+        "details": {
+          "tool": "request_fields",
+          "argument": "claim.policy_number, claim.vehicle_registration, claim.insurer, claim.product, claim.loss_date, claim.location, claim.country, claim.vehicle_use, claim.repair_cost, claim.repair_date, claim.retrieval_version, claim.last_observation, claim.missing_evidence, missing_evidence",
+          "purpose": "The verifier needs to identify missing fields in the claim data.",
+          "observation": {
+            "error": "Repeated call refused. Choose a different query or a different tool."
+          }
+        },
+        "time": 1793556165.5963953,
+        "prompt_version": "v5"
+      },
+      {
+        "agent": "analysis",
+        "step": "provider",
+        "seconds": 7.560352500004228,
+        "attempts": 1,
+        "errors": [],
+        "prompt_tokens": 737,
+        "completion_tokens": 94,
+        "cost_usd": 0.0,
+        "usage_source": "provider",
+        "prompt_version": "v5"
+      },
+      {
+        "run_id": "4d0df58e-3772-4275-97fd-702861bc1c0e",
+        "agent": "analysis",
+        "step": "decision",
+        "seconds": 7.985301299995626,
+        "outcome": "success",
+        "details": {
+          "action": "request_fields",
+          "argument": "claim.policy_number, claim.vehicle_registration, claim.insurer, claim.product, claim.loss_date, claim.location, claim.country, claim.vehicle_use, claim.repair_cost, claim.repair_date, claim.retrieval_version, claim.last_observation, claim.missing_evidence, missing_evidence",
+          "purpose": "To request specific fields from the claim data."
+        },
+        "time": 1793556173.5857897,
+        "prompt_version": "v5"
+      },
+      {
+        "run_id": "4d0df58e-3772-4275-97fd-702861bc1c0e",
+        "agent": "analysis",
+        "step": "tool",
+        "seconds": 0.0001875000016298145,
+        "outcome": "success",
+        "details": {
+          "tool": "request_fields",
+          "argument": "claim.policy_number, claim.vehicle_registration, claim.insurer, claim.product, claim.loss_date, claim.location, claim.country, claim.vehicle_use, claim.repair_cost, claim.repair_date, claim.retrieval_version, claim.last_observation, claim.missing_evidence, missing_evidence",
+          "purpose": "To request specific fields from the claim data.",
+          "observation": {
+            "error": "Repeated call refused. Choose a different query or a different tool."
+          }
+        },
+        "time": 1793556173.5909953,
+        "prompt_version": "v5"
+      },
+      {
+        "agent": "analysis",
+        "step": "provider",
+        "seconds": 6.784193200001027,
+        "attempts": 1,
+        "errors": [],
+        "prompt_tokens": 813,
+        "completion_tokens": 95,
+        "cost_usd": 0.0,
+        "usage_source": "provider",
+        "prompt_version": "v5"
+      },
+      {
+        "run_id": "4d0df58e-3772-4275-97fd-702861bc1c0e",
+        "agent": "analysis",
+        "step": "decision",
+        "seconds": 7.283465999993496,
+        "outcome": "success",
+        "details": {
+          "action": "request_fields",
+          "argument": "claim.policy_number, claim.vehicle_registration, claim.insurer, claim.product, claim.loss_date, claim.location, claim.country, claim.vehicle_use, claim.repair_cost, claim.repair_date, claim.retrieval_version, claim.last_observation, claim.missing_evidence, missing_evidence",
+          "purpose": "To request the missing fields from the claim data."
+        },
+        "time": 1793556180.8780987,
+        "prompt_version": "v5"
+      },
+      {
+        "run_id": "4d0df58e-3772-4275-97fd-702861bc1c0e",
+        "agent": "analysis",
+        "step": "tool",
+        "seconds": 0.00031940000189933926,
+        "outcome": "success",
+        "details": {
+          "tool": "request_fields",
+          "argument": "claim.policy_number, claim.vehicle_registration, claim.insurer, claim.product, claim.loss_date, claim.location, claim.country, claim.vehicle_use, claim.repair_cost, claim.repair_date, claim.retrieval_version, claim.last_observation, claim.missing_evidence, missing_evidence",
+          "purpose": "To request the missing fields from the claim data.",
+          "observation": {
+            "error": "Repeated call refused. Choose a different query or a different tool."
+          }
+        },
+        "time": 1793556180.8863332,
+        "prompt_version": "v5"
+      },
+      {
+        "agent": "analysis",
+        "step": "provider",
+        "seconds": 7.063239000010071,
+        "attempts": 1,
+        "errors": [],
+        "prompt_tokens": 889,
+        "completion_tokens": 101,
+        "cost_usd": 0.0,
+        "usage_source": "provider",
+        "prompt_version": "v5"
+      },
+      {
+        "run_id": "4d0df58e-3772-4275-97fd-702861bc1c0e",
+        "agent": "analysis",
+        "step": "decision",
+        "seconds": 7.4375301000109175,
+        "outcome": "success",
+        "details": {
+          "action": "request_fields",
+          "argument": "claim.policy_number, claim.vehicle_registration, claim.insurer, claim.product, claim.loss_date, claim.location, claim.country, claim.vehicle_use, claim.repair_cost, claim.repair_date, claim.retrieval_version, claim.last_observation, claim.missing_evidence, missing_evidence",
+          "purpose": "Verify the missing evidence and ensure the claim is not rejected due to repeated calls."
+        },
+        "time": 1793556188.3299704,
+        "prompt_version": "v5"
+      },
+      {
+        "run_id": "4d0df58e-3772-4275-97fd-702861bc1c0e",
+        "agent": "analysis",
+        "step": "tool",
+        "seconds": 0.0001773999974830076,
+        "outcome": "success",
+        "details": {
+          "tool": "request_fields",
+          "argument": "claim.policy_number, claim.vehicle_registration, claim.insurer, claim.product, claim.loss_date, claim.location, claim.country, claim.vehicle_use, claim.repair_cost, claim.repair_date, claim.retrieval_version, claim.last_observation, claim.missing_evidence, missing_evidence",
+          "purpose": "Verify the missing evidence and ensure the claim is not rejected due to repeated calls.",
+          "observation": {
+            "error": "Repeated call refused. Choose a different query or a different tool."
+          }
+        },
+        "time": 1793556188.3351367,
+        "prompt_version": "v5"
+      },
+      {
+        "agent": "analysis",
+        "step": "provider",
+        "seconds": 7.571352699989802,
+        "attempts": 1,
+        "errors": [],
+        "prompt_tokens": 965,
+        "completion_tokens": 101,
+        "cost_usd": 0.0,
+        "usage_source": "provider",
+        "prompt_version": "v5"
+      },
+      {
+        "run_id": "4d0df58e-3772-4275-97fd-702861bc1c0e",
+        "agent": "analysis",
+        "step": "decision",
+        "seconds": 7.574085700005526,
+        "outcome": "success",
+        "details": {
+          "action": "request_fields",
+          "argument": "claim.policy_number, claim.vehicle_registration, claim.insurer, claim.product, claim.loss_date, claim.location, claim.country, claim.vehicle_use, claim.repair_cost, claim.repair_date, claim.retrieval_version, claim.last_observation, claim.missing_evidence, missing_evidence",
+          "purpose": "Verify the missing evidence and ensure the claim is not rejected due to repeated calls."
+        },
+        "time": 1793556195.9120953,
+        "prompt_version": "v5"
+      },
+      {
+        "run_id": "4d0df58e-3772-4275-97fd-702861bc1c0e",
+        "agent": "analysis",
+        "step": "tool",
+        "seconds": 0.0001900999923236668,
+        "outcome": "success",
+        "details": {
+          "tool": "request_fields",
+          "argument": "claim.policy_number, claim.vehicle_registration, claim.insurer, claim.product, claim.loss_date, claim.location, claim.country, claim.vehicle_use, claim.repair_cost, claim.repair_date, claim.retrieval_version, claim.last_observation, claim.missing_evidence, missing_evidence",
+          "purpose": "Verify the missing evidence and ensure the claim is not rejected due to repeated calls.",
+          "observation": {
+            "error": "Repeated call refused. Choose a different query or a different tool."
+          }
+        },
+        "time": 1793556195.9171648,
+        "prompt_version": "v5"
+      },
+      {
+        "agent": "analysis",
+        "step": "provider",
+        "seconds": 8.720442600009847,
+        "attempts": 1,
+        "errors": [],
+        "prompt_tokens": 1041,
+        "completion_tokens": 101,
+        "cost_usd": 0.0,
+        "usage_source": "provider",
+        "prompt_version": "v5"
+      },
+      {
+        "run_id": "4d0df58e-3772-4275-97fd-702861bc1c0e",
+        "agent": "analysis",
+        "step": "decision",
+        "seconds": 8.724098599996069,
+        "outcome": "success",
+        "details": {
+          "action": "request_fields",
+          "argument": "claim.policy_number, claim.vehicle_registration, claim.insurer, claim.product, claim.loss_date, claim.location, claim.country, claim.vehicle_use, claim.repair_cost, claim.repair_date, claim.retrieval_version, claim.last_observation, claim.missing_evidence, missing_evidence",
+          "purpose": "Verify the missing evidence and ensure the claim is not rejected due to repeated calls."
+        },
+        "time": 1793556204.6458652,
+        "prompt_version": "v5"
+      },
+      {
+        "run_id": "4d0df58e-3772-4275-97fd-702861bc1c0e",
+        "agent": "analysis",
+        "step": "tool",
+        "seconds": 0.0002913999924203381,
+        "outcome": "success",
+        "details": {
+          "tool": "request_fields",
+          "argument": "claim.policy_number, claim.vehicle_registration, claim.insurer, claim.product, claim.loss_date, claim.location, claim.country, claim.vehicle_use, claim.repair_cost, claim.repair_date, claim.retrieval_version, claim.last_observation, claim.missing_evidence, missing_evidence",
+          "purpose": "Verify the missing evidence and ensure the claim is not rejected due to repeated calls.",
+          "observation": {
+            "error": "Repeated call refused. Choose a different query or a different tool."
+          }
+        },
+        "time": 1793556204.652814,
+        "prompt_version": "v5"
+      },
+      {
+        "agent": "analysis",
+        "step": "provider",
+        "seconds": 8.342550299988943,
+        "attempts": 1,
+        "errors": [],
+        "prompt_tokens": 1117,
+        "completion_tokens": 98,
+        "cost_usd": 0.0,
+        "usage_source": "provider",
+        "prompt_version": "v5"
+      },
+      {
+        "run_id": "4d0df58e-3772-4275-97fd-702861bc1c0e",
+        "agent": "analysis",
+        "step": "decision",
+        "seconds": 8.904720200007432,
+        "outcome": "success",
+        "details": {
+          "action": "request_fields",
+          "argument": "claim.policy_number, claim.vehicle_registration, claim.insurer, claim.product, claim.loss_date, claim.location, claim.country, claim.vehicle_use, claim.repair_cost, claim.repair_date, claim.retrieval_version, claim.last_observation, claim.missing_evidence, missing_evidence",
+          "purpose": "Verify the missing evidence and ensure the claim is not a duplicate."
+        },
+        "time": 1793556213.5623238,
+        "prompt_version": "v5"
+      },
+      {
+        "run_id": "4d0df58e-3772-4275-97fd-702861bc1c0e",
+        "agent": "analysis",
+        "step": "tool",
+        "seconds": 0.00026309999520890415,
+        "outcome": "success",
+        "details": {
+          "tool": "request_fields",
+          "argument": "claim.policy_number, claim.vehicle_registration, claim.insurer, claim.product, claim.loss_date, claim.location, claim.country, claim.vehicle_use, claim.repair_cost, claim.repair_date, claim.retrieval_version, claim.last_observation, claim.missing_evidence, missing_evidence",
+          "purpose": "Verify the missing evidence and ensure the claim is not a duplicate.",
+          "observation": {
+            "error": "Repeated call refused. Choose a different query or a different tool."
+          }
+        },
+        "time": 1793556213.569315,
+        "prompt_version": "v5"
+      },
+      {
+        "agent": "analysis",
+        "step": "provider",
+        "seconds": 7.814490000004298,
+        "attempts": 1,
+        "errors": [],
+        "prompt_tokens": 1193,
+        "completion_tokens": 101,
+        "cost_usd": 0.0,
+        "usage_source": "provider",
+        "prompt_version": "v5"
+      },
+      {
+        "run_id": "4d0df58e-3772-4275-97fd-702861bc1c0e",
+        "agent": "analysis",
+        "step": "decision",
+        "seconds": 7.818544299996574,
+        "outcome": "success",
+        "details": {
+          "action": "request_fields",
+          "argument": "claim.policy_number, claim.vehicle_registration, claim.insurer, claim.product, claim.loss_date, claim.location, claim.country, claim.vehicle_use, claim.repair_cost, claim.repair_date, claim.retrieval_version, claim.last_observation, claim.missing_evidence, missing_evidence",
+          "purpose": "Verify the missing evidence and ensure the claim is not rejected due to repeated calls."
+        },
+        "time": 1793556221.3944285,
+        "prompt_version": "v5"
+      },
+      {
+        "run_id": "4d0df58e-3772-4275-97fd-702861bc1c0e",
+        "agent": "analysis",
+        "step": "tool",
+        "seconds": 0.0003505000058794394,
+        "outcome": "success",
+        "details": {
+          "tool": "request_fields",
+          "argument": "claim.policy_number, claim.vehicle_registration, claim.insurer, claim.product, claim.loss_date, claim.location, claim.country, claim.vehicle_use, claim.repair_cost, claim.repair_date, claim.retrieval_version, claim.last_observation, claim.missing_evidence, missing_evidence",
+          "purpose": "Verify the missing evidence and ensure the claim is not rejected due to repeated calls.",
+          "observation": {
+            "error": "Repeated call refused. Choose a different query or a different tool."
+          }
+        },
+        "time": 1793556221.4017801,
+        "prompt_version": "v5"
+      },
+      {
+        "agent": "analysis",
+        "step": "provider",
+        "seconds": 8.588537399991765,
+        "attempts": 1,
+        "errors": [],
+        "prompt_tokens": 1269,
+        "completion_tokens": 101,
+        "cost_usd": 0.0,
+        "usage_source": "provider",
+        "prompt_version": "v5"
+      },
+      {
+        "run_id": "4d0df58e-3772-4275-97fd-702861bc1c0e",
+        "agent": "analysis",
+        "step": "decision",
+        "seconds": 8.59267379999801,
+        "outcome": "success",
+        "details": {
+          "action": "request_fields",
+          "argument": "claim.policy_number, claim.vehicle_registration, claim.insurer, claim.product, claim.loss_date, claim.location, claim.country, claim.vehicle_use, claim.repair_cost, claim.repair_date, claim.retrieval_version, claim.last_observation, claim.missing_evidence, missing_evidence",
+          "purpose": "Verify the missing evidence and ensure the claim is not rejected due to repeated calls."
+        },
+        "time": 1793556230.000648,
+        "prompt_version": "v5"
+      },
+      {
+        "run_id": "4d0df58e-3772-4275-97fd-702861bc1c0e",
+        "agent": "analysis",
+        "step": "tool",
+        "seconds": 0.0003355999942868948,
+        "outcome": "success",
+        "details": {
+          "tool": "request_fields",
+          "argument": "claim.policy_number, claim.vehicle_registration, claim.insurer, claim.product, claim.loss_date, claim.location, claim.country, claim.vehicle_use, claim.repair_cost, claim.repair_date, claim.retrieval_version, claim.last_observation, claim.missing_evidence, missing_evidence",
+          "purpose": "Verify the missing evidence and ensure the claim is not rejected due to repeated calls.",
+          "observation": {
+            "error": "Repeated call refused. Choose a different query or a different tool."
+          }
+        },
+        "time": 1793556230.009985,
+        "prompt_version": "v5"
+      },
+      {
+        "run_id": "4d0df58e-3772-4275-97fd-702861bc1c0e",
+        "agent": "verification",
+        "step": "verify",
+        "seconds": 0.000988700005109422,
+        "outcome": "success",
+        "details": {},
+        "time": 1793556230.273795,
+        "prompt_version": "v5"
+      }
+    ],
+    "retrieved_passages": [],
+    "verified": false,
+    "cost_usd": 0.0,
+    "trace_id": "47226d827dd04d9d39496bc2cf9f8de9",
+    "semantic_report": null,
+    "quality": {
+      "sampled": true,
+      "method": "reference-free-nli-and-embedding-v1",
+      "groundedness": null,
+      "faithfulness": null,
+      "hallucination_rate": null,
+      "context_relevance": null
+    }
+  }
+}
