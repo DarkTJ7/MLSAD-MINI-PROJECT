@@ -25,7 +25,7 @@ The core difficulty is that an accident description naturally retrieves the own-
 
 ## 3. Corpus and evidence preparation
 
-The corpus is the HDFC ERGO Standard Form for Private Car Package Policy PDF. Its first PDF page contains insurer FAQ and claims-intimation procedure; later pages contain policy wording and endorsements. The claims-procedure text file is extracted from that same PDF and is **not** a second independent insurer publication. This is a historical teaching snapshot. Confirm with faculty whether the corpus satisfies the two-document expectation; if not, add a separately published official procedure and re-run indexing/evaluation. The actual policy schedule is unavailable. See [corpus provenance](../corpus/SOURCES.md).
+The corpus is the HDFC ERGO Standard Form for Private Car Package Policy PDF. Its first PDF page contains insurer FAQ and claims-intimation procedure; later pages contain policy wording and endorsements. The procedure is part of the same PDF and is **not** a second independent insurer publication. This is a historical teaching snapshot. Confirm with faculty whether the corpus satisfies the two-document expectation; if not, add a separately published official procedure and re-run indexing/evaluation. The actual policy schedule is unavailable. See [corpus provenance](../corpus/SOURCES.md).
 
 The indexer reads the PDF text layer, creates page-linked chunks with document/page/clause IDs, builds a FAISS index and caches embeddings by content hash. It records source hash, build time, chunk count and throughput. Re-embedding has a separate command. Retrieval must surface apparent cover and modifying exclusions/restrictions; similarity alone cannot settle coverage.
 

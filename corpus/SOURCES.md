@@ -8,8 +8,8 @@ insurer's motor FAQ and claims procedure; pp2-9 contain the complete package
 wording and endorsement catalogue. The FAQ carries Ver.Aug14; this is a historical
 snapshot selected for reproducibility, not current product advice.
 
-The separately extracted claims-procedure.txt is a convenience extract of p1,
-not a separately authored insurer document. It is not indexed twice.
+The claims procedure on PDF p1 is part of this same insurer document, not a
+separately authored second source. It is indexed once with the policy PDF.
 reference_answer.json contains exact excerpts from the original PDF and is
 generated from its text layer. Source SHA-256 is in manifest.json.
 
