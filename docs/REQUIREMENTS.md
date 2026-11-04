@@ -8,7 +8,7 @@ not executed in Docker. None implies insurer/production certification.
 |---|---|---|
 | F1 | implemented | POST /runs; docs/openapi.json; data_contracts.json; API test |
 | F2 | implemented | Pydantic validation, cross-field chronology, quarantine; no-enqueue tests |
-| F3 | partial | Four-category rules and structured entities; no robust natural-language extraction |
+| F3 | partial | Four-category rules plus model-assisted vehicle-use narrative audit with exact quote; broader claim-entity extraction remains limited |
 | F4 | partial | Agent-selected FAISS searches plus modifier queries; lexical/scope limits |
 | F5 | implemented for bounded outputs | Canonical source/page/quote checks, controlled narrative and independent learned NLI; human legal interpretation still required |
 | F6 | implemented | Three operational queues with reasons; threshold is documented demo assumption |

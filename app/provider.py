@@ -51,7 +51,7 @@ class Gateway:
         event={'agent':agent,'step':'provider','seconds':time.monotonic()-started,
                'attempts':attempts,'errors':errors,'prompt_tokens':0,'completion_tokens':0,
                'cost_usd':0.0,'usage_source':'stub' if os.getenv('MODEL_MODE','stub')=='stub' else 'provider',
-               'prompt_version':state['fnol']['retrieval_version']}
+               'prompt_version':payload.get('prompt_version',state['fnol']['retrieval_version'])}
         if response is None or not isinstance(response,dict):
             failures=int(self.connection.incr('provider:failures')) if self.connection else self.failures+1
             self.failures=failures

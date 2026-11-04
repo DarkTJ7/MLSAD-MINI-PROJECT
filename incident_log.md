@@ -107,3 +107,20 @@ duplicate calls, supply only current missing evidence and a focused research
 objective, constrain argument length, and retain independent verification. The
 larger model uses a single processing slot to limit memory. See results/AGENT_V5.md
 for the subsequent measured smoke checks, not a claim of universal model accuracy.
+
+## Incident 009 — narrative audit exposed premature model abstention
+
+4 November 2026. A new paid-meal paraphrase was correctly identified as delivery
+use despite the structured personal-use field. In a stricter run the small model
+first produced text that the safety screen flagged during a tool decision, then
+in a separate run voluntarily escalated before searching the use limitation.
+Both runs returned human review, not an unsupported recommendation. Their
+synthetic traces are in results/narrative_audit_guardrail_failure.json and
+results/narrative_audit_early_escalation_failure.json.
+
+The correction separates executable tool-argument screening from the displayed
+purpose (a flagged purpose is masked), and requires a modifier search before
+voluntary escalation while research budget remains. The subsequent live run
+searched the use limitation and passed independent verification. Its trace is
+results/narrative_audit_live.json. This single result does not establish an
+accuracy rate; the full v5 scenario comparison remains outstanding.

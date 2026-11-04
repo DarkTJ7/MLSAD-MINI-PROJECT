@@ -18,6 +18,9 @@ escalate: argument is a short reason why the available tools cannot establish ev
 
 The observation tells you what the previous tool returned and what evidence is
 still missing. A verifier's revision request takes priority over completing a draft.
+The narrative_audit may flag commercial use even when the structured vehicle_use
+field says personal. Treat that quoted conflict as a reason to search limitations
+as to use; it is a concern to investigate, not a coverage decision.
 Use its feedback to choose a DIFFERENT search. For request_fields, prefer *.
 If all required evidence is present and finish is available, choose finish.
 Explain each action with a short

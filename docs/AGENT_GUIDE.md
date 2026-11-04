@@ -15,6 +15,12 @@ and escalation are explicit actions. Invalid identifiers and duplicate calls
 produce observations instead of running arbitrary operations.
 
 The analysis and verification agents are separate Redis/RQ worker processes.
+Within the analysis worker, a narrow local-model intake audit first interprets
+vehicle use in the claimant's narrative. A delivery or hire/reward signal must
+quote an exact phrase from that narrative. The signal is checked against the
+structured vehicle-use field; a conflict becomes a restriction evidence
+requirement, never a coverage determination. For restricted-use cases, the
+research agent must explicitly search for a modifier before it can finish.
 The verifier checks canonical source text, citations, bounded recommendation
 rules and independent learned NLI. Refusal is handed back with corrective evidence
 requirements for one retry, or escalates to a human. Its validation is independent
@@ -49,6 +55,8 @@ explicitly supplied for a system test.
 
 The terminal displays model-authored calls and observations, the independent
 verification result, citations, operational queue and recorded token/API cost.
+Use `examples/paraphrased_delivery.json` to demonstrate a paid meal trip without
+the literal word "delivery" and inspect the intake conflict in the trace.
 The JSON export includes the complete run trace. Keep exports with synthetic data
 when sharing the project; real customer requests may contain personal information.
 

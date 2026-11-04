@@ -1,0 +1,8 @@
+........................................................                 [100%]
+============================== warnings summary ===============================
+app\retrieval.py:15
+  C:\Users\Tarun\Documents\Codex\2026-10-17\https-github-com-poojithat99-mlsd-mini\outputs\motor-insurance-triage\app\retrieval.py:15: DeprecationWarning: `langchain-community` is being sunset and is no longer actively maintained. See https://github.com/langchain-ai/langchain-community/issues/674 for details and migration guidance toward standalone integration packages.
+    from langchain_community.vectorstores import FAISS
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+56 passed, 1 warning in 20.28s

@@ -39,6 +39,7 @@ class State(TypedDict, total=False):
     observation: dict
     searches: int
     retry_searches: int
+    narrative_audit: dict
 
 def classify(f):
     text=f['description'].lower()

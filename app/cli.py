@@ -50,6 +50,11 @@ def checked(response):
 
 def event_line(event):
     agent=event.get('agent','system');kind=event.get('step');d=event.get('details',{})
+    if kind=='narrative_audit':
+        signal=d.get('narrative_use','unknown')
+        conflict='; conflicts with structured vehicle use' if d.get('field_conflict') else ''
+        quoted='; claimant phrase: '+d['evidence_phrase'] if d.get('evidence_phrase') else ''
+        return f'[intake] narrative vehicle use: {signal}{conflict}{quoted}'
     if kind=='decision':return f"[{agent}] {d.get('action')}: {d.get('argument','')} | {d.get('purpose','')}"
     if kind=='tool':
         if d.get('observation',{}).get('error'):

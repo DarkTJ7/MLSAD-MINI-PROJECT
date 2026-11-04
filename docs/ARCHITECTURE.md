@@ -1,5 +1,14 @@
 # Architecture and decisions
 
+The current v5 behavior is documented in [the agent guide](AGENT_GUIDE.md).
+Its research worker includes a model-assisted narrative-use audit with an exact
+claimant quote, model-written search queries and an explicit modifier-search
+gate for restricted-use cases. The independently deployed verifier remains a
+separate worker. Older step and deadline figures below describe the original
+stub-oriented design; v5 uses 14 research decisions, 10 tool calls and a
+360-second local-model run deadline. See [the peer design comparison](REFERENCE_AGENT_COMPARISON.md)
+for the distinct approach adopted in this project.
+
 ```mermaid
 flowchart LR
   U[Browser / REST client] --> API[FastAPI boundary: validate and guard]

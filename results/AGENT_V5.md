@@ -46,3 +46,26 @@ Live v5 results and regression checks are in agent_v5_parking.json,
 agent_v5_delivery.json and tests_agent_v5.txt. A single or small set of successful
 cases does not establish general accuracy; the frozen 24-scenario set still needs
 to be rerun with v5 before a new quality percentage is reported.
+
+## Narrative-use audit extension, 4 November 2026
+
+The model now audits the claimant's vehicle-use wording before research. It must
+quote a contiguous phrase to flag delivery or hire/reward use, and the agent
+records a conflict with the structured vehicle-use field. For a restricted-use
+signal, a dedicated modifier search is required before finish is available.
+This is a stage of the analysis worker, not a third independently deployed agent.
+The intake prompt has its own version and token event. An unquoted commercial
+signal is discarded, and a flagged model-written display purpose is masked;
+unsafe tool arguments still fail closed.
+
+The synthetic paraphrase in examples/paraphrased_delivery.json is not matched
+by the original delivery phrase patterns. In the final live local-model run,
+the intake audit quoted the paid meal trip, the research model searched for
+private-car limitations as to use, and the independent verifier accepted an
+own-damage / coverage-concern / investigation recommendation citing original
+PDF cover, restriction and procedure chunks. See narrative_audit_live.json.
+The model also made an irrelevant request-fields call; it did not affect the
+verified outcome. Two unsuccessful development attempts are preserved as
+narrative_audit_*_failure.json. This evidence is one smoke test, not an
+updated 24-case accuracy or performance result. The updated local regression
+suite passed 56 tests (tests_narrative_audit.txt).

@@ -17,6 +17,8 @@ python -m app.cli --api-url http://127.0.0.1:18766 run examples/food_delivery.js
 ```
 
 The model supplies its own tool arguments: search queries and clause identifiers.
+An intake audit also checks the incident narrative for quoted evidence of delivery
+or hire/reward use that conflicts with a structured personal-use field.
 The terminal shows its actions and the independent verifier's response. No browser
 is required. Stub mode is explicitly refused by the agent client unless requested
 for system testing. Earlier v1-v4 performance/quality results are historical and
@@ -32,6 +34,8 @@ do not measure the redesigned v5 agent.
 
 - `docs/PROJECT_PLAN.md` and `docs/PROJECT_PLAN.pdf`: Evaluation 1 plan,
   architecture, evaluation schedule and corpus/reference-case confirmation.
+- `docs/REFERENCE_AGENT_COMPARISON.md`: what we learned from a peer project and
+  the distinct design and evidence in this implementation.
 - `REPORT.md`: final report draft, measured evaluation and honest remaining gaps.
 - `Motor_Insurance_Project_Report.pdf`: printable report with deployment diagram.
 - `docs/ARCHITECTURE.md`: deployment diagram, tools, topology and tradeoffs.
