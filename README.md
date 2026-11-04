@@ -81,11 +81,10 @@ are absent, so the agent cannot determine final coverage.
 | `evaluation/` | Frozen 24-scenario set, metric definitions and batch runner |
 | `tests/` | Contract, API, agent, safety and trace regressions |
 | `docs/` | [Project plan](docs/PROJECT_PLAN.pdf), [agent guide](docs/AGENT_GUIDE.md), [architecture](docs/ARCHITECTURE.md), [requirement status](docs/REQUIREMENTS.md) and [peer comparison](docs/REFERENCE_AGENT_COMPARISON.md) |
-| `results/` | Selected synthetic live traces and the latest regression output |
+| `results/` | Selected synthetic live traces and development failure evidence |
 | `client/` | Minimal optional web client required by the course brief |
 
-See [the report](Motor_Insurance_Agent_Report.pdf) or its
-[Markdown source](REPORT.md) for tested evidence and honest gaps,
+See [the report](Motor_Insurance_Agent_Report.pdf) for tested evidence and honest gaps,
 [runbook.md](runbook.md) for failures, and [incident_log.md](incident_log.md)
 for genuine development incidents.
 

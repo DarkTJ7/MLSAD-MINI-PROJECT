@@ -35,4 +35,4 @@ The helper owns only the processes it records in `.native_runtime/`. Stop
 them with `python tools/native_runtime.py stop`. It does not install or
 stop a separately managed llama.cpp server. Use synthetic FNOLs only.
 See [the agent guide](AGENT_GUIDE.md) for behavior and
-[the report](../REPORT.md) for evidence limits.
+[the report](../Motor_Insurance_Agent_Report.pdf) for evidence limits.
