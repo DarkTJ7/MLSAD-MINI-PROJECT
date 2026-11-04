@@ -1,6 +1,6 @@
 {
   "package": "Motor Insurance Mini Project 01",
-  "date": "2026-10-17",
+  "date": "2026-11-04",
   "files": [
     {
       "path": ".dockerignore",
@@ -229,8 +229,13 @@
     },
     {
       "path": "docs/PROJECT_PLAN.md",
-      "bytes": 2941,
-      "sha256": "500d975f7543f27edfa200aa695c2e98e4248f6daa8284ab86854e61b38dc606"
+      "bytes": 11775,
+      "sha256": "76840225a5e9e92db2b29c673ad20b01319f59ab8c98c1c5df05488bd990926f"
+    },
+    {
+      "path": "docs/PROJECT_PLAN.pdf",
+      "bytes": 52877,
+      "sha256": "17369ecffec68ead44ce5af6fed938c60acb9b5b3719cc90ad01f0400c6a1ac1"
     },
     {
       "path": "docs/REQUIREMENTS.md",
@@ -379,8 +384,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 8389,
-      "sha256": "120768dffd2dc925a7c2530da0ed44617a1073406e604becc7cdf4efe47ac6ea"
+      "bytes": 8455,
+      "sha256": "3ad0d11af052d1b94405f660f88b62adebf74c9e4f49e7faa605fdc9bc729e56"
     },
     {
       "path": "REPORT.md",

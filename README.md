@@ -30,7 +30,8 @@ do not measure the redesigned v5 agent.
 
 ## Deliverables
 
-- `docs/PROJECT_PLAN.md`: Evaluation 1 plan and corpus/reference-case confirmation.
+- `docs/PROJECT_PLAN.md` and `docs/PROJECT_PLAN.pdf`: Evaluation 1 plan,
+  architecture, evaluation schedule and corpus/reference-case confirmation.
 - `REPORT.md`: final report draft, measured evaluation and honest remaining gaps.
 - `Motor_Insurance_Project_Report.pdf`: printable report with deployment diagram.
 - `docs/ARCHITECTURE.md`: deployment diagram, tools, topology and tradeoffs.
