@@ -6,9 +6,9 @@ from typing import TypedDict, Any
 from langgraph.graph import StateGraph, END
 from .contracts import FNOL, Recommendation
 from .guardrails import inspect, output_safe
-from .provider import Gateway, ProviderUnavailable
+from .provider import Gateway
 from .retrieval import Corpus, get_corpus
-from .telemetry import step, TOOLS
+from .telemetry import step
 
 class State(TypedDict, total=False):
     run_id: str
@@ -84,81 +84,16 @@ def escalate(state,reason):
     return state
 
 def analysis_graph(corpus=None,gateway=None):
+    """Current agent only: model-chosen read-only tools, then bounded drafting."""
+    from .research_agent import plan_research,use_tool
     corpus=corpus or get_corpus()
     gateway=gateway or Gateway()
 
     def plan(state):
-        if state['fnol']['retrieval_version']=='v5':
-            from .research_agent import plan_research
-            return plan_research(state,corpus,gateway)
-        state['steps']=state.get('steps',0)+1
-        if time.time()>state['deadline'] or state['steps']>10 or state.get('tool_calls',0)>=7:
-            return escalate(state,'loop_budget_exhausted')
-        with step(state,'analysis','plan',{'stage':state.get('stage','initial')}):
-            f=state['fnol']
-            state['classification']=classify(f)
-            state['risk']=risks(f)
-            if inspect(f):
-                return escalate(state,'input_guardrail')
-            if out_of_scope(f):
-                return escalate(state,'outside_corpus')
-            stage=state.get('stage','initial')
-            available=['request_fields'] if stage=='initial' else ['corpus_search','escalate']
-            if stage=='base_read':
-                available+=['finish']
-            if stage in ('modifiers_read','retry_read'):
-                available=['finish','clause_lookup','escalate']
-            if stage=='clause_read':
-                available=['finish','escalate']
-            state['action']=gateway.choose(state,available,{'stage':stage,'fnol':f,
-                'passages':state.get('passages',[]),'risk':state['risk'],'version':f['retrieval_version']})
-            if state['action']=='escalate':
-                return escalate(state,'provider_requested_review')
-        return state
+        return plan_research(state,corpus,gateway)
 
     def tools(state):
-        if state['fnol']['retrieval_version']=='v5':
-            from .research_agent import use_tool
-            return use_tool(state,corpus,gateway)
-        name=state['action']
-        state['tool_calls']=state.get('tool_calls',0)+1
-        TOOLS.labels('analysis',name).inc()
-        details={'tool':name}
-        with step(state,'analysis','tool',details):
-            f=state['fnol']
-            if name=='request_fields':
-                details['fields']={k:f[k] for k in ['vehicle_use','country','driver_licensed','intoxicated','estimated_repair','idv']}
-                state['stage']='fields_read'
-            elif name=='clause_lookup':
-                if not state.get('passages'):
-                    return escalate(state,'no_clause_to_lookup')
-                cid=state['passages'][0]['clause_id']
-                details['clause_id']=cid
-                row=corpus.lookup(cid)
-                details['result']=row
-                state['stage']='clause_read'
-            else:
-                stage=state.get('stage')
-                if stage=='fields_read':
-                    query={'own_damage':'SECTION I loss damage vehicle accidental external means',
-                           'theft':'burglary housebreaking theft loss damage vehicle',
-                           'third_party':'SECTION II liability third parties damage property bodily injury',
-                           'total_loss':'constructive total loss exceeds 75% IDV'}[state['classification']]
-                    state['stage']='base_read'
-                else:
-                    # Follow references found in the first passages, rather than relying on FNOL similarity.
-                    read=' '.join(p['text'] for p in state.get('passages',[]))
-                    reference='terms exceptions conditions' if 'subject' in read.lower() else 'limitations exclusions'
-                    query=f'{reference} general exceptions limitations as to use hire reward licence intoxicating mechanical breakdown claims process'
-                    state['stage']='modifiers_read'
-                details['query']=query
-                new=corpus.search(query,k=10 if state['stage']=='modifiers_read' else 6)
-                by_id={p['clause_id']:p for p in state.get('passages',[])+new}
-                state['passages']=list(by_id.values())
-                details['passages']=new
-                if not new:
-                    return escalate(state,'weak_retrieval')
-        return state
+        return use_tool(state,corpus,gateway)
 
     def draft(state):
         with step(state,'analysis','draft'):
@@ -166,7 +101,7 @@ def analysis_graph(corpus=None,gateway=None):
         return state
 
     def route(state):
-        if state.get('failure'): return END
+        if state.get('failure'):return END
         return 'draft' if state.get('action')=='finish' else 'tools'
 
     graph=StateGraph(State)
@@ -175,7 +110,7 @@ def analysis_graph(corpus=None,gateway=None):
     graph.add_node('draft',draft)
     graph.set_entry_point('plan')
     graph.add_conditional_edges('plan',route,{'tools':'tools','draft':'draft',END:END})
-    graph.add_conditional_edges('tools',lambda s: END if s.get('failure') else 'plan',{'plan':'plan',END:END})
+    graph.add_conditional_edges('tools',lambda state:END if state.get('failure') else 'plan',{'plan':'plan',END:END})
     graph.add_edge('draft',END)
     return graph.compile().with_config(recursion_limit=40)
 
@@ -257,7 +192,7 @@ def verify(state,corpus=None):
         details['template_mismatches']=[k for k in ('classification','coverage_position','queue','reason','requires_human','recommendation_only') if proposal.get(k)!=expected.get(k)]
         passed=passed and all(proposal.get(k)==expected.get(k) for k in
             ('classification','coverage_position','queue','reason','requires_human','recommendation_only'))
-        # Independent checks against FNOL and full retrieved text catch v1 missing modifier search.
+        # Independent checks against FNOL and full retrieved text catch a missed modifier.
         text=' '.join(c['quote'] for c in proposal.get('citations',[])).lower()
         if 'restricted_use' in risks(state['fnol']):
             passed=passed and bool(re.search(PATTERNS['restriction'],text,re.I)) and proposal.get('coverage_position')=='coverage_concern'
@@ -307,9 +242,8 @@ def run_local(fnol,run_id='local',gateway=None,corpus=None):
         state=analysis_graph(corpus,gateway).invoke(state)
         state=verification_graph(corpus).invoke(state)
         if not state.get('verified') and not state.get('failure'):
-            state['stage']='base_read';state['action']='corpus_search'
             state['retry_searches']=state.get('searches',0)
-            # Retry with modifier strategy by restarting planner with observed base passages.
+            # A verifier refusal requires a different research search before retrying.
             state=analysis_graph(corpus,gateway).invoke(state)
             state=verification_graph(corpus).invoke(state)
         if not state.get('verified'):

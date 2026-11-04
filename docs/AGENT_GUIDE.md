@@ -1,83 +1,67 @@
-# Run the AI agents directly
+# Motor claim AI agent guide
 
-The primary interface is now a terminal agent client. No browser is needed.
-The optional web client remains only because the brief requests one in A8.
+The terminal client is the primary interface. The API and optional browser
+client submit the same FNOL contract to the same queue.
 
-## What changed in v5
+## Agent roles
 
-Previously the model selected a tool name, but Python supplied the search query
-and always chose the first clause for lookup. That limited the agent's autonomy.
-In v5 the local model produces a validated action, its argument, and a short
-public purpose. It writes each search query and selects exact clause identifiers
-from retrieved evidence. Tool observations and prior calls become its next context.
-The tool set is read-only: request_fields, corpus_search, clause_lookup. Completion
-and escalation are explicit actions. Invalid identifiers and duplicate calls
-produce observations instead of running arbitrary operations.
+**Research worker.** A local model audits vehicle use in the claimant's words,
+then chooses one read-only tool at a time. It writes the query for
+`corpus_search`, selects an already retrieved ID for `clause_lookup`, and can
+read structured fields through `request_fields`. Observations feed the next
+decision. For delivery/hire-reward concerns, the loop requires a separate
+search for a use limitation before it may finish. The intake audit is a stage
+of this worker, not a third independently deployed agent.
 
-The analysis and verification agents are separate Redis/RQ worker processes.
-Within the analysis worker, a narrow local-model intake audit first interprets
-vehicle use in the claimant's narrative. A delivery or hire/reward signal must
-quote an exact phrase from that narrative. The signal is checked against the
-structured vehicle-use field; a conflict becomes a restriction evidence
-requirement, never a coverage determination. For restricted-use cases, the
-research agent must explicitly search for a modifier before it can finish.
-The verifier checks canonical source text, citations, bounded recommendation
-rules and independent learned NLI. Refusal is handed back with corrective evidence
-requirements for one retry, or escalates to a human. Its validation is independent
-of the research model; it does not blindly accept an LLM's self-assessment.
+**Verification worker.** A different RQ process checks the cited passage
+against canonical indexed PDF text, the allowed advisory output, required
+evidence and an independent semantic support service. It can reject the
+research result and request one different search. Repeated or unsupported
+work becomes human escalation. No model has a claim-approval or payment tool.
 
-Classification, operational routing and final wording remain constrained rules.
-This is a tool-using AI research agent with deterministic decision safeguards;
-it is not unrestricted legal reasoning. Logged purposes are short action summaries,
-not private chain-of-thought. The initial 0.5B model repeated tool calls and failed
-the v5 smoke test; those failures are preserved. The current local runtime uses
-Qwen2.5-1.5B-Instruct Q4_K_M with one processing slot. Models can fail, and failures must be
-reported as abstentions rather than replaced with fabricated policy conclusions.
+## Run it
 
-## Terminal usage
-
-Install requirements.txt in your virtual environment. Start the support services
-using the documented native runtime or Compose/local-model profile. Configure
-AGENT_API_URL in the shell or pass --api-url. This endpoint connects to the agent
-service; the CLI does not launch a browser.
+Follow the live local-model Compose setup in [README.md](../README.md).
+Then:
 
 ```powershell
-python -m app.cli --api-url http://127.0.0.1:18766 chat
-python -m app.cli --api-url http://127.0.0.1:18766 run examples/food_delivery.json --output results/my_agent_run.json
-python -m app.cli --api-url http://127.0.0.1:18766 watch RUN_ID
-python -m app.cli --api-url http://127.0.0.1:18766 feedback RUN_ID --satisfactory yes --reason "Citations and routing were useful"
+docker compose exec api python -m app.cli --api-url http://api:8000 chat
+docker compose exec api python -m app.cli --api-url http://api:8000 run examples/food_delivery.json
+docker compose exec api python -m app.cli --api-url http://api:8000 run examples/paraphrased_delivery.json
 ```
 
-Chat asks for incident and policy facts. It does not invent dates, amounts or
-driver eligibility. File submission validates the same external FNOL contract.
-Both select prompt v5 and refuse a stub-mode service unless --allow-stub is
-explicitly supplied for a system test.
+The terminal shows model-authored actions and tool results, then the independent
+verifier's outcome. It prints the operational route and original PDF
+citations. A run can be resumed with `watch RUN_ID`; the caller can submit
+feedback with `feedback RUN_ID --satisfactory yes|no --reason TEXT`.
 
-The terminal displays model-authored calls and observations, the independent
-verification result, citations, operational queue and recorded token/API cost.
-Use `examples/paraphrased_delivery.json` to demonstrate a paid meal trip without
-the literal word "delivery" and inspect the intake conflict in the trace.
-The JSON export includes the complete run trace. Keep exports with synthetic data
-when sharing the project; real customer requests may contain personal information.
+The paid-meal paraphrase intentionally says `vehicle_use=personal` in a
+structured field. The audit must quote the contrary narrative phrase. An
+unquoted model signal is discarded; deterministic risk flags remain in force.
 
-## Local-model services and assessed deployment
+## Boundaries and fallback
 
-See NATIVE_DEMO.md for native process setup and README for Compose. The CLI is a
-client of the same API and queue used for assessed asynchronous execution; it does
-not substitute a single Python process for two separate agents.
-Use the live model configuration for AI demonstrations. The delayed stub is solely
-for repeatable load tests. Earlier v1-v4 results and native performance trials are
-historical evidence and must not be claimed as measurements of v5. Docker execution
-and container measurements remain pending until separately run.
+- Research: at most 14 decisions and 10 tool calls, with a wall-clock deadline.
+- The live local model uses a longer run budget than the delayed stub used for
+  system load tests. The budget is set in the runtime environment.
+- Every model call has a timeout, bounded retry and shared circuit breaker.
+- Input, model tool arguments and retrieved text are screened; flagged source
+  passages are quarantined from the model context.
+- Only retrieved clause IDs may be looked up. The verifier resolves each
+  citation to the original policy text.
+- Weak evidence, conflict, missing scope, deadline, unsafe content or provider
+  outage leads to explicit human review.
 
-For live v5 research, use MODEL_TIMEOUT_SECONDS=90 and RUN_TIMEOUT_SECONDS=360.
-The CLI waits up to 420 seconds and can resume an existing run. This live-model
-budget is separate from the 45-second stub deadline used in historical load tests.
+The chosen HDFC ERGO PDF is a historical teaching snapshot. Its first page has
+FAQ/claims-procedure text, not an independently published second document.
+Faculty confirmation is still needed. The insured schedule and active
+endorsements are unavailable, so no definitive coverage determination is
+possible.
 
-## Limits
+## Evidence
 
-- At most 14 research decisions and 10 tool calls per run, including retry.
-- Existing model timeout/retry/circuit breaker, wall-clock deadline and safety service.
-- Only retrieved clause IDs may be looked up; all citation text resolves canonically.
-- The verifier can refuse a confident-looking model action.
-- All recommendations require a human; there is no claim approval or settlement tool.
+The selected [live paraphrase trace](../results/clean_agent_live.json)
+shows a quoted use conflict, a distinct use-limitation search, clause lookup,
+and verified coverage-concern/investigation route. The two [development](../results/narrative_audit_guardrail_failure.json)
+[failures](../results/narrative_audit_early_escalation_failure.json) are
+preserved. These runs are examples, not a general accuracy estimate.

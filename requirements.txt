@@ -18,3 +18,5 @@ fakeredis[lua]==2.40.0
 locust==2.46.7
 onnxruntime==1.31.0
 tokenizers==0.23.3
+psutil==7.2.2
+python-dotenv==1.2.4

@@ -1,46 +1,36 @@
-# Evaluation definitions and limits
+# Current-agent evaluation definitions
 
-Fixed set: 24 synthetic scenarios, with structured expected classification,
-position and queue; supporting source chunks frozen in scenarios.jsonl. Labels
-were prepared from the public corpus and operational demo rules. They require
-faculty/domain review, particularly the food-delivery reference answer. They are
-not an independently annotated insurer benchmark.
+The fixed set has 24 synthetic FNOL scenarios, expected classification,
+coverage position and operational queue, and frozen policy-support chunks.
+It includes the required food-delivery case. These labels need faculty
+or claims-domain review and are not an insurer benchmark.
 
-For each run:
+Run the batch from a configured live local-model environment:
 
-| Metric | Exact implementation |
-|---|---|
-| Groundedness proxy | Exact quoted citations resolving to retrieved chunks / all returned citations |
-| Context relevance proxy | Retrieved chunk IDs overlapping frozen reference chunk IDs / all retrieved chunk IDs |
-| Faithfulness proxy | 1 when all three expected classification/position/queue fields match; else 0 |
-| Hallucination rate proxy | Non-resolving or fabricated citations / all returned citations |
-| Reference recall | Frozen reference chunks retrieved / frozen reference chunks |
-| Verified rate | Fraction whose final recommendation passed the independent verifier |
+```powershell
+python -m evaluation.evaluate --output results/evaluation_v5.json
+```
 
-Citation-based metrics are undefined on abstentions without citations; JSON uses
-null and reports denominators explicitly. Never turn these into a perfect score.
-All 24 runs enter outcome/faithfulness accuracy. Guarded and out-of-scope cases
-count as correct only if the expected safe abstention matches.
+The runner reports:
 
-"Faithfulness" here is a coarse structured-outcome proxy, not semantic entailment.
-Groundedness/hallucination inspect citations, not every narrative claim. Reference
-overlap may penalise an alternative valid chunk. These metrics are an equivalent
-small explicit harness, not TruLens or an independent LLM judge. Add expert
-annotation for stronger quality evidence. Independent semantic-claim scoring is
-also supplied separately, with per-metric denominators.
+| Metric | Computation |
+| --- | --- |
+| Groundedness proxy | Returned citations whose exact quotes resolve to retrieved chunks / all returned citations |
+| Context relevance proxy | Retrieved chunk IDs matching frozen supporting IDs / all retrieved IDs |
+| Faithfulness proxy | Share of scenarios whose classification, position and queue all match expected fields |
+| Hallucination rate proxy | Returned citations that do not resolve / all returned citations |
+| Reference recall | Frozen supporting chunks retrieved / all frozen supporting chunks |
+| Verified rate | Share of runs accepted by the independent verifier |
 
-Deliberate change: v1 searches apparent cover and finishes; v4 adds modifier
-search, source lookup, explicit tool descriptions and stage-specific objectives.
-Historical v2/v3 regressions and the first NLI input strategy are preserved.
-The current v1/v4 comparison holds the corrected
-clause-preserving verifier constant. Both still face independent verification.
-Report before/after for all four required metrics, citation denominators and
-structured accuracy. The stub has zero tokens/cost; it cannot predict live cost.
-Provider call events record actual usage and runtime prices in live mode.
+Citation-based rates are undefined for abstentions without citations and
+are reported as `null` with denominators. The faithfulness metric is a
+structured outcome comparison, not unrestricted semantic truth. Matching
+a frozen source ID can miss another valid supporting passage. Independent
+reference-free semantic quality is scored separately on sampled live runs.
 
-The original evaluation_v1/v2 JSON files preserve historical stub proxy results.
-Current real_model_v1/v4 files use an actual local generative model and required
-independent safety/NLI. Native load and Docker load are separate environments;
-Docker remains unmeasured here. /quality now charts independently computed,
-sampled reference-free quality metrics, not ground-truth claim accuracy.
-See HARDENING.md for live metric definitions and the asynchronous scoring handoff.
+Run the same 24 scenarios with two **current v5** prompt variants before
+claiming prompt-comparison or before/after quality results. This clean
+repository contains only the current deployed prompt; that comparison
+remains pending. Stub runs may test orchestration but cannot validate
+real-model reasoning. Historic v1–v4 scores have been removed from this
+repository tree.

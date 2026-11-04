@@ -1,28 +1,29 @@
-# SLO declared before measurements
+# Service level objective and measurement plan
 
-Declaration: 17 October 2026, before evaluation and load measurements in this package.
+The original target was declared on 17 October 2026 before load tests:
+**complete-run p95 at most 30 seconds at five concurrent clients** with a
+350 ms delayed model stub and a warm policy index. A run starts when the API
+accepts the FNOL and ends at a verified recommendation or explicit escalation.
+The POST response time alone is not the run latency. The 45-second stub run
+deadline and verified-success fraction must be reported alongside p95.
 
-Target: p95 <= 30 seconds from accepted FNOL submission to terminal verified
-recommendation or explicit escalation, under 5 concurrent clients, a 350 ms stub
-per planner call and an initially warm corpus. Also report terminal escalation rate;
-fast failures do not count as successful recommendations. At least 95% of valid,
-in-scope test claims should produce a verified recommendation.
+This target measures queueing, workers, retrieval, verification and API
+polling with a controlled model delay. A live CPU model has a separate
+360-second run budget for quality demonstrations; its latency is not
+comparable to the stub SLO. The target was not changed after seeing results.
 
-Why: handlers need interactive intake rather than immediate final settlement;
-30 seconds gives queueing/retry headroom above 4-5 model calls while remaining
-short enough for assisted intake. Hard run deadline: 45 seconds including queueing.
-This is a design target, not a measured claim.
+## Required experiment
 
-Load plan: 1, 5, 10, 20, 40 clients for 60 seconds each, repeat three times;
-compare 1 versus 3 analysis workers. Preserve CSV files and terminal-run events.
-Repeat cache off/on on identical scenarios. Raise demo rate limit for the isolated
-load experiment, then restore it. Measure completed-run RPS, p50, p95, errors and
-escalations separately. Identify the first tested concurrency missing either SLO;
-inspect queue wait and step spans before attributing a bottleneck.
+Run Locust against a clean Compose deployment at 1, 5, 10, 20 and 40
+concurrent clients for 60 seconds per condition, with repeat trials.
+Compare one and three analysis workers using
+`docker compose up -d --scale agent-worker=3`. Repeat matched cache
+on/off conditions. Preserve raw terminal-run events, CSV, container metrics,
+model-stub delay/configuration and source revision. Report completed-run RPS,
+p50, p95, errors, verified rate and escalations. Identify the first tested
+concurrency missing the target and the component causing it.
 
-Docker is unavailable in the authoring environment. Docker SLO, scaling,
-concurrency failure point and Docker cache comparisons remain UNMEASURED.
-The user authorised separately labelled native-process measurements; their plan,
-raw RUN records and CSVs are under results/native_load/. The native plan uses
-60-second exploratory trials, one and three analysis processes, and preserves
-the same 30-second target. It does not replace the required Docker experiment.
+Docker Desktop has not been available in the authoring environment. These
+current-agent Docker measurements, scaling results and cache comparisons
+are **unmeasured**. One real local-model run and 57 regression tests
+demonstrate behavior, not this SLO.

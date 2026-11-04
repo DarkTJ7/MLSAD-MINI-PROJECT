@@ -1,7 +1,0 @@
-{
-  "workflow": "Tests and optional Docker rehearsal",
-  "url": "https://github.com/DarkTJ7/MLSAD-MINI-PROJECT/actions/runs/38971836670",
-  "head_sha": "b19dbef8bfda3627513778195fe0fdd0a60e196c",
-  "conclusion": "success",
-  "scope": "Linux unit tests and docker compose config validation; no running container rehearsal or Docker load measurements"
-}

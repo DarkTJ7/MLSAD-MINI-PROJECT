@@ -69,7 +69,7 @@ The published contract enforces schema, categories, ranges and cross-field dates
 | Performance | Predeclared stub-mode SLO: complete-run p95 ≤ 30 seconds at five concurrent clients with 350 ms model-stub delay. Measure terminal-run RPS, p50/p95, failures and escalations at 1, 5, 10, 20 and 40 clients; compare one/three research workers and cache on/off. Identify first failing tested concurrency and bottleneck. |
 | Operations | Reconstruct one run across API, workers, tools, retrieval and verification. Verify Prometheus scrapes, Grafana container panels and Jaeger trace once Docker Desktop is available. |
 
-Current evidence includes 50 regression tests, two verified live v5 agent examples (parking and food delivery), and **historical** native-process load and prompt measurements from earlier code. Those measurements are neither new v5 nor Docker results. Docker startup, container dashboard rehearsal and Docker scaling measurements remain pending. See [v5 evidence](../results/AGENT_V5.md), [native measurements](../results/NATIVE_MEASUREMENTS.md) and [predeclared SLO](SLO.md).
+Current evidence includes 57 regression tests and one verified live local-model example for a paid-meal paraphrase from the cleaned checkout. These few traces are not a full accuracy estimate. The old native-process and v1–v4 measurement files have been removed from this clean repository tree because they do not measure the current agent. Docker startup, container dashboard rehearsal, full v5 evaluation and Docker scaling measurements remain pending. See the [current report](../REPORT.md), [live paraphrase trace](../results/clean_agent_live.json) and [predeclared SLO](SLO.md).
 
 ## 7. Delivery sequence and team work
 

@@ -21,6 +21,15 @@ def client(monkeypatch):
 
 def payload():return json.loads((ROOT/'examples/valid.json').read_text())
 
+def test_agent_root_and_required_minimal_client(client):
+    web,_=client
+    root=web.get('/')
+    assert root.status_code==200
+    assert 'app.cli chat' in root.json()['primary_interface']
+    page=web.get('/client')
+    assert page.status_code==200
+    assert 'Motor claim agent API client' in page.text
+
 def test_malformed_quarantined_before_enqueue(client):
     web,redis=client
     body=payload();body['estimated_repair']=-1

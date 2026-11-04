@@ -11,10 +11,27 @@ from app.config import ROOT
 from app.provider import Gateway,ProviderUnavailable
 
 class Planner:
-    def choose(self,state,available,context):
-        stage=context['stage']
-        return {'initial':'request_fields','fields_read':'corpus_search','base_read':'corpus_search',
-                'modifiers_read':'clause_lookup','clause_read':'finish'}[stage]
+    def call(self,state,agent,payload):
+        from app.research_agent import missing_evidence,modifier_search_complete
+        history=state.get('research_history',[])
+        searches=state.get('searches',0)
+        if not history:
+            action,argument='request_fields','*'
+        elif searches==0:
+            action,argument='corpus_search','SECTION I accidental external means loss damage vehicle'
+        elif not modifier_search_complete(state):
+            action,argument='corpus_search','private car limitations as to use hire reward'
+        elif searches==1:
+            action,argument='corpus_search','general exceptions limitations as to use hire reward claims documents repair estimate'
+        elif 'use_clause' in missing_evidence(state):
+            action,argument='corpus_search','General Exception 3(a) limitations as to use vehicle being used otherwise'
+        elif missing_evidence(state):
+            action,argument='corpus_search','claims documents repair estimate conditions exclusion'
+        elif not any(h['action']=='clause_lookup' and h.get('ok') for h in history):
+            action,argument='clause_lookup',state['passages'][0]['clause_id']
+        else:
+            action,argument='finish',''
+        return {'action':action,'argument':argument,'purpose':'Deterministic test step'}
 
 @pytest.fixture(scope='session')
 def corpus(): index_corpus();return Corpus()
@@ -59,7 +76,7 @@ def test_outside_corpus_escalates(corpus,fnol):
 def test_deadline_escalates(corpus,fnol):
     state={'run_id':'timeout','fnol':fnol,'deadline':time.time()-1,'events':[]}
     state=analysis_graph(corpus,Planner()).invoke(state)
-    assert state['failure']=='loop_budget_exhausted'
+    assert state['failure']=='research_budget_exhausted'
 def test_circuit_breaker(monkeypatch,fnol):
     import httpx
     monkeypatch.setenv('MODEL_URL','http://test.invalid')

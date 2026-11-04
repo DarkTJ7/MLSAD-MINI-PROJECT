@@ -6,7 +6,8 @@ from app.config import ROOT
 
 def run():
     base=os.environ['DEMO_BASE_URL'].rstrip('/')
-    evidence={'environment':'native Windows processes, Redis community Windows port; NOT Docker','base_url':base,'checks':[]}
+    evidence={'environment':os.getenv('DEMO_ENVIRONMENT','configured API deployment'),
+              'planner_mode':os.getenv('MODEL_MODE','unknown'),'base_url':base,'checks':[]}
     with httpx.Client(base_url=base,timeout=30,trust_env=False) as client:
         for _ in range(90):
             try:
@@ -24,7 +25,7 @@ def run():
             if name=='outside_corpus':body['insurer']='Other Insurer'
             response=client.post('/runs',json=body)
             response.raise_for_status();rid=response.json()['run_id']
-            while time.perf_counter()-started<float(os.getenv('DEMO_TIMEOUT_SECONDS','190')):
+            while time.perf_counter()-started<float(os.getenv('DEMO_TIMEOUT_SECONDS','420')):
                 body=client.get('/runs/'+rid).json()
                 if body['status'] in ('completed','escalated'):break
                 time.sleep(.2)

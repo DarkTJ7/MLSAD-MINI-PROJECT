@@ -321,7 +321,7 @@
           },
           "retrieval_version": {
             "type": "string",
-            "pattern": "^v[12345]$",
+            "const": "v5",
             "title": "Retrieval Version",
             "default": "v5"
           }

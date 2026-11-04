@@ -1,37 +1,43 @@
-# Ten-item live demonstration
+# Live demonstration checklist
 
-1. Copy .env.example to .env. Run `docker compose up --build`. Wait for API health.
-   Show README setup on a fresh clone; inspect indexer logs and source hash.
-2. Submit examples/valid.json from the web form or REST. Show 202/run id, poll,
-   routed recommendation, source page and exact quote. Open original PDF.
-3. Open /runs/{id}/trace. Show each tool query, passages, prompt version, timings,
-   token/cost events and verification outcome. Locate run_id spans in Jaeger.
-   Note the disconnected parent-context limitation honestly.
-4. Submit examples/malformed.json. Show 422 and quarantine id. Inspect Redis key;
-   prove analysis queue count does not increase. Use automated API test as evidence.
-5. Change insurer to another company. Show insufficient_evidence and handler path.
-6. Run the unsupported-citation test; show verifier refuses the fabricated quote.
-   Optional live fault injection requires a test-only hook not exposed by default.
-7. Submit examples/injection.json. Show rejection before queue creation. Repeat
-   with instruction in location to demonstrate all string fields are checked.
-8. Set STUB_FAIL=true in .env and recreate model-stub. Submit two runs; inspect
-   retry events, Redis circuit key, escalation. Restore false and wait cooldown.
-9. Follow SLO.md load matrix. Change RATE_LIMIT_PER_MINUTE to 10000 only during
-   isolated load experiment. `docker compose --profile load run --rm load`.
-   Repeat with `docker compose up -d --scale agent-worker=3`; preserve RUN rows.
-   Do not present the POST row as end-to-end p95. Report first failing concurrency.
-10. Submit examples/food_delivery.json. Show accident cover plus use restriction,
-    investigation recommendation, and schedule/endorsement caveat.
+Use synthetic FNOLs and the **live local model** for reasoning demonstrations.
+State explicitly when switching to the delayed stub for load or outage tests.
+The course brief asks for these ten items:
 
-## Viva preparation
-Why two agents? Independently deployed verifier can refuse analysis outputs and
-scale/fail separately. Why retry? Search omissions differ from provider outages;
-one modifier-search retry is allowed, then safe escalation. Why not always answer?
-Unverified coverage can harm a customer and insurer. Why stub? Isolates platform
-capacity from provider limits; it cannot establish real-model quality. Why p95?
-Tail latency captures queueing and retries that averages conceal. Why no settlement?
-Explicitly outside assignment scope. What does grounding measure? Exact citation
-support here; it does not prove full legal/semantic correctness.
+1. From a clean clone, copy `.env.example` to `.env`, set the local-model
+   values in [README.md](../README.md), and start
+   `docker compose --profile local-model up --build`. Check service health.
+2. Submit `examples/valid.json` through the terminal client. Show the run
+   ID, verified route, exact PDF page and quote.
+3. Open `/runs/{id}/trace` and the matching Jaeger trace. Explain every
+   model call, tool query, passage, verifier decision, latency and API cost.
+4. Submit `examples/malformed.json`. Show 422, quarantine ID and no
+   analysis queue job.
+5. Change the insurer/product to one outside the corpus. Show escalation.
+6. Use the controlled verifier test to insert a fabricated citation. Show
+   rejection and a different search or escalation.
+7. Submit `examples/injection.json`. Show the input guard and no agent run.
+8. With the stub only, set `STUB_FAIL=true`, recreate the stub, and show
+   bounded retries, shared circuit opening and safe human-review fallback.
+9. Run the [Locust matrix](SLO.md) with one and three research workers;
+   report terminal-run p50/p95/RPS, first failing concurrency and cache effect.
+10. Run `examples/food_delivery.json` and
+    `examples/paraphrased_delivery.json`. Show apparent cover, separate
+    use-limitation search, quoted narrative conflict, original citations,
+    investigation route and schedule caveat.
 
-Bring actual clean-clone output, results JSON/CSV, relevant source pages, report,
-requirement status matrix and a real incident entry. Rehearse with the whole team.
+Items 1, 3 dashboard, 8 and 9 still need a live Docker rehearsal on a machine
+with Docker Desktop. Do not present configuration or earlier native numbers as
+those measurements. The selected local-model traces in [results](../results)
+prove only the recorded synthetic cases.
+
+## Viva points
+
+The terminal is primary because this is an agent project; `/client` exists
+only for the required simple web-client demonstration. Research and
+verification are separate workers so the verifier can refuse the researcher
+and scale or fail independently. A second search is needed because a vehicle
+use restriction may be far from the accident cover in the policy. The agent
+never decides the claim; absent schedule/endorsements and unverified evidence
+lead to human review. A stub isolates system capacity from live-model speed
+and quality. The course target is full-run p95, including queue wait.

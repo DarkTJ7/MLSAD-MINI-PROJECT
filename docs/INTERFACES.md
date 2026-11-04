@@ -13,7 +13,9 @@ The live server /openapi.json is authoritative if code changes after export.
 | GET /quality | None | Aggregate feedback and recent verifier outcomes |
 | GET /health | None | 200 if Redis/index ready; 503 otherwise |
 | GET /metrics | None | Prometheus exposition, process/agent/index counters and histograms |
-| POST model gateway URL | Runtime endpoint; messages, model, stage/context/available | Stub action/usage; live OpenAI-style choices + usage; strict allowlisted action |
+| GET / | None | Agent service summary and primary terminal command |
+| GET /client | None | Minimal optional browser client required by A8 |
+| POST model gateway URL | Runtime endpoint; messages, model and JSON schema | Stub action/usage; live OpenAI-style choices + usage; strict allowlisted action |
 
 Dates use ISO 8601 calendar dates. Repair estimate is a nonnegative finite number;
 IDV positive finite number, each capped at 100000000. Loss <= report <= current

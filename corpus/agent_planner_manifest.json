@@ -8,5 +8,5 @@
     }
   ],
   "model": "Qwen2.5-1.5B-Instruct Q4_K_M",
-  "note": "Agent v5 model; earlier 0.5B benchmarks are retained separately."
+  "note": "Current local research model; downloaded at runtime, not committed to Git."
 }

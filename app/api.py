@@ -55,7 +55,15 @@ async def correlation(request,call_next):
 RATE_SCRIPT='''local n=redis.call('INCR',KEYS[1]); if n==1 then redis.call('EXPIRE',KEYS[1],60) end; return n'''
 
 @app.get('/',include_in_schema=False)
-def home(): return FileResponse(ROOT/'frontend'/'index.html')
+def home():
+    return {'service':'Motor Insurance Claim Research Agent',
+            'primary_interface':'python -m app.cli chat',
+            'api_docs':'/docs','optional_client':'/client',
+            'advisory_only':True}
+
+@app.get('/client',include_in_schema=False)
+def optional_client():
+    return FileResponse(ROOT/'client'/'index.html')
 
 @app.get('/health')
 def health():

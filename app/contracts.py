@@ -30,7 +30,7 @@ class FNOL(BaseModel):
     intoxicated: bool | None = None
     third_party_involved: bool = False
     police_report: bool = False
-    retrieval_version: str = Field(default='v5', pattern=r'^v[12345]$')
+    retrieval_version: Literal['v5'] = 'v5'
 
     @field_validator('policy_start','policy_end','loss_date','reported_date',mode='before')
     @classmethod

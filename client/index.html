@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Motor claim agent API client</title>
+  <style>
+    body{font:16px system-ui,sans-serif;max-width:900px;margin:2rem auto;padding:0 1rem;color:#152235}
+    textarea{width:100%;min-height:22rem;font:13px ui-monospace,monospace}
+    button{padding:.7rem 1.1rem;margin:.6rem 0;cursor:pointer}
+    pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f3f6fa;padding:1rem}
+    li{margin:1rem 0} small{color:#526579}
+  </style>
+</head>
+<body>
+  <h1>Motor claim agent API client</h1>
+  <p>This small client exists for the course demonstration. The terminal agent is the primary interface. Recommendations require a human claims handler.</p>
+  <label for="fnol">FNOL JSON</label>
+  <textarea id="fnol">{
+  "policy_number": "DEMO-001",
+  "vehicle_registration": "KA01AB1234",
+  "insurer": "HDFC ERGO",
+  "product": "private_car_package",
+  "policy_start": "2026-01-01",
+  "policy_end": "2026-12-31",
+  "loss_date": "2026-10-01",
+  "reported_date": "2026-10-02",
+  "description": "I was making a food delivery run in my own car when the accident happened.",
+  "location": "Bengaluru",
+  "country": "India",
+  "vehicle_use": "personal",
+  "estimated_repair": 12000,
+  "idv": 500000,
+  "network_garage": true,
+  "driver_licensed": true,
+  "intoxicated": false,
+  "third_party_involved": false,
+  "police_report": false,
+  "retrieval_version": "v5"
+}</textarea>
+  <p><button id="submit" type="button">Send to agent</button> <small id="status" role="status"></small></p>
+  <section aria-live="polite">
+    <h2>Recommendation</h2>
+    <pre id="result">No run submitted.</pre>
+    <h2>Citations</h2>
+    <ol id="citations"></ol>
+  </section>
+  <script>
+    const status=document.querySelector('#status'),result=document.querySelector('#result'),citations=document.querySelector('#citations');
+    const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+    document.querySelector('#submit').addEventListener('click',async()=>{
+      citations.replaceChildren();result.textContent='Waiting for agent...';
+      let body;
+      try{body=JSON.parse(document.querySelector('#fnol').value)}catch(e){status.textContent='Invalid JSON: '+e.message;return}
+      try{
+        const submission=await fetch('/runs',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+        const accepted=await submission.json();
+        if(!submission.ok){status.textContent='Request rejected ('+submission.status+').';result.textContent=JSON.stringify(accepted,null,2);return}
+        status.textContent='Run '+accepted.run_id+' queued';
+        for(let i=0;i<420;i++){
+          await delay(1000);
+          const response=await fetch('/runs/'+encodeURIComponent(accepted.run_id));
+          const run=await response.json();
+          status.textContent='Run '+accepted.run_id+': '+run.status;
+          if(run.status==='completed'||run.status==='escalated'){
+            result.textContent=JSON.stringify(run.result,null,2);
+            for(const item of run.result?.citations||[]){
+              const li=document.createElement('li');
+              li.textContent=item.document+' · PDF page '+item.page+' · '+item.clause_id+' — '+item.quote;
+              citations.append(li);
+            }
+            return;
+          }
+        }
+        status.textContent='Still running. Poll /runs/'+accepted.run_id;
+      }catch(e){status.textContent='Connection error: '+e.message}
+    });
+  </script>
+</body>
+</html>

@@ -1,168 +1,106 @@
 # MLSAD MINI PROJECT
 
-Motor Insurance Claim Intake and Triage — AI agents
+**Motor Insurance Claim Intake and Triage AI Agent · Mini Project 01 · UE24AM342AA5**
 
-Course UE24AM342AA5, Mini Project 01. Two independently running agents research
-and verify claims against an HDFC ERGO private-car package corpus. Humans decide
-all claims. The primary interface is the terminal agent; the website is optional.
+This repository contains a terminal-first AI agent for a synthetic motor
+insurance First Notice of Loss (FNOL). It checks the request, investigates
+the HDFC ERGO private-car policy wording with model-chosen read-only tools,
+verifies every cited recommendation in a separate worker, and routes work
+to fast-track, surveyor assignment or investigation. A human claims handler
+makes every coverage decision. The agent cannot approve, reject or settle a
+claim.
 
-## Start with the AI agent
+## Team
 
-Read [the agent guide](docs/AGENT_GUIDE.md) for setup and the v5 redesign. With the
-real local model and worker services running:
+- [@DarkTJ7](https://github.com/DarkTJ7)
+- [@vishalh06](https://github.com/vishalh06)
+- [@trishagshetty05-art](https://github.com/trishagshetty05-art)
 
-```powershell
-python -m app.cli --api-url http://127.0.0.1:18766 chat
-python -m app.cli --api-url http://127.0.0.1:18766 run examples/food_delivery.json
-```
+See [CONTRIBUTORS.md](CONTRIBUTORS.md) for the team list.
 
-The model supplies its own tool arguments: search queries and clause identifiers.
-An intake audit also checks the incident narrative for quoted evidence of delivery
-or hire/reward use that conflicts with a structured personal-use field.
-The terminal shows its actions and the independent verifier's response. No browser
-is required. Stub mode is explicitly refused by the agent client unless requested
-for system testing. Earlier v1-v4 performance/quality results are historical and
-do not measure the redesigned v5 agent.
+## Try the AI agent
 
-## Team / Contributors
+The real-model demonstration uses a free local Qwen2.5 1.5B GGUF served through
+an OpenAI-compatible llama.cpp endpoint. It needs **no hosted API key**. The
+model weights are downloaded at runtime and are not stored in Git.
 
-- [@DarkTJ7](https://github.com/DarkTJ7) — project team member and repository owner.
-- [@vishalh06](https://github.com/vishalh06) — project team member.
-- [@trishagshetty05-art](https://github.com/trishagshetty05-art) — project team member.
+1. Install Docker Desktop with its Linux engine and Docker Compose v2.
+2. Copy `.env.example` to `.env`. Set `MODEL_MODE=live`,
+   `MODEL_URL=http://local-model:8003/v1/chat/completions`,
+   `MODEL_ID` to your local model alias, `MODEL_TIMEOUT_SECONDS=90`,
+   `RUN_TIMEOUT_SECONDS=360`, and both token prices to `0`.
+3. Start the stack from this directory:
 
-## Deliverables
+   ```powershell
+   docker compose --profile local-model up --build
+   ```
 
-- `docs/PROJECT_PLAN.md` and `docs/PROJECT_PLAN.pdf`: Evaluation 1 plan,
-  architecture, evaluation schedule and corpus/reference-case confirmation.
-- `docs/REFERENCE_AGENT_COMPARISON.md`: what we learned from a peer project and
-  the distinct design and evidence in this implementation.
-- `REPORT.md`: final report draft, measured evaluation and honest remaining gaps.
-- `Motor_Insurance_Project_Report.pdf`: printable report with deployment diagram.
-- `docs/ARCHITECTURE.md`: deployment diagram, tools, topology and tradeoffs.
-- `docs/REQUIREMENTS.md`: every F/A/L/D requirement and its actual status.
-- `docs/DEMO_AND_VIVA.md`: ten demonstration items and viva preparation.
-- `runbook.md`, `incident_log.md`, `.env.example`, evaluation set and results.
-- `app/`, `frontend/`, `prompts/`, `corpus/`: service source and policy evidence.
+4. In another terminal, use the agent client inside the API container:
 
-The repository is named MLSAD-MINI-PROJECT; this package contains its source.
-See `docs/SUBMISSION_CHECKLIST.md` before calling it presentation-ready.
+   ```powershell
+   docker compose exec api python -m app.cli --api-url http://api:8000 chat
+   docker compose exec api python -m app.cli --api-url http://api:8000 run examples/paraphrased_delivery.json
+   ```
 
-## Clean-clone setup (Docker Desktop / Docker Compose v2)
+The first build downloads dependencies and local model assets. If the machine
+cannot run the local model, `MODEL_MODE=stub` with the default `.env.example`
+configuration allows deterministic system tests; the CLI requires
+`--allow-stub` in that mode and the result is **not** real AI reasoning.
+An [optional native runtime guide](docs/NATIVE_RUNTIME.md) covers Windows
+when Docker Desktop is unavailable.
+The API is at `http://127.0.0.1:8000` by default, with OpenAPI at `/docs`.
+A small optional browser client is at `/client` solely for brief requirement A8.
+The root URL describes the agent service rather than opening a website.
 
-Install Docker Desktop and start its Linux-container engine. From this directory:
+## What the agent does
 
-```powershell
-Copy-Item .env.example .env
-docker compose up --build
-```
+1. FastAPI validates the FNOL contract and quarantines rejects before queueing.
+2. The analysis worker checks the claimant narrative for quoted delivery or
+   hire/reward use that conflicts with a structured field.
+3. Its local model chooses `request_fields`, `corpus_search` or
+   `clause_lookup` and writes search queries and clause IDs. A restricted-use
+   case must include a modifier search.
+4. A separate verification worker checks canonical PDF citations, route
+   constraints and semantic support. It can request one different search or
+   escalate.
+5. The API exposes status, trace, metrics and feedback by run ID.
 
-Linux/macOS: `cp .env.example .env`, then the same Docker command.
-First build downloads Python dependencies and about 1 GB of pinned safety models.
-Indexer reads the bundled PDF; API starts after indexing, Redis, safety and both
-warmed worker roles are healthy. All application
-processes run inside containers. No model or Redis installation on the host.
+The required food-delivery case should produce an **own-damage,
+coverage-concern, investigation** recommendation citing both accident cover
+and private-car use restriction. The actual policy schedule and endorsements
+are absent, so the agent cannot determine final coverage.
 
-Open the browser on localhost at the API_PORT in .env (default 8000). The root
-page is the web client. `/docs` documents REST; `/openapi.json` is its generated
-machine-readable contract. Grafana uses GRAFANA_PORT (default 3000) and the local
-credentials you set in .env. Jaeger uses JAEGER_PORT; Prometheus uses PROMETHEUS_PORT.
+## Repository map
 
-**Verification status:** local HTTP demonstration, API/queue handoff, independent
-safety/NLI service and native process measurements have evidence under results/.
-See docs/HARDENING.md and docs/MEASUREMENTS.md. Docker is absent and WSL networking
-is blocked here, so container startup, Grafana/cAdvisor integration and container
-scaling remain pending. Native measurements are not Docker measurements.
+| Path | Purpose |
+| --- | --- |
+| `app/` | API, terminal client, LangGraph research and verification, safety, queue and tracing |
+| `prompts/` | Current versioned research, intake-audit and verification prompts |
+| `corpus/` | Official historical policy PDF, provenance, hashes and reference case |
+| `examples/` | Synthetic FNOLs, including the food-delivery paraphrase |
+| `evaluation/` | Frozen 24-scenario set, metric definitions and batch runner |
+| `tests/` | Contract, API, agent, safety and trace regressions |
+| `docs/` | [Project plan](docs/PROJECT_PLAN.pdf), [agent guide](docs/AGENT_GUIDE.md), [architecture](docs/ARCHITECTURE.md), [requirement status](docs/REQUIREMENTS.md) and [peer comparison](docs/REFERENCE_AGENT_COMPARISON.md) |
+| `results/` | Selected synthetic live traces and the latest regression output |
+| `client/` | Minimal optional web client required by the course brief |
 
-## First request and results
+See [the report](Motor_Insurance_Agent_Report.pdf) or its
+[Markdown source](REPORT.md) for tested evidence and honest gaps,
+[runbook.md](runbook.md) for failures, and [incident_log.md](incident_log.md)
+for genuine development incidents.
 
-The form is prefilled with `examples/valid.json`. Submit, then observe the run id,
-status, recommendation and exact citations. Use `examples/food_delivery.json`
-to exercise the mandatory difficult case. Other examples show malformed and
-injected inputs. Source PDF page numbering is one based (includes FAQ page).
+## Verification and limits
 
-PowerShell REST example (inject your configured API endpoint):
+Run `python -m pytest -q` after installing `requirements.txt`. The latest
+clean-tree local suite passed 57 tests. The fresh real local-model trace in
+`results/clean_agent_live.json` shows the paraphrased paid-meal case,
+an explicit use-limitation search, a cited investigation route and independent
+verification. These few cases do not establish an accuracy rate.
 
-```powershell
-$apiBase = Read-Host 'API base URL from your runtime configuration'
-$body = Get-Content examples/valid.json -Raw
-$run = Invoke-RestMethod "$apiBase/runs" -Method Post -ContentType application/json -Body $body
-Invoke-RestMethod "$apiBase/runs/$($run.run_id)"
-```
+The full v5 24-scenario real-model comparison and Docker load, scaling, cache
+and dashboard measurements remain unmeasured. Docker Desktop was unavailable
+in the authoring environment. Do not cite earlier native measurements as
+results for this cleaned agent.
 
-POST /runs returns 202 immediately. GET /runs/{run_id} polls until `completed` or
-`escalated`. GET /runs/{run_id}/trace exposes tool calls/evidence. POST
-/runs/{run_id}/feedback accepts `{ "satisfactory": true, "reason": "Checked citations" }`.
-Unknown fields and invalid chronology/ranges return 422 without enqueueing.
-All string fields are screened. Quarantine has a 24-hour TTL; runs also expire
-after 24 hours. Feedback is retained until Redis data is explicitly removed.
-Use synthetic data only; the localhost prototype has no authentication.
-
-## Evaluation and tests
-
-```powershell
-docker compose exec api python -m pytest -q
-docker compose exec api python -m evaluation.evaluate --version v1 --output results/evaluation_v1.json
-docker compose exec api python -m evaluation.evaluate --version v4 --output results/evaluation_v4.json
-docker compose cp api:/service/results/evaluation_v1.json results/evaluation_v1_docker.json
-docker compose cp api:/service/results/evaluation_v4.json results/evaluation_v4_docker.json
-```
-
-Version comparison uses the same frozen 24 cases. Stub responses implement
-different planner policies; these are system ablation results, not real-LLM prompt
-quality scores. Metrics are explicit deterministic proxies in `evaluation/METRICS.md`.
-The original evaluation_v1/v2 files are historical pre-hardening stub results.
-Current real-model comparisons and native_load/ are separate experiments; see REPORT.md.
-
-Index again (stop worker services first when changing the corpus):
-
-```powershell
-docker compose stop agent-worker verification-worker
-docker compose run --rm indexer python -m app.retrieval --reembed
-docker compose up -d agent-worker verification-worker
-```
-
-## Scaling and failure demonstrations
-
-```powershell
-docker compose up -d --scale agent-worker=3
-docker compose --profile load run --rm load
-```
-
-Follow the predeclared target and experiment matrix in docs/SLO.md. Raise the
-isolated test rate limit temporarily; restore afterwards. RUN events measure from
-submission through terminal result. Never report POST latency as run latency.
-Change STUB_FAIL in .env and recreate model-stub to demonstrate provider outage;
-restore it for recovery. See runbook.md for exact recovery steps.
-
-## Optional live planner
-
-Set MODEL_MODE=live, MODEL_URL, MODEL_ID, MODEL_API_KEY and input/output token prices
-in .env, then recreate API/workers. Endpoint must implement OpenAI-style chat JSON
-and return `choices[0].message.content` containing the v5 JSON object with
-`action`, `argument`, and a brief public `purpose` (v1-v4 only used `action`)
-plus token usage. Unknown actions or missing usage/prices cause escalation.
-The adapter has been exercised with a real free local CPU model; see
-results/REAL_MODEL.md and real_model_v1/v4.json for measured outcomes. Constrained
-JSON ensures allowed actions; it does not guarantee good retrieval decisions.
-Drafting remains template based; verification includes independent NLI.
-
-For native reproduction, see docs/NATIVE_DEMO.md and .env.native.example.
-
-For an entirely containerised local planner, the optional `local-model` profile
-downloads the checksum-pinned GGUF into the models volume. Set MODEL_MODE=live,
-MODEL_URL to the local-model service's chat-completions endpoint (port 8003),
-MODEL_ID to LOCAL_MODEL_ALIAS, MODEL_TIMEOUT_SECONDS=90 and RUN_TIMEOUT_SECONDS=360,
-then run `docker compose --profile local-model up --build`. Keep token prices at
-zero for local inference. The longer timeout is for model quality evaluation;
-it does not replace the 30-second stub SLO. This optional Docker profile is supplied
-but unexecuted here, like the rest of the Docker rehearsal.
-
-The v5 profile uses Qwen2.5-1.5B-Instruct Q4_K_M with one processing slot;
-`corpus/agent_planner_manifest.json` pins the source and checksum. The historical
-0.5B model manifest remains alongside the earlier evaluation evidence.
-
-## Stop / preserve evidence
-
-`docker compose down` stops services and retains named volumes. Copy results and
-logs for submission. The report deliberately marks missing experiments; fill those
-with actual measurements after rehearsal, never invented numbers.
+Use synthetic data only. This localhost course prototype has no customer
+authentication, insurer policy lookup or production PII controls.

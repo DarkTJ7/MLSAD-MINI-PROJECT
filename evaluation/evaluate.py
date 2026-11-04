@@ -24,13 +24,12 @@ def score(state,case):
             'verified':int(result['verified'])}
 
 def evaluate():
-    parser=argparse.ArgumentParser();parser.add_argument('--version',choices=['v1','v2','v3','v4'],default='v4')
-    parser.add_argument('--output',default='results/evaluation_v2.json');args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('--output',default='results/evaluation_v5.json');args=parser.parse_args()
     index_corpus();corpus=Corpus()
     cases=[json.loads(x) for x in (ROOT/'evaluation/scenarios.jsonl').read_text().splitlines()]
     results=[]
     for case in cases:
-        fnol=dict(case['fnol'],retrieval_version=args.version)
+        fnol=dict(case['fnol'],retrieval_version='v5')
         started=time.monotonic();state=run_local(fnol,case['id'],corpus=corpus)
         previous=os.environ.get('QUALITY_SAMPLE_RATE')
         os.environ['QUALITY_SAMPLE_RATE']='1'
@@ -53,7 +52,7 @@ def evaluate():
     for key in ('groundedness','context_relevance','faithfulness','hallucination_rate'):
         values=[r['semantic_quality'].get(key) for r in results if r['semantic_quality'].get(key) is not None]
         semantic_summary[key]={'mean':sum(values)/len(values) if values else None,'n':len(values)}
-    output={'version':args.version,'mode':os.getenv('MODEL_MODE','stub'),
+    output={'version':'v5','mode':os.getenv('MODEL_MODE','stub'),
             'safety_required':os.getenv('SAFETY_REQUIRED','false'),'metric_kind':'structured references and citation proxies; semantic evidence in each event',
             'summary':summary,'semantic_summary':semantic_summary,'metric_denominators':counts,'runs':results}
     path=ROOT/args.output;path.parent.mkdir(exist_ok=True,parents=True)
