@@ -40,6 +40,7 @@ class State(TypedDict, total=False):
     searches: int
     retry_searches: int
     narrative_audit: dict
+    research_prompt_version: str
 
 def classify(f):
     text=f['description'].lower()
@@ -79,7 +80,7 @@ def escalate(state,reason):
         'coverage_position':'insufficient_evidence','queue':'investigation',
         'reason':'Human claims review required: '+reason+'. No claim determination is made.',
         'requires_human':True,'escalation':'Claims handler: obtain the policy schedule, endorsements and missing evidence.',
-        'citations':[],'verified':False,'prompt_version':state['fnol']['retrieval_version'],
+        'citations':[],'verified':False,'prompt_version':state.get('research_prompt_version',state['fnol']['retrieval_version']),
         'limitations':['Advisory only. No approval, rejection or settlement calculation.']}
     return state
 
@@ -164,7 +165,7 @@ def make_recommendation(state):
         reason='Driver eligibility or vehicle-use facts are missing; obtain them before recommending a coverage position.'
     return {'recommendation_only':True,'classification':kind,'coverage_position':position,'queue':queue,
             'reason':reason,'requires_human':True,'escalation':escalation,'citations':list(unique.values()),
-            'verified':False,'prompt_version':f['retrieval_version'],
+            'verified':False,'prompt_version':state.get('research_prompt_version',f['retrieval_version']),
             'limitations':['Policy schedule and activated endorsements are not in this public corpus.',
                           'Fast-track threshold is an operational demo assumption, not a policy entitlement.',
                           'Local lexical embeddings and rule-based drafting have limited language understanding.']}

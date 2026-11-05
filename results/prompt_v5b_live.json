@@ -1,0 +1,622 @@
+{
+  "version": "v5",
+  "prompt_variant": "v5b",
+  "case_ids": [
+    "food-delivery"
+  ],
+  "mode": "live",
+  "model_id": "local-qwen",
+  "safety_required": "true",
+  "metric_kind": "structured references and citation proxies; semantic evidence in each event",
+  "summary": {
+    "groundedness": 1.0,
+    "context_relevance": 0.16666666666666666,
+    "faithfulness": 1.0,
+    "hallucination_rate": 0.0,
+    "reference_recall": 0.6666666666666666,
+    "verified": 1.0,
+    "cost_per_100_runs_usd": 0.0
+  },
+  "semantic_summary": {
+    "groundedness": {
+      "mean": 0.9560646386334213,
+      "n": 1
+    },
+    "context_relevance": {
+      "mean": 0.12533188611268997,
+      "n": 1
+    },
+    "faithfulness": {
+      "mean": 1.0,
+      "n": 1
+    },
+    "hallucination_rate": {
+      "mean": 0.0,
+      "n": 1
+    }
+  },
+  "metric_denominators": {
+    "groundedness": 1,
+    "context_relevance": 1,
+    "faithfulness": 1,
+    "hallucination_rate": 1,
+    "reference_recall": 1,
+    "verified": 1
+  },
+  "runs": [
+    {
+      "id": "food-delivery",
+      "metrics": {
+        "groundedness": 1.0,
+        "context_relevance": 0.16666666666666666,
+        "faithfulness": 1,
+        "hallucination_rate": 0.0,
+        "reference_recall": 0.6666666666666666,
+        "verified": 1
+      },
+      "seconds": 115.00972469995031,
+      "result": {
+        "recommendation_only": true,
+        "classification": "own_damage",
+        "coverage_position": "coverage_concern",
+        "queue": "investigation",
+        "reason": "Review required for restricted_use. Retrieved cover is subject to restrictions; this is not a claim determination.",
+        "requires_human": true,
+        "escalation": "A human handler must verify the schedule, facts and applicable endorsements.",
+        "citations": [
+          {
+            "clause_id": "hdfc_private_car_package:p2:c0",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 2,
+            "quote": "Whereas the insured by a proposal and declaration dated as stated in the Schedule which shall be the basis of this contract and is deemed to be incorporated herein has applied to the Company for the insurance hereinafter contained and has paid the premium mentioned in the schedule as consideration for such insurance in respect of accidental loss or damage occurring during the period of insurance. NOW THIS POLICY WITNESSETH: That subject to the terms exceptions and conditions contained herein or endorsed or expressed hereon; The Company will indemnify the insured against loss or damage to the vehicle insured hereunder and/ or its accessories whilst thereon I. by fire explosion self ignition or lightning II. by burglary housebreaking or theft III. by riot and strike IV. by earthquake (fire and shock damage) V. by flood typhoon hurricane storm tempest inundation cyclone hailstorm frost VI. by accidental external means VII. by malicious act VIII. by terrorist activity IX. whilst in transit"
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p3:c0",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 3,
+            "quote": "HDFC ERGO General Insurance Company Limited STANDARD FORM FOR PRIVATE CAR PACKAGE POLICY Policy Wording 2 st th Registered & Corporate Office: 1 Floor, 165 - 166 Backbay Reclamation, H. T. Parekh Marg, Churchgate, Mumbai \u2013 400 020. Customer Service Address: 6 Floor, Leela Business Park, Andheri Kurla Road, Andheri (E), Mumbai \u2013 400 059. Toll-free: 1800 2 700 700 (Accessible from India only) | Fax: 91 22 66383699 | care@hdfcergo.com | www.hdfcergo.com CIN : U66010MH2002PLC134869. IRDA Reg No. 125. The Company shall not be liable under this Policy in respect of 1. any accidental loss or damage and/or liability caused sustained or incurred outside the geographical area; 2. any claim arising out of any contractual liability; 3. any accidental loss damage and/or liability caused sustained or incurred whilst the vehicle insured herein is a. being used otherwise than in accordance with the \u2018Limitations as to Use\u2019 or b. being driven by or is for the purpose of being driven by him/her in the"
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p1:c5",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 1,
+            "quote": "Andheri (East), Mumbai - 400 059 IPO :Raise a service request on Insurance Portfolio Organiser (IPO) For any endorsments on your policy you can contact us through any of the below mentioned modes: E mail us at : care@hdfcergo.com OR Call Toll-free: 1800 2 700 700 (Accessible from India only) OR Fax your request at: 022 6638 3669 OR Raise a service request on Insurance Portfolio Organizer (IPO) from www.hdfcergo.com NO CLAIM BONUS (NCB): NCB is provided for every claim free year basis the slab as provided by Tariff. How can I get No Claim Bonus Reserving Letter? NCB Reserving letter can be provided only on Sale of vehicle evidenced by transferred RC copy OR Sale Deed and Form 29 & 30. The OD section of the policy needs to be transferred to the new owner or cancelled. CLAIMS DOCUMENTS - For ACCIDENTAL DAMAGE TO INSURED VEHICLE a. Duly filled and signed claim form & satisfaction voucher b. Registration Certificate (RC) c. Driving license of the person driving at the time of the accident"
+          },
+          {
+            "clause_id": "hdfc_private_car_package:p1:c1",
+            "document": "hdfc_private_car_package.pdf",
+            "page": 1,
+            "quote": "for owner driver and optional cover for passengers covering accidental death and permanent total disability a. General aging, wear & tear, mechanical or electrical breakdown, failure, depreciation, any consequential loss b. Damage by a person driving without a valid license c. Damage by a person driving under the influence of liquor or drugs d. Loss/damage attributable to war, mutiny, nuclear risks e. Damage to tyres and tubes, unless damaged during an accident f. Usage on hire & reward (applicable for all classes except public commercial vehicles) g. Loss or damage to bonnet side parts, mudguard, bumpers, lamps, tyres, tubes, headlights, paint work (applicable for all commercial vehicles; unless opted additionally) h. Loss or damage resulting from overturning arising out of operation as a tool (applicable for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or"
+          }
+        ],
+        "verified": true,
+        "prompt_version": "v5b",
+        "limitations": [
+          "Policy schedule and activated endorsements are not in this public corpus.",
+          "Fast-track threshold is an operational demo assumption, not a policy entitlement.",
+          "Local lexical embeddings and rule-based drafting have limited language understanding."
+        ]
+      },
+      "events": [
+        {
+          "agent": "intake",
+          "step": "provider",
+          "seconds": 1.2493885000003502,
+          "attempts": 1,
+          "errors": [],
+          "prompt_tokens": 207,
+          "completion_tokens": 24,
+          "cost_usd": 0.0,
+          "usage_source": "provider",
+          "prompt_version": "intake_audit_v1"
+        },
+        {
+          "run_id": "food-delivery",
+          "agent": "intake",
+          "step": "narrative_audit",
+          "seconds": 1.261349100037478,
+          "outcome": "success",
+          "details": {
+            "narrative_use": "delivery",
+            "evidence_phrase": "food delivery run",
+            "source": "model",
+            "status": "quoted_signal",
+            "structured_vehicle_use": "personal",
+            "field_conflict": true
+          },
+          "time": 1793876088.1677287,
+          "prompt_version": "v5"
+        },
+        {
+          "agent": "analysis",
+          "step": "provider",
+          "seconds": 8.929500900034327,
+          "attempts": 1,
+          "errors": [],
+          "prompt_tokens": 777,
+          "completion_tokens": 45,
+          "cost_usd": 0.0,
+          "usage_source": "provider",
+          "prompt_version": "v5b"
+        },
+        {
+          "run_id": "food-delivery",
+          "agent": "analysis",
+          "step": "decision",
+          "seconds": 9.02565379999578,
+          "outcome": "success",
+          "details": {
+            "action": "corpus_search",
+            "argument": "accidental loss or damage cover",
+            "purpose": "To find the definition and scope of accidental loss or damage cover in the policy"
+          },
+          "time": 1793876097.1936572,
+          "prompt_version": "v5"
+        },
+        {
+          "run_id": "food-delivery",
+          "agent": "analysis",
+          "step": "tool",
+          "seconds": 0.04248500004177913,
+          "outcome": "success",
+          "details": {
+            "tool": "corpus_search",
+            "argument": "accidental loss or damage cover",
+            "purpose": "To find the definition and scope of accidental loss or damage cover in the policy",
+            "query": "accidental loss or damage cover",
+            "passages": [
+              {
+                "clause_id": "hdfc_private_car_package:p1:c1",
+                "document": "hdfc_private_car_package.pdf",
+                "page": 1,
+                "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                "text": "for owner driver and optional cover for passengers covering accidental death and permanent total disability a. General aging, wear & tear, mechanical or electrical breakdown, failure, depreciation, any consequential loss b. Damage by a person driving without a valid license c. Damage by a person driving under the influence of liquor or drugs d. Loss/damage attributable to war, mutiny, nuclear risks e. Damage to tyres and tubes, unless damaged during an accident f. Usage on hire & reward (applicable for all classes except public commercial vehicles) g. Loss or damage to bonnet side parts, mudguard, bumpers, lamps, tyres, tubes, headlights, paint work (applicable for all commercial vehicles; unless opted additionally) h. Loss or damage resulting from overturning arising out of operation as a tool (applicable for mobile cranes, drilling rigs, mobile plants, navvies, shovels, grabs, rippers unless opted for additionally) i. Loss of or damage to accessories by burglary housebreaking or",
+                "score": 1.2033838033676147
+              },
+              {
+                "clause_id": "hdfc_private_car_package:p3:c1",
+                "document": "hdfc_private_car_package.pdf",
+                "page": 3,
+                "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                "text": "vehicle insured herein is a. being used otherwise than in accordance with the \u2018Limitations as to Use\u2019 or b. being driven by or is for the purpose of being driven by him/her in the charge of any person other than a Driver as stated in the Driver's Clause 4. i. any accidental loss or damage to any property whatsoever or any loss or expense whatsoever resulting or arising there from or any consequential loss ii. any liability of whatsoever nature directly or indirectly caused by or contributed to by or arising from ionising radiations or contamination by radioactivity from any nuclear fuel or from any nuclear waste from the combustion of nuclear fuel. For the purpose of this exception combustion shall include any self-sustaining process of nuclear fission 5. any accidental loss or damage or liability directly or indirectly caused by or contributed to by or arising from nuclear weapons material. 6. any accidental loss damage and/or liability directly or indirectly or proximately or",
+                "score": 1.2339123487472534
+              },
+              {
+                "clause_id": "hdfc_private_car_package:p1:c0",
+                "document": "hdfc_private_car_package.pdf",
+                "page": 1,
+                "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                "text": "* supports smart phone based on Blackberry, iPhone, Windows 8 & Android platform. Manage Your @ hdfcergo.com / Smartphones* Portfolio Download IPO mobile application from IPO website post log in WHAT ARE THE MAJOR COVERS UNDER THE POLICY? WHAT ARE THE MAJOR EXCLUSIONS OF THE POLICY? Loss or Damage to the Insured Vehicle caused due to: a. Fire, explosion, self ignition or lightning. b Burglary, housebreaking or theft c All act of God perils like earthquake, flood, cyclone etc d Accidental external means, terrorism, riot and strike Liability to Third Parties: Provides cover for any legal liability arising out of the use of the vehicle for a Accidental death / injury to any third party b Any damage to property owned by third party Personal Accident Cover: The policy provides for a mandatory Personal Accident cover for owner driver and optional cover for passengers covering accidental death and permanent total disability a. General aging, wear & tear, mechanical or electrical breakdown,",
+                "score": 1.4308192729949951
+              },
+              {
+                "clause_id": "hdfc_private_car_package:p3:c2",
+                "document": "hdfc_private_car_package.pdf",
+                "page": 3,
+                "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                "text": "or indirectly caused by or contributed to by or arising from nuclear weapons material. 6. any accidental loss damage and/or liability directly or indirectly or proximately or remotely occasioned by contributed to by or traceable to or arising out of or in connection with war, invasion, the act of foreign enemies, hostilities or war like operations (whether before or after declaration of war) civil war, mutiny rebellion, military or usurped power or by any direct or indirect consequence of any of the said occurrences and in the event of any claim hereunder the insured shall prove that the accidental loss damage and/or liability arose independently of and was in no way connected with or occasioned by or contributed to by or traceable to any of the said occurrences or any consequences thereof and in default of such proof, the Company shall not be liable to make any payment in respect of such a claim. DEDUCTIBLE The Company shall not be liable for each and every claim under Section - I",
+                "score": 1.4414411783218384
+              },
+              {
+                "clause_id": "hdfc_private_car_package:p3:c0",
+                "document": "hdfc_private_car_package.pdf",
+                "page": 3,
+                "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                "text": "HDFC ERGO General Insurance Company Limited STANDARD FORM FOR PRIVATE CAR PACKAGE POLICY Policy Wording 2 st th Registered & Corporate Office: 1 Floor, 165 - 166 Backbay Reclamation, H. T. Parekh Marg, Churchgate, Mumbai \u2013 400 020. Customer Service Address: 6 Floor, Leela Business Park, Andheri Kurla Road, Andheri (E), Mumbai \u2013 400 059. Toll-free: 1800 2 700 700 (Accessible from India only) | Fax: 91 22 66383699 | care@hdfcergo.com | www.hdfcergo.com CIN : U66010MH2002PLC134869. IRDA Reg No. 125. The Company shall not be liable under this Policy in respect of 1. any accidental loss or damage and/or liability caused sustained or incurred outside the geographical area; 2. any claim arising out of any contractual liability; 3. any accidental loss damage and/or liability caused sustained or incurred whilst the vehicle insured herein is a. being used otherwise than in accordance with the \u2018Limitations as to Use\u2019 or b. being driven by or is for the purpose of being driven by him/her in the",
+                "score": 1.512742042541504
+              },
+              {
+                "clause_id": "hdfc_private_car_package:p2:c0",
+                "document": "hdfc_private_car_package.pdf",
+                "page": 2,
+                "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                "text": "Whereas the insured by a proposal and declaration dated as stated in the Schedule which shall be the basis of this contract and is deemed to be incorporated herein has applied to the Company for the insurance hereinafter contained and has paid the premium mentioned in the schedule as consideration for such insurance in respect of accidental loss or damage occurring during the period of insurance. NOW THIS POLICY WITNESSETH: That subject to the terms exceptions and conditions contained herein or endorsed or expressed hereon; The Company will indemnify the insured against loss or damage to the vehicle insured hereunder and/ or its accessories whilst thereon I. by fire explosion self ignition or lightning II. by burglary housebreaking or theft III. by riot and strike IV. by earthquake (fire and shock damage) V. by flood typhoon hurricane storm tempest inundation cyclone hailstorm frost VI. by accidental external means VII. by malicious act VIII. by terrorist activity IX. whilst in transit",
+                "score": 1.5283008813858032
+              }
+            ],
+            "quarantined_sources": [],
+            "observation": {
+              "passages": [
+                {
+                  "clause_id": "hdfc_private_car_package:p1:c1",
+                  "text": "for owner driver and optional cover for passengers covering accidental death and permanent total disability a. General aging, wear & tear, mechanical or electrical breakdown, failure, depreciation, any consequential loss b. Damage by a person driving without a valid license c. Damage by a person driving under the influence of liquor or drugs d. Loss/damage attributable to war, mutiny, nuclear risks e. Damage to tyres and tubes, unless damaged dur"
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p3:c1",
+                  "text": "vehicle insured herein is a. being used otherwise than in accordance with the \u2018Limitations as to Use\u2019 or b. being driven by or is for the purpose of being driven by him/her in the charge of any person other than a Driver as stated in the Driver's Clause 4. i. any accidental loss or damage to any property whatsoever or any loss or expense whatsoever resulting or arising there from or any consequential loss ii. any liability of whatsoever nature di"
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p1:c0",
+                  "text": "* supports smart phone based on Blackberry, iPhone, Windows 8 & Android platform. Manage Your @ hdfcergo.com / Smartphones* Portfolio Download IPO mobile application from IPO website post log in WHAT ARE THE MAJOR COVERS UNDER THE POLICY? WHAT ARE THE MAJOR EXCLUSIONS OF THE POLICY? Loss or Damage to the Insured Vehicle caused due to: a. Fire, explosion, self ignition or lightning. b Burglary, housebreaking or theft c All act of God perils like e"
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p3:c2",
+                  "text": "or indirectly caused by or contributed to by or arising from nuclear weapons material. 6. any accidental loss damage and/or liability directly or indirectly or proximately or remotely occasioned by contributed to by or traceable to or arising out of or in connection with war, invasion, the act of foreign enemies, hostilities or war like operations (whether before or after declaration of war) civil war, mutiny rebellion, military or usurped power "
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p3:c0",
+                  "text": "HDFC ERGO General Insurance Company Limited STANDARD FORM FOR PRIVATE CAR PACKAGE POLICY Policy Wording 2 st th Registered & Corporate Office: 1 Floor, 165 - 166 Backbay Reclamation, H. T. Parekh Marg, Churchgate, Mumbai \u2013 400 020. Customer Service Address: 6 Floor, Leela Business Park, Andheri Kurla Road, Andheri (E), Mumbai \u2013 400 059. Toll-free: 1800 2 700 700 (Accessible from India only) | Fax: 91 22 66383699 | care@hdfcergo.com | www.hdfcergo"
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p2:c0",
+                  "text": "Whereas the insured by a proposal and declaration dated as stated in the Schedule which shall be the basis of this contract and is deemed to be incorporated herein has applied to the Company for the insurance hereinafter contained and has paid the premium mentioned in the schedule as consideration for such insurance in respect of accidental loss or damage occurring during the period of insurance. NOW THIS POLICY WITNESSETH: That subject to the te"
+                }
+              ],
+              "missing_evidence": [
+                "procedure"
+              ],
+              "quarantined_sources": 0
+            }
+          },
+          "time": 1793876097.2377129,
+          "prompt_version": "v5"
+        },
+        {
+          "agent": "analysis",
+          "step": "provider",
+          "seconds": 20.906994500022847,
+          "attempts": 1,
+          "errors": [],
+          "prompt_tokens": 2333,
+          "completion_tokens": 48,
+          "cost_usd": 0.0,
+          "usage_source": "provider",
+          "prompt_version": "v5b"
+        },
+        {
+          "run_id": "food-delivery",
+          "agent": "analysis",
+          "step": "decision",
+          "seconds": 20.997702300024685,
+          "outcome": "success",
+          "details": {
+            "action": "corpus_search",
+            "argument": "claim procedure and required documents",
+            "purpose": "To gather information on the claim procedure and required documents for HDFC ERGO's private car plan"
+          },
+          "time": 1793876118.2370934,
+          "prompt_version": "v5"
+        },
+        {
+          "run_id": "food-delivery",
+          "agent": "analysis",
+          "step": "tool",
+          "seconds": 0.04694500000914559,
+          "outcome": "success",
+          "details": {
+            "tool": "corpus_search",
+            "argument": "claim procedure and required documents",
+            "purpose": "To gather information on the claim procedure and required documents for HDFC ERGO's private car plan",
+            "query": "claim procedure and required documents",
+            "passages": [
+              {
+                "clause_id": "hdfc_private_car_package:p8:c5",
+                "document": "hdfc_private_car_package.pdf",
+                "page": 8,
+                "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                "text": "the amount for which the insured is so responsible. 21. IMT.26. Fire and/or Theft Risks Only (Not applicable for Miscellaneous and Special Types of vehicles rateable under Class -D and Motor Trade Policies under Classes- E, F and G of the Commercial Vehicles Tariff) Notwithstanding anything to the contrary contained in the policy it is hereby understood and agreed that Section II of the Policy is deemed to be cancelled and under Section I thereof the insurer shall only be liable to indemnify the insured against loss or damage by fire explosion self ignition lightning and/or burglary housebreaking theft and riot strike malicious damage terrorism storm tempest flood inundation and earthquake perils whilst the vehicle is laid up in garage and not in use. Subject otherwise to the terms conditions limitations and exceptions of this policy. NB.i. In case of Fire Risk only, the words \u201cburglary housebreaking theft\u201d are to be deleted. NB.ii. In case of Theft Risk only, the words \u201cfire",
+                "score": 1.6993566751480103
+              },
+              {
+                "clause_id": "hdfc_private_car_package:p8:c6",
+                "document": "hdfc_private_car_package.pdf",
+                "page": 8,
+                "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                "text": "and exceptions of this policy. NB.i. In case of Fire Risk only, the words \u201cburglary housebreaking theft\u201d are to be deleted. NB.ii. In case of Theft Risk only, the words \u201cfire explosion self ignition lightning riot strike malicious damage terrorism storm tempest flood inundation and earthquake perils\u201d are to be deleted. 22. IMT. 27. Liability and Fire and/or Theft (Not applicable for Miscellaneous and Special Types of vehicles rateable under Class \u2013D of the Tariff for Commercial Vehicles) Notwithstanding anything to the contrary contained in the policy it is hereby understood and agreed that Section I of the Policy the insurer shall not be liable thereunder except in respect of loss or damage by fire explosion self ignition lightning and/or burglary housebreaking theft and riot strike malicious damage terrorism storm tempest flood inundation and earthquake perils. Subject otherwise to the terms conditions limitations and exceptions of the policy. NB.i. In case of Liability and Fire",
+                "score": 1.70932936668396
+              },
+              {
+                "clause_id": "hdfc_private_car_package:p4:c4",
+                "document": "hdfc_private_car_package.pdf",
+                "page": 4,
+                "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                "text": "and their receipt shall be a full and final discharge to the insurer in respect of such loss or damage. It is also understood and agreed that notwithstanding any provision in the Leasing Agreement to the contrary, this policy is issued to the insured namely \u2026\u2026\u2026\u2026.. as the principal party and not as agent or trustee and nothing herein contained shall be construed as constituting the insured an agent or trustee for the Lessors or as an assignment (whether legal or equitable) by the insured to the Lessors, of his rights benefits and claims under this policy and further nothing herein shall be construed as creating or vesting any right in the Owner/Lessor to sue the insurer in any capacity whatsoever for any alleged breach of its obligations hereunder. b. for partial losses, i.e. losses other than Total Loss/Constructive Total Loss of the vehicle - actual and reasonable costs of repair and/or replacement of parts lost/damaged subject to depreciation as per limits specified. 4. The insured",
+                "score": 1.7230119705200195
+              },
+              {
+                "clause_id": "hdfc_private_car_package:p1:c5",
+                "document": "hdfc_private_car_package.pdf",
+                "page": 1,
+                "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                "text": "Andheri (East), Mumbai - 400 059 IPO :Raise a service request on Insurance Portfolio Organiser (IPO) For any endorsments on your policy you can contact us through any of the below mentioned modes: E mail us at : care@hdfcergo.com OR Call Toll-free: 1800 2 700 700 (Accessible from India only) OR Fax your request at: 022 6638 3669 OR Raise a service request on Insurance Portfolio Organizer (IPO) from www.hdfcergo.com NO CLAIM BONUS (NCB): NCB is provided for every claim free year basis the slab as provided by Tariff. How can I get No Claim Bonus Reserving Letter? NCB Reserving letter can be provided only on Sale of vehicle evidenced by transferred RC copy OR Sale Deed and Form 29 & 30. The OD section of the policy needs to be transferred to the new owner or cancelled. CLAIMS DOCUMENTS - For ACCIDENTAL DAMAGE TO INSURED VEHICLE a. Duly filled and signed claim form & satisfaction voucher b. Registration Certificate (RC) c. Driving license of the person driving at the time of the accident",
+                "score": 1.7492741346359253
+              }
+            ],
+            "quarantined_sources": [
+              {
+                "clause_id": "hdfc_private_car_package:p8:c7",
+                "reason": "model_guardrail"
+              },
+              {
+                "clause_id": "hdfc_private_car_package:p1:c6",
+                "reason": "model_guardrail"
+              }
+            ],
+            "observation": {
+              "passages": [
+                {
+                  "clause_id": "hdfc_private_car_package:p8:c5",
+                  "text": "the amount for which the insured is so responsible. 21. IMT.26. Fire and/or Theft Risks Only (Not applicable for Miscellaneous and Special Types of vehicles rateable under Class -D and Motor Trade Policies under Classes- E, F and G of the Commercial Vehicles Tariff) Notwithstanding anything to the contrary contained in the policy it is hereby understood and agreed that Section II of the Policy is deemed to be cancelled and under Section I thereof"
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p8:c6",
+                  "text": "and exceptions of this policy. NB.i. In case of Fire Risk only, the words \u201cburglary housebreaking theft\u201d are to be deleted. NB.ii. In case of Theft Risk only, the words \u201cfire explosion self ignition lightning riot strike malicious damage terrorism storm tempest flood inundation and earthquake perils\u201d are to be deleted. 22. IMT. 27. Liability and Fire and/or Theft (Not applicable for Miscellaneous and Special Types of vehicles rateable under Class"
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p4:c4",
+                  "text": "and their receipt shall be a full and final discharge to the insurer in respect of such loss or damage. It is also understood and agreed that notwithstanding any provision in the Leasing Agreement to the contrary, this policy is issued to the insured namely \u2026\u2026\u2026\u2026.. as the principal party and not as agent or trustee and nothing herein contained shall be construed as constituting the insured an agent or trustee for the Lessors or as an assignment (w"
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p1:c5",
+                  "text": "Andheri (East), Mumbai - 400 059 IPO :Raise a service request on Insurance Portfolio Organiser (IPO) For any endorsments on your policy you can contact us through any of the below mentioned modes: E mail us at : care@hdfcergo.com OR Call Toll-free: 1800 2 700 700 (Accessible from India only) OR Fax your request at: 022 6638 3669 OR Raise a service request on Insurance Portfolio Organizer (IPO) from www.hdfcergo.com NO CLAIM BONUS (NCB): NCB is pr"
+                }
+              ],
+              "missing_evidence": [],
+              "quarantined_sources": 2
+            }
+          },
+          "time": 1793876118.2853577,
+          "prompt_version": "v5"
+        },
+        {
+          "agent": "analysis",
+          "step": "provider",
+          "seconds": 25.482859000039753,
+          "attempts": 1,
+          "errors": [],
+          "prompt_tokens": 2654,
+          "completion_tokens": 53,
+          "cost_usd": 0.0,
+          "usage_source": "provider",
+          "prompt_version": "v5b"
+        },
+        {
+          "run_id": "food-delivery",
+          "agent": "analysis",
+          "step": "decision",
+          "seconds": 25.584985899971798,
+          "outcome": "success",
+          "details": {
+            "action": "corpus_search",
+            "argument": "private-car limitations as to use or hire/reward restrictions",
+            "purpose": "To search for specific limitations on the use or hire/reward restrictions of the private-car package"
+          },
+          "time": 1793876143.871983,
+          "prompt_version": "v5"
+        },
+        {
+          "run_id": "food-delivery",
+          "agent": "analysis",
+          "step": "tool",
+          "seconds": 0.02819219999946654,
+          "outcome": "success",
+          "details": {
+            "tool": "corpus_search",
+            "argument": "private-car limitations as to use or hire/reward restrictions",
+            "purpose": "To search for specific limitations on the use or hire/reward restrictions of the private-car package",
+            "query": "private-car limitations as to use or hire/reward restrictions",
+            "passages": [
+              {
+                "clause_id": "hdfc_private_car_package:p3:c0",
+                "document": "hdfc_private_car_package.pdf",
+                "page": 3,
+                "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                "text": "HDFC ERGO General Insurance Company Limited STANDARD FORM FOR PRIVATE CAR PACKAGE POLICY Policy Wording 2 st th Registered & Corporate Office: 1 Floor, 165 - 166 Backbay Reclamation, H. T. Parekh Marg, Churchgate, Mumbai \u2013 400 020. Customer Service Address: 6 Floor, Leela Business Park, Andheri Kurla Road, Andheri (E), Mumbai \u2013 400 059. Toll-free: 1800 2 700 700 (Accessible from India only) | Fax: 91 22 66383699 | care@hdfcergo.com | www.hdfcergo.com CIN : U66010MH2002PLC134869. IRDA Reg No. 125. The Company shall not be liable under this Policy in respect of 1. any accidental loss or damage and/or liability caused sustained or incurred outside the geographical area; 2. any claim arising out of any contractual liability; 3. any accidental loss damage and/or liability caused sustained or incurred whilst the vehicle insured herein is a. being used otherwise than in accordance with the \u2018Limitations as to Use\u2019 or b. being driven by or is for the purpose of being driven by him/her in the",
+                "score": 1.5265592336654663
+              },
+              {
+                "clause_id": "hdfc_private_car_package:p3:c1",
+                "document": "hdfc_private_car_package.pdf",
+                "page": 3,
+                "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                "text": "vehicle insured herein is a. being used otherwise than in accordance with the \u2018Limitations as to Use\u2019 or b. being driven by or is for the purpose of being driven by him/her in the charge of any person other than a Driver as stated in the Driver's Clause 4. i. any accidental loss or damage to any property whatsoever or any loss or expense whatsoever resulting or arising there from or any consequential loss ii. any liability of whatsoever nature directly or indirectly caused by or contributed to by or arising from ionising radiations or contamination by radioactivity from any nuclear fuel or from any nuclear waste from the combustion of nuclear fuel. For the purpose of this exception combustion shall include any self-sustaining process of nuclear fission 5. any accidental loss or damage or liability directly or indirectly caused by or contributed to by or arising from nuclear weapons material. 6. any accidental loss damage and/or liability directly or indirectly or proximately or",
+                "score": 1.5370419025421143
+              },
+              {
+                "clause_id": "hdfc_private_car_package:p6:c7",
+                "document": "hdfc_private_car_package.pdf",
+                "page": 6,
+                "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                "text": "shall be payable in respect of death or injury directly or indirectly wholly or in part arising or resulting from or traceable to a. intentional self injury suicide or attempted suicide physical defect or infirmity or b. an accident happening whilst such person is under the influence of intoxicating liquor or drugs. 3. such compensation shall be payable only with the approval of the insured named in the policy and directly to the injured person or his/her legal representative(s) whose receipt shall be a full discharge in respect of the injury of such person. Subject otherwise to the terms exceptions conditions and limitations of this policy. * The Capital Sum Insured (CSI) per passenger is to be inserted. 13. IMT.16. Personal Accident to Unnamed Passengers other than Insured and the Paid Drivers and Cleaner. (For vehicles rated as Private cars) In consideration of the payment of an additional premium it is hereby understood and agreed that the insurer undertakes to pay compensation on",
+                "score": 1.5477540493011475
+              },
+              {
+                "clause_id": "hdfc_private_car_package:p8:c3",
+                "document": "hdfc_private_car_package.pdf",
+                "page": 8,
+                "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                "text": "otherwise to the terms, conditions limitations and exceptions of this policy. * Delete in the case of Liability to the public risks only policies. ** Insert value of trailer as declared at inception of insurance or any renewal thereof. 26. IMT.31. Reliability Trials and Rallies. (Applicable to Private Cars) In consideration of the payment of an additional premium it is hereby understood and agreed that the indemnity granted by this policy is extended to apply whilst the vehicle insured is engaged in ....\u2026\u2026.... ......*. to be held at \u2026\u2026..**... on or about the date of ..../\u2026/ \u2026 ..... under the auspices of ............\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026.# Provided that, a. No indemnity shall be granted by this Endorsement to \u2026\u2026\u2026\u2026\u2026.... # b. This policy does not cover use for organised racing, pace making or speed testing. c. During the course of the \u2026\u2026\u2026\u2026\u2026\u2026\u2026* the Insurer shall not be liable in respect of death of or bodily injury to any person being carried in or upon or entering or getting on to or alighting from",
+                "score": 1.5697314739227295
+              },
+              {
+                "clause_id": "hdfc_private_car_package:p3:c2",
+                "document": "hdfc_private_car_package.pdf",
+                "page": 3,
+                "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1",
+                "text": "or indirectly caused by or contributed to by or arising from nuclear weapons material. 6. any accidental loss damage and/or liability directly or indirectly or proximately or remotely occasioned by contributed to by or traceable to or arising out of or in connection with war, invasion, the act of foreign enemies, hostilities or war like operations (whether before or after declaration of war) civil war, mutiny rebellion, military or usurped power or by any direct or indirect consequence of any of the said occurrences and in the event of any claim hereunder the insured shall prove that the accidental loss damage and/or liability arose independently of and was in no way connected with or occasioned by or contributed to by or traceable to any of the said occurrences or any consequences thereof and in default of such proof, the Company shall not be liable to make any payment in respect of such a claim. DEDUCTIBLE The Company shall not be liable for each and every claim under Section - I",
+                "score": 1.5783710479736328
+              }
+            ],
+            "quarantined_sources": [
+              {
+                "clause_id": "hdfc_private_car_package:p8:c0",
+                "reason": "model_guardrail"
+              }
+            ],
+            "observation": {
+              "passages": [
+                {
+                  "clause_id": "hdfc_private_car_package:p3:c0",
+                  "text": "HDFC ERGO General Insurance Company Limited STANDARD FORM FOR PRIVATE CAR PACKAGE POLICY Policy Wording 2 st th Registered & Corporate Office: 1 Floor, 165 - 166 Backbay Reclamation, H. T. Parekh Marg, Churchgate, Mumbai \u2013 400 020. Customer Service Address: 6 Floor, Leela Business Park, Andheri Kurla Road, Andheri (E), Mumbai \u2013 400 059. Toll-free: 1800 2 700 700 (Accessible from India only) | Fax: 91 22 66383699 | care@hdfcergo.com | www.hdfcergo"
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p3:c1",
+                  "text": "vehicle insured herein is a. being used otherwise than in accordance with the \u2018Limitations as to Use\u2019 or b. being driven by or is for the purpose of being driven by him/her in the charge of any person other than a Driver as stated in the Driver's Clause 4. i. any accidental loss or damage to any property whatsoever or any loss or expense whatsoever resulting or arising there from or any consequential loss ii. any liability of whatsoever nature di"
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p6:c7",
+                  "text": "shall be payable in respect of death or injury directly or indirectly wholly or in part arising or resulting from or traceable to a. intentional self injury suicide or attempted suicide physical defect or infirmity or b. an accident happening whilst such person is under the influence of intoxicating liquor or drugs. 3. such compensation shall be payable only with the approval of the insured named in the policy and directly to the injured person o"
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p8:c3",
+                  "text": "otherwise to the terms, conditions limitations and exceptions of this policy. * Delete in the case of Liability to the public risks only policies. ** Insert value of trailer as declared at inception of insurance or any renewal thereof. 26. IMT.31. Reliability Trials and Rallies. (Applicable to Private Cars) In consideration of the payment of an additional premium it is hereby understood and agreed that the indemnity granted by this policy is exte"
+                },
+                {
+                  "clause_id": "hdfc_private_car_package:p3:c2",
+                  "text": "or indirectly caused by or contributed to by or arising from nuclear weapons material. 6. any accidental loss damage and/or liability directly or indirectly or proximately or remotely occasioned by contributed to by or traceable to or arising out of or in connection with war, invasion, the act of foreign enemies, hostilities or war like operations (whether before or after declaration of war) civil war, mutiny rebellion, military or usurped power "
+                }
+              ],
+              "missing_evidence": [],
+              "quarantined_sources": 1
+            }
+          },
+          "time": 1793876143.901552,
+          "prompt_version": "v5"
+        },
+        {
+          "agent": "analysis",
+          "step": "provider",
+          "seconds": 31.22052240004996,
+          "attempts": 1,
+          "errors": [],
+          "prompt_tokens": 3012,
+          "completion_tokens": 45,
+          "cost_usd": 0.0,
+          "usage_source": "provider",
+          "prompt_version": "v5b"
+        },
+        {
+          "run_id": "food-delivery",
+          "agent": "analysis",
+          "step": "decision",
+          "seconds": 31.354793999984395,
+          "outcome": "success",
+          "details": {
+            "action": "clause_lookup",
+            "argument": "hdfc_private_car_package:p3:c0",
+            "purpose": "Inspect the clause for the policy wording related to the vehicle use"
+          },
+          "time": 1793876175.258079,
+          "prompt_version": "v5"
+        },
+        {
+          "run_id": "food-delivery",
+          "agent": "analysis",
+          "step": "tool",
+          "seconds": 0.0007516000187024474,
+          "outcome": "success",
+          "details": {
+            "tool": "clause_lookup",
+            "argument": "hdfc_private_car_package:p3:c0",
+            "purpose": "Inspect the clause for the policy wording related to the vehicle use",
+            "clause_id": "hdfc_private_car_package:p3:c0",
+            "result": {
+              "clause_id": "hdfc_private_car_package:p3:c0",
+              "document": "hdfc_private_car_package.pdf",
+              "page": 3,
+              "text": "HDFC ERGO General Insurance Company Limited STANDARD FORM FOR PRIVATE CAR PACKAGE POLICY Policy Wording 2 st th Registered & Corporate Office: 1 Floor, 165 - 166 Backbay Reclamation, H. T. Parekh Marg, Churchgate, Mumbai \u2013 400 020. Customer Service Address: 6 Floor, Leela Business Park, Andheri Kurla Road, Andheri (E), Mumbai \u2013 400 059. Toll-free: 1800 2 700 700 (Accessible from India only) | Fax: 91 22 66383699 | care@hdfcergo.com | www.hdfcergo.com CIN : U66010MH2002PLC134869. IRDA Reg No. 125. The Company shall not be liable under this Policy in respect of 1. any accidental loss or damage and/or liability caused sustained or incurred outside the geographical area; 2. any claim arising out of any contractual liability; 3. any accidental loss damage and/or liability caused sustained or incurred whilst the vehicle insured herein is a. being used otherwise than in accordance with the \u2018Limitations as to Use\u2019 or b. being driven by or is for the purpose of being driven by him/her in the",
+              "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1"
+            },
+            "observation": {
+              "clause": {
+                "clause_id": "hdfc_private_car_package:p3:c0",
+                "document": "hdfc_private_car_package.pdf",
+                "page": 3,
+                "text": "HDFC ERGO General Insurance Company Limited STANDARD FORM FOR PRIVATE CAR PACKAGE POLICY Policy Wording 2 st th Registered & Corporate Office: 1 Floor, 165 - 166 Backbay Reclamation, H. T. Parekh Marg, Churchgate, Mumbai \u2013 400 020. Customer Service Address: 6 Floor, Leela Business Park, Andheri Kurla Road, Andheri (E), Mumbai \u2013 400 059. Toll-free: 1800 2 700 700 (Accessible from India only) | Fax: 91 22 66383699 | care@hdfcergo.com | www.hdfcergo.com CIN : U66010MH2002PLC134869. IRDA Reg No. 125. The Company shall not be liable under this Policy in respect of 1. any accidental loss or damage and/or liability caused sustained or incurred outside the geographical area; 2. any claim arising out of any contractual liability; 3. any accidental loss damage and/or liability caused sustained or incurred whilst the vehicle insured herein is a. being used otherwise than in accordance with the \u2018Limitations as to Use\u2019 or b. being driven by or is for the purpose of being driven by him/her in the",
+                "sha256": "fefcf8ed65b5838e0eacc359e70dec3a9a0655ecb3013d178a89d9916ed51ad1"
+              }
+            }
+          },
+          "time": 1793876175.2602599,
+          "prompt_version": "v5"
+        },
+        {
+          "agent": "analysis",
+          "step": "provider",
+          "seconds": 25.324414299975615,
+          "attempts": 1,
+          "errors": [],
+          "prompt_tokens": 2803,
+          "completion_tokens": 25,
+          "cost_usd": 0.0,
+          "usage_source": "provider",
+          "prompt_version": "v5b"
+        },
+        {
+          "run_id": "food-delivery",
+          "agent": "analysis",
+          "step": "decision",
+          "seconds": 25.347082299995236,
+          "outcome": "success",
+          "details": {
+            "action": "finish",
+            "argument": "",
+            "purpose": "Hand gathered evidence to the independent verifier"
+          },
+          "time": 1793876200.609058,
+          "prompt_version": "v5"
+        },
+        {
+          "run_id": "food-delivery",
+          "agent": "analysis",
+          "step": "draft",
+          "seconds": 0.0004398999735713005,
+          "outcome": "success",
+          "details": {},
+          "time": 1793876200.6112392,
+          "prompt_version": "v5"
+        },
+        {
+          "run_id": "food-delivery",
+          "agent": "verification",
+          "step": "verify",
+          "seconds": 0.31491399998776615,
+          "outcome": "success",
+          "details": {
+            "initial_checks": true,
+            "template_mismatches": [],
+            "semantic": {
+              "passed": true,
+              "claims": [
+                {
+                  "hypothesis": "The policy covers accidental damage to the insured vehicle.",
+                  "supported": true,
+                  "scores": {
+                    "contradiction": 0.003174313634475339,
+                    "entailment": 0.9747419113847618,
+                    "neutral": 0.022083774980762694
+                  },
+                  "method": "nli-deberta-cpu"
+                },
+                {
+                  "hypothesis": "The policy contains restrictions on the use of the insured vehicle.",
+                  "supported": true,
+                  "scores": {
+                    "contradiction": 0.011087016136653199,
+                    "entailment": 0.9373873658820806,
+                    "neutral": 0.051525617981266154
+                  },
+                  "method": "nli-deberta-cpu"
+                }
+              ],
+              "method": "independent-nli"
+            },
+            "verified": true,
+            "citations_checked": 4
+          },
+          "time": 1793876200.9291196,
+          "prompt_version": "v5"
+        }
+      ],
+      "semantic_quality": {
+        "sampled": true,
+        "method": "reference-free-nli-and-embedding-v1",
+        "groundedness": 0.9560646386334213,
+        "faithfulness": 1.0,
+        "hallucination_rate": 0.0,
+        "context_relevance": 0.12533188611268997
+      },
+      "cost_usd": 0.0
+    }
+  ]
+}

@@ -3,6 +3,7 @@ import pytest
 from app.research_agent import Decision, use_tool, plan_research, audit_narrative
 from app.provider import Gateway
 from app.cli import event_line
+from app.cli import vehicle_use, checked
 from app.contracts import FNOL
 from .test_system import fnol
 
@@ -79,6 +80,18 @@ def test_verifier_refusal_requires_new_research_before_finish(fnol,monkeypatch):
             return {'action':'corpus_search','argument':'vehicle use restrictions','purpose':'Address verifier feedback'}
     assert decide(s,Capture())['action']=='corpus_search'
 
+def test_research_prompt_variant_reaches_model_and_trace(fnol,monkeypatch):
+    from app.research_agent import decide
+    monkeypatch.setenv('RESEARCH_PROMPT_VARIANT','v5b')
+    s=state(fnol,'corpus_search','cover')
+    class Capture:
+        def call(self,state,agent,payload):
+            assert payload['prompt_version']=='v5b'
+            assert 'Use request_fields only when' in payload['messages'][0]['content']
+            return {'action':'corpus_search','argument':'accidental damage cover','purpose':'Find cover'}
+    assert decide(s,Capture())['action']=='corpus_search'
+    assert s['research_prompt_version']=='v5b'
+
 def test_cli_calls_refusal_a_refusal():
     from app.cli import event_line
     e={'agent':'analysis','step':'tool','details':{'tool':'corpus_search','observation':{'error':'Repeated call refused.'}}}
@@ -90,6 +103,19 @@ def test_cli_does_not_label_abstention_verified(capsys):
     output=capsys.readouterr().out
     assert 'HUMAN REVIEW REQUIRED' in output
     assert 'VERIFIED ADVICE' not in output
+
+def test_terminal_vehicle_use_accepts_case_and_rejects_unknown_choice():
+    assert vehicle_use(' PERSONAL ')=='personal'
+    assert vehicle_use('Hire Reward')=='hire_reward'
+    with pytest.raises(ValueError):vehicle_use('private taxi permit')
+
+def test_terminal_validation_error_is_readable():
+    import httpx
+    response=httpx.Response(422,json={'quarantine_id':'example-id','errors':[{
+        'loc':['body','vehicle_use'],'msg':'Invalid vehicle use'}]},
+        request=httpx.Request('POST','http://localhost/runs'))
+    with pytest.raises(RuntimeError,match='vehicle_use: Invalid vehicle use.*No agent run started'):
+        checked(response)
 
 def test_narrative_audit_flags_paraphrased_paid_delivery(fnol,monkeypatch):
     monkeypatch.setenv('MODEL_MODE','live')

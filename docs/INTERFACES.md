@@ -23,6 +23,9 @@ date; policy end >= start. A loss outside the policy period is valid intake data
 and becomes a coverage concern rather than schema rejection. Registration is
 uppercase alphanumeric with spaces/hyphens; this is a broad demo contract and
 not official registration verification. No real policy ownership lookup exists.
+Vehicle-use choices and registration letters are normalised to lowercase and
+uppercase respectively at intake, so common typing differences do not create
+an unnecessary quarantine record.
 
 Coverage positions: potentially_covered, coverage_concern, insufficient_evidence.
 Queues: fast-track, surveyor assignment, investigation. Every recommendation is

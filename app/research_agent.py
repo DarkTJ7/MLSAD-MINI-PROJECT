@@ -20,6 +20,15 @@ class NarrativeUse(BaseModel):
     narrative_use: Literal['delivery','hire_reward','private_or_business','unknown']
     evidence_phrase: str = Field(max_length=160)
 
+RESEARCH_PROMPTS={'v5a':'analysis_v5.txt','v5b':'analysis_v5b.txt'}
+
+def research_prompt():
+    from .config import ROOT
+    variant=os.getenv('RESEARCH_PROMPT_VARIANT','v5b').strip().lower()
+    if variant not in RESEARCH_PROMPTS:
+        raise ValueError('RESEARCH_PROMPT_VARIANT must be v5a or v5b')
+    return variant,(ROOT/'prompts'/RESEARCH_PROMPTS[variant]).read_text(encoding='utf-8')
+
 def audit_narrative(state,gateway):
     """Ask the model once about vehicle use; never erase deterministic risk flags."""
     if 'narrative_audit' in state:
@@ -80,6 +89,8 @@ def modifier_search_complete(state):
 
 def decide(state,gateway):
     from .config import ROOT
+    variant,system_prompt=research_prompt()
+    state['research_prompt_version']=variant
     schema=Decision.model_json_schema()
     history=state.get('research_history',[])
     revision_due=bool(state.get('verification_reason')) and state.get('searches',0)<=state.get('retry_searches',-1)
@@ -114,7 +125,8 @@ def decide(state,gateway):
         'evidence':[{'clause_id':p['clause_id'],'text':p['text'][:450]} for p in state.get('passages',[])[-12:]]}
     raw=gateway.call(state,'analysis',{'model':os.getenv('MODEL_ID',''),
         'agent':'analysis','stage':'research','context':{'version':'v5',**context},
-        'messages':[{'role':'system','content':(ROOT/'prompts/analysis_v5.txt').read_text()},
+        'prompt_version':variant,
+        'messages':[{'role':'system','content':system_prompt},
                     {'role':'user','content':json.dumps(context)+'\nNEXT RESEARCH OBJECTIVE: '+objective}],
         'temperature':0,'max_tokens':150,'response_format':{'type':'json_schema','json_schema':{
             'name':'research_tool_call','strict':True,'schema':schema}}})

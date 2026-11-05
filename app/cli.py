@@ -22,6 +22,12 @@ def yes_no(value):
     if value.lower() in ('unknown','?'):return None
     raise ValueError()
 
+def vehicle_use(value):
+    choice=value.strip().casefold().replace('-', '_').replace(' ', '_')
+    if choice not in {'personal','commute','business','delivery','hire_reward','unknown'}:
+        raise ValueError()
+    return choice
+
 def intake():
     print('\nMotor claim research agent\nDescribe the incident; I will collect the facts the research and verification agents need.')
     print('This produces advice only. You can type unknown for driver eligibility facts. Ctrl+C exits.\n')
@@ -31,7 +37,7 @@ def intake():
           'location':ask('Incident location'),'loss_date':ask('Incident date (YYYY-MM-DD)'),
           'reported_date':ask('Reported date (YYYY-MM-DD)'),
           'policy_start':ask('Policy start (YYYY-MM-DD)'), 'policy_end':ask('Policy end (YYYY-MM-DD)'),
-          'vehicle_use':ask('Vehicle use: personal / commute / business / delivery / hire_reward / unknown','unknown'),
+          'vehicle_use':ask('Vehicle use: personal / commute / business / delivery / hire_reward / unknown','unknown',vehicle_use),
           'estimated_repair':ask('Estimated repair in INR',convert=float),
           'idv':ask('Insured declared value in INR',convert=float),
           'network_garage':ask('Network garage? yes/no','no',yes_no),
@@ -45,6 +51,15 @@ def checked(response):
     if response.is_error:
         try:detail=response.json()
         except ValueError:detail=response.text[:500]
+        if response.status_code==422 and isinstance(detail,dict):
+            issues=detail.get('errors') or detail.get('detail') or []
+            if isinstance(issues,list):
+                readable='; '.join(f"{'.'.join(map(str,e.get('loc',[])))}: {e.get('msg','invalid value')}"
+                                  for e in issues if isinstance(e,dict))
+                if readable:
+                    qid=detail.get('quarantine_id')
+                    suffix=f' Quarantine ID: {qid}.' if qid else ''
+                    raise RuntimeError(f'Input rejected (HTTP 422). {readable}. No agent run started.{suffix}')
         raise RuntimeError(f'HTTP {response.status_code}: {json.dumps(detail,ensure_ascii=False)}')
     return response.json()
 

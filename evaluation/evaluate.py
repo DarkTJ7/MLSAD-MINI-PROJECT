@@ -24,9 +24,18 @@ def score(state,case):
             'verified':int(result['verified'])}
 
 def evaluate():
-    parser=argparse.ArgumentParser();parser.add_argument('--output',default='results/evaluation_v5.json');args=parser.parse_args()
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--output',default='results/evaluation_v5.json')
+    parser.add_argument('--prompt-variant',choices=('v5a','v5b'),default='v5b')
+    parser.add_argument('--case-id',action='append',dest='case_ids',help='Repeat to select matched scenarios')
+    args=parser.parse_args()
+    os.environ['RESEARCH_PROMPT_VARIANT']=args.prompt_variant
     index_corpus();corpus=Corpus()
     cases=[json.loads(x) for x in (ROOT/'evaluation/scenarios.jsonl').read_text().splitlines()]
+    if args.case_ids:
+        unknown=set(args.case_ids)-{case['id'] for case in cases}
+        if unknown:parser.error('Unknown case ID(s): '+', '.join(sorted(unknown)))
+        cases=[case for case in cases if case['id'] in set(args.case_ids)]
     results=[]
     for case in cases:
         fnol=dict(case['fnol'],retrieval_version='v5')
@@ -52,7 +61,9 @@ def evaluate():
     for key in ('groundedness','context_relevance','faithfulness','hallucination_rate'):
         values=[r['semantic_quality'].get(key) for r in results if r['semantic_quality'].get(key) is not None]
         semantic_summary[key]={'mean':sum(values)/len(values) if values else None,'n':len(values)}
-    output={'version':'v5','mode':os.getenv('MODEL_MODE','stub'),
+    output={'version':'v5','prompt_variant':args.prompt_variant,
+            'case_ids':[case['id'] for case in cases], 'mode':os.getenv('MODEL_MODE','stub'),
+            'model_id':os.getenv('MODEL_ID',''),
             'safety_required':os.getenv('SAFETY_REQUIRED','false'),'metric_kind':'structured references and citation proxies; semantic evidence in each event',
             'summary':summary,'semantic_summary':semantic_summary,'metric_denominators':counts,'runs':results}
     path=ROOT/args.output;path.parent.mkdir(exist_ok=True,parents=True)

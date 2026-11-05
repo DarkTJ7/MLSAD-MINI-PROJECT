@@ -1,6 +1,6 @@
 # Course requirement status for the cleaned AI agent
 
-Status is as of 4 November 2026. **Implemented** means code plus local
+Status is as of 5 November 2026. **Implemented** means code plus local
 regression or selected live evidence; it does not mean production or insurer
 approval. **Configured** means Compose/dashboard files exist but have not
 been rehearsed with Docker Desktop. The course brief requires honest
@@ -25,7 +25,7 @@ disclosure of remaining gaps.
 | A7 | Pending | `--scale agent-worker=3` is configured; Docker throughput/p95 comparison unmeasured |
 | A8 | Implemented as minimal client | `/client` submits and polls; terminal remains primary |
 | L1 | Partial | LangChain/FAISS, idempotent index and re-embedding; lexical word-hash embedding baseline |
-| L2 | Pending for current agent | Current prompts versioned; same-set live v5 prompt-variant comparison still needed |
+| L2 | Partial | v5a/v5b compared on the food-delivery live case; full same-set 24-scenario comparison pending |
 | L3 | Partial | Frozen 24 scenarios and CLI metric code; full v5 batch/before-after metrics still needed |
 | L4 | Implemented with limits | Input/source screening, output controls, toxicity and injection classifiers; no universal guarantee |
 | L5 | Partial | Per-step/run token and zero local API-cost records; current-agent cost per 100 runs pending batch |

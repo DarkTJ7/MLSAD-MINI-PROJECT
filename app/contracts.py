@@ -32,6 +32,16 @@ class FNOL(BaseModel):
     police_report: bool = False
     retrieval_version: Literal['v5'] = 'v5'
 
+    @field_validator('vehicle_registration', mode='before')
+    @classmethod
+    def normalise_registration(cls, value):
+        return value.strip().upper() if isinstance(value, str) else value
+
+    @field_validator('vehicle_use', mode='before')
+    @classmethod
+    def normalise_vehicle_use(cls, value):
+        return value.strip().casefold().replace('-', '_').replace(' ', '_') if isinstance(value, str) else value
+
     @field_validator('policy_start','policy_end','loss_date','reported_date',mode='before')
     @classmethod
     def date_wire_format(cls,value):

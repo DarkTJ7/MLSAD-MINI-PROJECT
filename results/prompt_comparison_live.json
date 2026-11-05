@@ -1,0 +1,41 @@
+{
+  "mode": "live",
+  "case_count": 1,
+  "variants": [
+    "v5a",
+    "v5b"
+  ],
+  "summary": {
+    "v5a": {
+      "faithfulness": 1.0,
+      "verified": 1.0,
+      "median_seconds": 185.92659899999853
+    },
+    "v5b": {
+      "faithfulness": 1.0,
+      "verified": 1.0,
+      "median_seconds": 115.00972469995031
+    }
+  },
+  "cases": [
+    {
+      "id": "food-delivery",
+      "faithfulness": {
+        "v5a": 1,
+        "v5b": 1
+      },
+      "verified": {
+        "v5a": 1,
+        "v5b": 1
+      },
+      "seconds": {
+        "v5a": 185.92659899999853,
+        "v5b": 115.00972469995031
+      },
+      "provider_calls": {
+        "v5a": 7,
+        "v5b": 6
+      }
+    }
+  ]
+}

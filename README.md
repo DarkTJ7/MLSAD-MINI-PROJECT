@@ -59,7 +59,8 @@ The root URL describes the agent service rather than opening a website.
    hire/reward use that conflicts with a structured field.
 3. Its local model chooses `request_fields`, `corpus_search` or
    `clause_lookup` and writes search queries and clause IDs. A restricted-use
-   case must include a modifier search.
+   case must include a modifier search. Set `RESEARCH_PROMPT_VARIANT=v5a` or
+   `v5b` to compare the two current research instructions.
 4. A separate verification worker checks canonical PDF citations, route
    constraints and semantic support. It can request one different search or
    escalate.
@@ -91,10 +92,15 @@ for genuine development incidents.
 ## Verification and limits
 
 Run `python -m pytest -q` after installing `requirements.txt`. The latest
-clean-tree local suite passed 57 tests. The fresh real local-model trace in
+local suite passed 63 tests. The fresh real local-model trace in
 `results/clean_agent_live.json` shows the paraphrased paid-meal case,
 an explicit use-limitation search, a cited investigation route and independent
 verification. These few cases do not establish an accuracy rate.
+
+The [matched live prompt comparison](results/prompt_comparison_live.json) for
+the synthetic food-delivery claim found both variants verified and faithful;
+v5b used 6 provider calls and 115 seconds versus 7 calls and 186 seconds for
+v5a. This is a one-case observation, not an accuracy or throughput estimate.
 
 The full v5 24-scenario real-model comparison and Docker load, scaling, cache
 and dashboard measurements remain unmeasured. Docker Desktop was unavailable
