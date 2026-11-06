@@ -102,6 +102,12 @@ the synthetic food-delivery claim found both variants verified and faithful;
 v5b used 6 provider calls and 115 seconds versus 7 calls and 186 seconds for
 v5a. This is a one-case observation, not an accuracy or throughput estimate.
 
+A later [live retrieval check](results/procedure_retrieval_live.json) on the
+same claim retrieved and cited the PDF's actual claim-filing instructions
+(`p1:c2`) after a documented procedure-query vocabulary expansion. The run
+was verified and matched the expected route. Its 150-second duration is a
+separate local run and does not establish a latency improvement.
+
 The full v5 24-scenario real-model comparison and Docker load, scaling, cache
 and dashboard measurements remain unmeasured. Docker Desktop was unavailable
 in the authoring environment. Do not cite earlier native measurements as

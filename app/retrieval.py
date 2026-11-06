@@ -3,6 +3,7 @@ import hashlib
 import json
 import time
 import os
+import re
 from pathlib import Path
 from functools import lru_cache
 import numpy as np
@@ -26,6 +27,13 @@ class LocalEmbeddings(Embeddings):
         return self.vectorizer.transform(texts).toarray().astype('float32').tolist()
     def embed_query(self, text):
         return self.embed_documents([text])[0]
+
+def expand_query(query):
+    """Bridge common claim-filing language to terms used in the source PDF."""
+    if (re.search(r'\b(claim|claims|intimation)\b',query,re.I) and
+            re.search(r'\b(procedure|process|documents?|file|filing|intimate|intimation|register)\b',query,re.I)):
+        return query+' file claim policy number registration RC copy driver details repair estimate'
+    return query
 
 def index_corpus(force=False):
     start = time.monotonic()
@@ -88,7 +96,7 @@ class Corpus:
         if os.getenv('RETRIEVAL_CACHE','true').lower()=='true' and key in self.cache:
             return self.cache[key]
         result=[dict(d.metadata,text=d.page_content,score=float(score))
-                for d,score in self.store.similarity_search_with_score(query,k=k)
+                for d,score in self.store.similarity_search_with_score(expand_query(query),k=k)
                 if float(score)<1.95]
         if len(self.cache)>=128:
             self.cache.clear()

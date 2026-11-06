@@ -52,3 +52,12 @@ unnecessary `request_fields` call; v5b searched the policy instead. See
 [`prompt_comparison_live.json`](../results/prompt_comparison_live.json) and
 the two underlying run files in `results/`. This is a single sequential
 sample, so timing can vary with local CPU load and does not establish p95.
+
+On 6 November 2026, the revised lexical retrieval was checked on the same
+live `food-delivery` scenario. The old procedure search did not return the
+claim-filing chunk in its top six; the new search returned `p1:c2` first,
+and the final recommendation cited it. The verifier accepted all four
+citations and the expected investigation route. The run took 149.74 seconds
+and 6 provider calls. This shows better procedure evidence on one scenario;
+it does not show a latency gain or a general accuracy change. The full trace
+is [`procedure_retrieval_live.json`](../results/procedure_retrieval_live.json).

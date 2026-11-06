@@ -1,6 +1,6 @@
 # Course requirement status for the cleaned AI agent
 
-Status is as of 5 November 2026. **Implemented** means code plus local
+Status is as of 6 November 2026. **Implemented** means code plus local
 regression or selected live evidence; it does not mean production or insurer
 approval. **Configured** means Compose/dashboard files exist but have not
 been rehearsed with Docker Desktop. The course brief requires honest
@@ -11,7 +11,7 @@ disclosure of remaining gaps.
 | F1 | Implemented | Documented `POST /runs` and FNOL schema |
 | F2 | Implemented | Boundary validation, field errors, quarantine, no enqueue on reject |
 | F3 | Partial | Four-category rules plus quoted model audit of vehicle use; broader entity extraction limited |
-| F4 | Partial | Agent-chosen FAISS searches and modifier gate; lexical retrieval can miss paraphrases |
+| F4 | Partial | Agent-chosen FAISS searches, modifier gate and tested claim-procedure query expansion; lexical retrieval can still miss paraphrases |
 | F5 | Implemented for bounded output | Exact original-PDF citations, canonical and semantic verification |
 | F6 | Implemented | Fast-track, surveyor and investigation routes with reasons |
 | F7 | Implemented | Weak, conflicting, unsafe or out-of-scope evidence escalates |

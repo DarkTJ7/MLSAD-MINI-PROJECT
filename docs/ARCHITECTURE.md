@@ -54,7 +54,9 @@ worker cannot overwrite an already terminal status.
 
 The source PDF is indexed by an idempotent one-shot job using page-local
 chunks and a local lexical hashing embedding baseline in FAISS. This is
-not a semantic retrieval model. The index records PDF hashes, chunk count,
+not a semantic retrieval model. Procedural claim queries add documented
+synonyms from the source PDF before lexical search; the returned evidence
+remains the unmodified, page-linked PDF chunk. The index records PDF hashes, chunk count,
 build time and throughput. The historical document and missing customer
 schedule constrain any coverage statement.
 

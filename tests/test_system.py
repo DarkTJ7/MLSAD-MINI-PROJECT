@@ -6,7 +6,7 @@ import pytest
 from app.contracts import FNOL
 from app.guardrails import inspect,output_safe
 from app.agents import analysis_graph,verify,run_local
-from app.retrieval import Corpus,index_corpus
+from app.retrieval import Corpus,index_corpus,expand_query
 from app.config import ROOT
 from app.provider import Gateway,ProviderUnavailable
 
@@ -54,6 +54,14 @@ def test_output_determinations_blocked():
     assert not output_safe('Your claim is approved')
 def test_corpus_idempotent(corpus):
     assert index_corpus()['fingerprint']==index_corpus()['fingerprint']
+def test_claim_procedure_query_finds_original_pdf_instructions(corpus):
+    query='claim procedure and required documents'
+    assert expand_query('private car limitations as to use')=='private car limitations as to use'
+    results=corpus.search(query,k=6)
+    instruction=next(row for row in results if 'HOW DO I FILE A CLAIM?' in row['text'])
+    assert instruction['page']==1
+    assert 'Repair estimate' in instruction['text']
+    assert corpus.lookup(instruction['clause_id'])['text']==instruction['text']
 def test_ordinary_verified(corpus,fnol):
     state=run_local(fnol,gateway=Planner(),corpus=corpus)
     assert state['proposed']['verified'],state['proposed']
