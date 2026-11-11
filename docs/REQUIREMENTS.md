@@ -33,7 +33,7 @@ disclosure of remaining gaps.
 | D1 | Implemented locally | Published JSON/OpenAPI contracts and quarantine at boundary |
 | D2 | Implemented locally | Source digest, chunks, freshness, throughput and CLI index job |
 | D3 | Configured | Compose services and health checks; clean-clone container start untested here |
-| D4 | Partial | Runtime environment file; published artifact manifests necessarily identify pinned local models |
+| D4 | Partial | Runtime environment file and interactive hosted-key setup keep credentials local; published artifact manifests necessarily identify pinned local models |
 | D5 | Configured and locally traced | W3C context, structured events and all exporters; live container dashboards pending |
 | D6 | Pending for this agent | Predeclared whole-run p95 target; Docker Locust RPS/p50/p95 and failure point unmeasured |
 | D7 | Partial | Rate limit and caches implemented; current-agent cache p95/cost effect unmeasured |

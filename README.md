@@ -46,6 +46,23 @@ The first build downloads dependencies and local model assets. If the machine
 cannot run the local model, `MODEL_MODE=stub` with the default `.env.example`
 configuration allows deterministic system tests; the CLI requires
 `--allow-stub` in that mode and the result is **not** real AI reasoning.
+
+### Run with a hosted API key
+
+To run the agent on a computer without the local model, use any provider with
+an OpenAI-compatible chat-completions API. From the repository root, run:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/Configure-HostedModel.ps1
+docker compose up --build
+```
+
+The setup asks for the provider URL, model ID and API key with hidden input.
+It writes the secret only to the local `.env` file, which Git ignores. Do not
+paste a key into the repository, a report, or chat. A hosted provider may
+charge for model calls; enter its input and output token prices when prompted
+so the agent records run costs accurately.
+
 An [optional native runtime guide](docs/NATIVE_RUNTIME.md) covers Windows
 when Docker Desktop is unavailable.
 The API is at `http://127.0.0.1:8000` by default, with OpenAPI at `/docs`.
