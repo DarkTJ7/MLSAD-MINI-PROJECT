@@ -41,6 +41,7 @@ class State(TypedDict, total=False):
     retry_searches: int
     narrative_audit: dict
     research_prompt_version: str
+    inline: bool
 
 def classify(f):
     text=f['description'].lower()
@@ -142,7 +143,9 @@ def evidence(state,concept):
     return None
 
 def make_recommendation(state):
-    f=state['fnol']; kind=state['classification']; risk=state['risk']
+    f=state['fnol']
+    kind=state.get('classification') or classify(f)
+    risk=state.get('risk') if 'risk' in state else risks(f)
     concepts=['third_party' if kind=='third_party' else 'base','exclusion','procedure']
     if kind=='total_loss': concepts.append('total_loss')
     if 'restricted_use' in risk: concepts+=['restriction','use_clause']

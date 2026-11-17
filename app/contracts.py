@@ -1,6 +1,6 @@
 from datetime import date
 from enum import Enum
-from typing import Literal
+from typing import Literal, Optional
 from pydantic import BaseModel, ConfigDict, Field, model_validator,field_validator
 
 class Kind(str, Enum):
@@ -26,8 +26,8 @@ class FNOL(BaseModel):
     estimated_repair: float = Field(ge=0, le=100000000, allow_inf_nan=False)
     idv: float = Field(gt=0, le=100000000, allow_inf_nan=False)
     network_garage: bool = False
-    driver_licensed: bool | None = None
-    intoxicated: bool | None = None
+    driver_licensed: Optional[bool] = None
+    intoxicated: Optional[bool] = None
     third_party_involved: bool = False
     police_report: bool = False
     retrieval_version: Literal['v5'] = 'v5'
@@ -77,7 +77,7 @@ class Recommendation(BaseModel):
     queue: str = Field(pattern=r'^(fast-track|surveyor assignment|investigation)$')
     reason: str
     requires_human: Literal[True] = True
-    escalation: str | None
+    escalation: Optional[str] = None
     citations: list[Citation]
     verified: bool
     prompt_version: str

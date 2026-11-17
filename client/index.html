@@ -1,80 +1,508 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Motor claim agent API client</title>
-  <style>
-    body{font:16px system-ui,sans-serif;max-width:900px;margin:2rem auto;padding:0 1rem;color:#152235}
-    textarea{width:100%;min-height:22rem;font:13px ui-monospace,monospace}
-    button{padding:.7rem 1.1rem;margin:.6rem 0;cursor:pointer}
-    pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f3f6fa;padding:1rem}
-    li{margin:1rem 0} small{color:#526579}
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Motor claim agent API client · MLSAD Triage</title>
+  <link rel="stylesheet" href="/client/static/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
 </head>
 <body>
-  <h1>Motor claim agent API client</h1>
-  <p>This small client exists for the course demonstration. The terminal agent is the primary interface. Recommendations require a human claims handler.</p>
-  <label for="fnol">FNOL JSON</label>
-  <textarea id="fnol">{
-  "policy_number": "DEMO-001",
-  "vehicle_registration": "KA01AB1234",
-  "insurer": "HDFC ERGO",
-  "product": "private_car_package",
-  "policy_start": "2026-01-01",
-  "policy_end": "2026-12-31",
-  "loss_date": "2026-10-01",
-  "reported_date": "2026-10-02",
-  "description": "I was making a food delivery run in my own car when the accident happened.",
-  "location": "Bengaluru",
-  "country": "India",
-  "vehicle_use": "personal",
-  "estimated_repair": 12000,
-  "idv": 500000,
-  "network_garage": true,
-  "driver_licensed": true,
-  "intoxicated": false,
-  "third_party_involved": false,
-  "police_report": false,
-  "retrieval_version": "v5"
-}</textarea>
-  <p><button id="submit" type="button">Send to agent</button> <small id="status" role="status"></small></p>
-  <section aria-live="polite">
-    <h2>Recommendation</h2>
-    <pre id="result">No run submitted.</pre>
-    <h2>Citations</h2>
-    <ol id="citations"></ol>
-  </section>
-  <script>
-    const status=document.querySelector('#status'),result=document.querySelector('#result'),citations=document.querySelector('#citations');
-    const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
-    document.querySelector('#submit').addEventListener('click',async()=>{
-      citations.replaceChildren();result.textContent='Waiting for agent...';
-      let body;
-      try{body=JSON.parse(document.querySelector('#fnol').value)}catch(e){status.textContent='Invalid JSON: '+e.message;return}
-      try{
-        const submission=await fetch('/runs',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-        const accepted=await submission.json();
-        if(!submission.ok){status.textContent='Request rejected ('+submission.status+').';result.textContent=JSON.stringify(accepted,null,2);return}
-        status.textContent='Run '+accepted.run_id+' queued';
-        for(let i=0;i<420;i++){
-          await delay(1000);
-          const response=await fetch('/runs/'+encodeURIComponent(accepted.run_id));
-          const run=await response.json();
-          status.textContent='Run '+accepted.run_id+': '+run.status;
-          if(run.status==='completed'||run.status==='escalated'){
-            result.textContent=JSON.stringify(run.result,null,2);
-            for(const item of run.result?.citations||[]){
-              const li=document.createElement('li');
-              li.textContent=item.document+' · PDF page '+item.page+' · '+item.clause_id+' — '+item.quote;
-              citations.append(li);
-            }
-            return;
-          }
-        }
-        status.textContent='Still running. Poll /runs/'+accepted.run_id;
-      }catch(e){status.textContent='Connection error: '+e.message}
-    });
-  </script>
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand">
+          <div class="brand-icon">🛡️</div>
+          <div class="brand-text">
+            <h1>ClaimTriage AI</h1>
+            <p>MLSAD Mini Project</p>
+          </div>
+        </div>
+      </div>
+
+      <ul class="nav-menu">
+        <li class="nav-item active">
+          <button type="button" data-view="dashboard">
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>
+            Dashboard
+          </button>
+        </li>
+        <li class="nav-item">
+          <button type="button" data-view="submit">
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+            Submit Claim
+          </button>
+        </li>
+        <li class="nav-item">
+          <button type="button" data-view="execution">
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+            Agent Execution
+          </button>
+        </li>
+        <li class="nav-item">
+          <button type="button" data-view="results">
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"/></svg>
+            Advisory Results
+          </button>
+        </li>
+        <li class="nav-item">
+          <button type="button" data-view="quarantine">
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286zm0 13.036h.008v.008H12v-.008z"/></svg>
+            Quarantine
+          </button>
+        </li>
+        <li class="nav-item">
+          <button type="button" data-view="guide">
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
+            Policy Guide
+          </button>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div class="model-indicator" id="sidebar-model-badge">
+          <span class="status-dot"></span> Checking model...
+        </div>
+        <button type="button" class="theme-toggle" id="theme-toggle-btn">
+          <span id="theme-label">Light Mode</span>
+          <span id="theme-icon">☀️</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <h2 class="page-title" id="topbar-title">Claims Overview & Analytics</h2>
+        </div>
+        <div class="topbar-right">
+          <div class="advisory-badge">
+            <span>⚠️</span>
+            <span>Advisory AI · Human Decision Mandatory</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="content-body">
+        <div id="toast-container" style="position: fixed; top: 1rem; right: 1.5rem; z-index: 999; max-width: 400px;"></div>
+
+        <!-- VIEW 1: DASHBOARD -->
+        <section id="view-dashboard" class="view-section">
+          <!-- Metric Stat Cards -->
+          <div class="grid-cols-4">
+            <div class="card stat-card">
+              <span class="stat-label">Total Claims</span>
+              <span class="stat-value" id="stat-total">0</span>
+              <span class="stat-desc">Processed through intake pipeline</span>
+            </div>
+            <div class="card stat-card warning">
+              <span class="stat-label">Active Processing</span>
+              <span class="stat-value" id="stat-processing">0</span>
+              <span class="stat-desc">Analyzing or verifying in queue</span>
+            </div>
+            <div class="card stat-card success">
+              <span class="stat-label">Recommended (Fast-Track)</span>
+              <span class="stat-value" id="stat-recommended">0</span>
+              <span class="stat-desc">Verified cover without concern</span>
+            </div>
+            <div class="card stat-card purple">
+              <span class="stat-label">Human Review / Escalated</span>
+              <span class="stat-value" id="stat-human-review">0</span>
+              <span class="stat-desc">Coverage concern, gaps or anomalies</span>
+            </div>
+          </div>
+
+          <div class="grid-cols-2">
+            <!-- Escalated & Quarantine Mini-Cards -->
+            <div class="card" style="display: flex; gap: 1.5rem; align-items: center;">
+              <div style="flex: 1;">
+                <span class="stat-label">Escalated Claims</span>
+                <span class="stat-value" id="stat-escalated" style="color: var(--status-danger);">0</span>
+                <span class="stat-desc">Deadlines exceeded or policy mismatch</span>
+              </div>
+              <div style="width: 1px; height: 60px; background: var(--border-default);"></div>
+              <div style="flex: 1;">
+                <span class="stat-label">Quarantined Inputs</span>
+                <span class="stat-value" id="stat-quarantined" style="color: var(--status-warning);">0</span>
+                <span class="stat-desc">Security injections & malformed data</span>
+              </div>
+            </div>
+
+            <!-- Quick Action & Intake Entry Card -->
+            <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <h3 style="font-size: 1rem; margin-bottom: 0.35rem;">Start New Claim Assessment</h3>
+                <p style="font-size: 0.8rem; color: var(--text-secondary);">Submit synthetic FNOL details to run policy retrieval and citation verification.</p>
+              </div>
+              <button class="btn btn-primary" onclick="switchView('submit')">New Claim +</button>
+            </div>
+          </div>
+
+          <!-- Recent Claims Table -->
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <h3 style="font-size: 1rem; font-weight: 700;">Recent Claim Intake Activity</h3>
+              <button class="btn btn-outline btn-sm" onclick="refreshDashboard()">Refresh Activity</button>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Run ID</th>
+                    <th>Policy Number</th>
+                    <th>Registration</th>
+                    <th>Status</th>
+                    <th>Coverage Position</th>
+                    <th>Queue</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-runs-tbody">
+                  <tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 1.5rem;">Loading recent runs...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 2: SUBMIT CLAIM -->
+        <section id="view-submit" class="view-section" style="display: none;">
+          <div class="card" style="margin-bottom: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+              <div>
+                <h3 style="font-size: 1.05rem; font-weight: 700;">First Notice of Loss (FNOL) Submission</h3>
+                <p style="font-size: 0.825rem; color: var(--text-secondary);">Enter claim details or choose a representative preset to test the agent.</p>
+              </div>
+              <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="loadPreset('valid')">Load: Normal Claim</button>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="loadPreset('delivery')">Load: Food Delivery (Concern)</button>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="loadPreset('total_loss')">Load: Total Loss</button>
+                <button type="button" class="btn btn-outline btn-sm" onclick="loadPreset('injection')">Load: Injection Attack</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Supporting Document Upload Card -->
+          <div class="card" style="margin-bottom: 1.5rem;">
+            <h4 style="font-size: 0.9rem; margin-bottom: 0.5rem;">Attach Supporting Document (Optional)</h4>
+            <p style="font-size: 0.775rem; color: var(--text-secondary); margin-bottom: 1rem;">
+              Upload repair estimates, bills, or police reports (PDF, TXT, max 5MB). The agent will extract text, check guardrails, and prefill form fields.
+            </p>
+            <div class="dropzone" id="file-dropzone">
+              <svg class="dropzone-icon" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m6.75 12l-3-3m0 0l-3 3m3-3v6m-1.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/>
+              </svg>
+              <p style="font-weight: 600; font-size: 0.85rem;">Click to upload or drag & drop claim file</p>
+              <p style="font-size: 0.75rem; color: var(--text-muted);">PDF or plain text estimates (max 5MB)</p>
+              <input type="file" id="file-input" style="display: none;" accept=".pdf,.txt,.json">
+            </div>
+            <div id="upload-progress-box" style="display: none; margin-top: 0.75rem; font-size: 0.8rem; color: var(--text-secondary);">
+              <span class="spin">⏳</span> Extracting and screening document...
+            </div>
+            <div id="upload-result-box" style="display: none; margin-top: 0.75rem;"></div>
+          </div>
+
+          <!-- Structured Form -->
+          <div class="card">
+            <div class="alert alert-warning" id="form-validation-warning" style="display: none;"></div>
+
+            <form id="fnol-form" onsubmit="return false;">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="fnol-policy-number">Policy Number *</label>
+                  <input type="text" id="fnol-policy-number" required placeholder="e.g. DEMO-2026-001">
+                </div>
+                <div class="form-group">
+                  <label for="fnol-reg-number">Vehicle Registration *</label>
+                  <input type="text" id="fnol-reg-number" required placeholder="e.g. KA01AB1234">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="fnol-insurer">Insurer</label>
+                  <input type="text" id="fnol-insurer" value="HDFC ERGO">
+                </div>
+                <div class="form-group">
+                  <label for="fnol-product">Product</label>
+                  <input type="text" id="fnol-product" value="private_car_package">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="fnol-start-date">Policy Start Date *</label>
+                  <input type="date" id="fnol-start-date" required>
+                </div>
+                <div class="form-group">
+                  <label for="fnol-end-date">Policy End Date *</label>
+                  <input type="date" id="fnol-end-date" required>
+                </div>
+                <div class="form-group">
+                  <label for="fnol-loss-date">Incident Loss Date *</label>
+                  <input type="date" id="fnol-loss-date" required>
+                </div>
+                <div class="form-group">
+                  <label for="fnol-reported-date">Reported Date *</label>
+                  <input type="date" id="fnol-reported-date" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="fnol-location">Incident Location *</label>
+                  <input type="text" id="fnol-location" required placeholder="City, State">
+                </div>
+                <div class="form-group">
+                  <label for="fnol-country">Country</label>
+                  <input type="text" id="fnol-country" value="India">
+                </div>
+                <div class="form-group">
+                  <label for="fnol-vehicle-use">Vehicle Use *</label>
+                  <select id="fnol-vehicle-use">
+                    <option value="personal">Personal</option>
+                    <option value="commute">Commute</option>
+                    <option value="business">Business</option>
+                    <option value="delivery">Delivery</option>
+                    <option value="hire_reward">Hire / Reward</option>
+                    <option value="unknown">Unknown</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="fnol-estimated-repair">Estimated Repair Cost (INR) *</label>
+                  <input type="number" id="fnol-estimated-repair" required min="0" step="100">
+                </div>
+                <div class="form-group">
+                  <label for="fnol-idv">Insured Declared Value - IDV (INR) *</label>
+                  <input type="number" id="fnol-idv" required min="1000" step="1000">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="fnol-description">Incident Description * <span class="label-hint">(Minimum 12 characters; narrative audit checks for commercial use keywords)</span></label>
+                <textarea id="fnol-description" required placeholder="Describe what happened, where, and under what circumstances..."></textarea>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.5rem; margin-bottom: 1.5rem;">
+                <label class="checkbox-group">
+                  <input type="checkbox" id="fnol-garage">
+                  <span>Network Garage</span>
+                </label>
+                <label class="checkbox-group">
+                  <input type="checkbox" id="fnol-license" checked>
+                  <span>Driver Licensed</span>
+                </label>
+                <label class="checkbox-group">
+                  <input type="checkbox" id="fnol-intoxicated">
+                  <span>Alcohol / Intoxication</span>
+                </label>
+                <label class="checkbox-group">
+                  <input type="checkbox" id="fnol-third-party">
+                  <span>Third Party Involved</span>
+                </label>
+                <label class="checkbox-group">
+                  <input type="checkbox" id="fnol-police-report">
+                  <span>Police FIR Filed</span>
+                </label>
+              </div>
+
+              <div style="display: flex; justify-content: flex-end; gap: 1rem;">
+                <button type="button" class="btn btn-secondary" onclick="loadPreset('valid')">Reset Form</button>
+                <button type="button" class="btn btn-primary" id="btn-submit-claim">Submit Claim to Agent</button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- VIEW 3: AGENT EXECUTION VISUALIZATION -->
+        <section id="view-execution" class="view-section" style="display: none;">
+          <div class="card" style="margin-bottom: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+              <div>
+                <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Active Run</span>
+                <h3 style="font-size: 1.15rem; font-family: var(--font-mono); margin: 0.2rem 0;" id="exec-run-id">No active run</h3>
+                <span id="exec-elapsed-time" style="font-size: 0.8rem; color: var(--text-secondary);"></span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <span class="badge badge-neutral" id="exec-status-badge">Idle</span>
+                <button class="btn btn-primary" id="btn-view-results" style="display: none;" onclick="showResultsView()">View Advisory Results →</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-cols-2">
+            <!-- 11 Stages Stepper -->
+            <div class="card">
+              <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 1.25rem;">Live Agent Workflow Stages</h3>
+              <div class="stage-stepper" id="pipeline-stages-container">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+
+            <!-- Live Event Trace Log -->
+            <div class="card" style="display: flex; flex-direction: column;">
+              <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.75rem;">Real Telemetry Stream</h3>
+              <p style="font-size: 0.775rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+                Live execution events dispatched from backend research agent, FAISS searches, and independent verifier worker.
+              </p>
+              <div id="exec-live-logs" style="flex-grow: 1; min-height: 480px; max-height: 600px; overflow-y: auto; background: var(--bg-app); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: 0.85rem; font-family: var(--font-mono); font-size: 0.775rem; line-height: 1.6; color: var(--text-primary);">
+                Select or submit a claim to monitor real agent execution.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 4: ADVISORY RESULTS & CITATIONS -->
+        <section id="view-results" class="view-section" style="display: none;">
+          <!-- Mandatory Advisory Banner -->
+          <div class="alert alert-warning">
+            <span style="font-size: 1.25rem;">⚖️</span>
+            <div>
+              <strong>ADVISORY ONLY — HUMAN CLAIMS DECISION MANDATORY</strong><br>
+              This AI agent performs automated intake investigation and policy verification. It cannot approve, reject, calculate settlement, or issue binding claims decisions. Every coverage position is subject to review by a qualified human claims handler.
+            </div>
+          </div>
+
+          <!-- Summary Grid -->
+          <div class="grid-cols-4" style="margin-bottom: 1.5rem;">
+            <div class="card">
+              <span class="stat-label">Claim Reference</span>
+              <span style="font-size: 1rem; font-family: var(--font-mono); font-weight: 700;" id="res-claim-id">-</span>
+              <span class="stat-desc" id="res-policy-number">Policy: -</span>
+            </div>
+            <div class="card">
+              <span class="stat-label">Coverage Position</span>
+              <div style="margin-top: 0.25rem;"><span class="badge badge-success" id="res-position-badge">Pending</span></div>
+              <span class="stat-desc" id="res-reg-number">Reg: -</span>
+            </div>
+            <div class="card">
+              <span class="stat-label">Assigned Queue</span>
+              <div style="margin-top: 0.25rem;"><span class="badge badge-purple" id="res-queue-badge">Investigation</span></div>
+              <span class="stat-desc">Triage destination</span>
+            </div>
+            <div class="card">
+              <span class="stat-label">Model Inference Cost</span>
+              <span class="stat-value" style="font-size: 1.35rem;" id="res-model-cost">$0.000000</span>
+              <span class="stat-desc" id="res-classification">Classification</span>
+            </div>
+          </div>
+
+          <!-- Reason & Human Guidance -->
+          <div class="grid-cols-2">
+            <div class="card">
+              <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.6rem;">Agent Findings & Advisory Reason</h3>
+              <p style="font-size: 0.875rem; line-height: 1.6; color: var(--text-primary); margin-bottom: 1rem;" id="res-reason-text">
+                Findings will appear here once claim analysis is completed.
+              </p>
+
+              <h4 style="font-size: 0.85rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text-secondary);">Incident Narrative Analysis</h4>
+              <div id="res-narrative-box"></div>
+            </div>
+
+            <div class="card">
+              <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.6rem; color: var(--status-warning);">Claims Handler Action Plan</h3>
+              <p style="font-size: 0.875rem; line-height: 1.6; color: var(--text-primary); margin-bottom: 1rem;" id="res-escalation-text">
+                Handler next actions will appear here.
+              </p>
+
+              <h4 style="font-size: 0.85rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text-secondary);">Policy Limitations & Caveats</h4>
+              <ul style="padding-left: 1.25rem; font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;" id="res-limitations-list">
+              </ul>
+            </div>
+          </div>
+
+          <!-- Policy Citations -->
+          <div class="card" style="margin-bottom: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <h3 style="font-size: 1rem; font-weight: 700;">Verified Supporting Policy Citations</h3>
+              <span class="badge badge-success">Independent Verifier Checked ✓</span>
+            </div>
+            <div id="res-citations-container">
+              <p style="color: var(--text-muted); font-size: 0.85rem;">No citations available.</p>
+            </div>
+          </div>
+
+          <!-- Actions & Feedback -->
+          <div class="card" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <span style="font-size: 0.85rem; font-weight: 600;">Rate Advice Quality:</span>
+              <button class="btn btn-secondary btn-sm" onclick="submitFeedback(true)">👍 Satisfactory</button>
+              <button class="btn btn-secondary btn-sm" onclick="submitFeedback(false)">👎 Refused / Issue</button>
+            </div>
+            <div style="display: flex; gap: 0.75rem;">
+              <button class="btn btn-secondary" onclick="exportReportJson()">Export JSON Report 📥</button>
+              <button class="btn btn-primary" onclick="window.print()">Print Report 🖨️</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 5: QUARANTINE -->
+        <section id="view-quarantine" class="view-section" style="display: none;">
+          <div class="card" style="margin-bottom: 1.5rem;">
+            <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem;">Quarantine & Guardrail Audit Trail</h3>
+            <p style="font-size: 0.825rem; color: var(--text-secondary);">
+              Inputs flagged for prompt injection, toxic content, boundary tampering, or contract violations are safely isolated. No agent execution starts for quarantined inputs.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Quarantine ID</th>
+                    <th>Reason / Guardrail</th>
+                    <th>Timestamp</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="quarantine-tbody">
+                  <tr><td colspan="4" style="text-align: center; color: var(--text-muted); padding: 1.5rem;">Loading quarantine logs...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 6: POLICY & ARCHITECTURE GUIDE -->
+        <section id="view-guide" class="view-section" style="display: none;">
+          <div class="grid-cols-2">
+            <div class="card">
+              <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.75rem;">Policy Scope (HDFC ERGO Private Car)</h3>
+              <p style="font-size: 0.85rem; line-height: 1.6; color: var(--text-primary); margin-bottom: 0.75rem;">
+                The agent is grounded in the public HDFC ERGO Private Car Package Policy wording (text-layer PDF in <code>corpus/</code>).
+              </p>
+              <ul style="padding-left: 1.25rem; font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;">
+                <li><strong>Section I:</strong> Own damage from accidental external means, burglary, housebreaking, fire, and flood.</li>
+                <li><strong>Section II:</strong> Legal liability to third parties for bodily injury and property damage.</li>
+                <li><strong>Limitations as to Use:</strong> Private carriage only. Strictly excludes usage on hire, reward, and commercial delivery.</li>
+                <li><strong>General Exclusions:</strong> Consequential loss, depreciation, mechanical/electrical breakdown, and driving while intoxicated.</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.75rem;">Multi-Provider Model Architecture</h3>
+              <p style="font-size: 0.85rem; line-height: 1.6; color: var(--text-primary); margin-bottom: 0.75rem;">
+                The intake and research planning loop supports dual model providers configured via environment variables:
+              </p>
+              <ul style="padding-left: 1.25rem; font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;">
+                <li><strong>Local Model:</strong> Qwen2.5 1.5B served via local llama.cpp OpenAI-compatible endpoint (zero API key needed).</li>
+                <li><strong>Google Gemini:</strong> Frontier Gemini model integration (<code>gemini-2.5-flash</code>) using Google Gen AI SDK.</li>
+                <li><strong>Deterministic Stub:</strong> Delayed reproducible test harness for automated system regression suites.</li>
+                <li><strong>Independent Verifier:</strong> Separate worker checking exact PDF quotes and entailment before any advice is shown.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="/client/static/app.js"></script>
 </body>
 </html>

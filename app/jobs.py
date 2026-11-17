@@ -40,8 +40,11 @@ def terminal(connection,state):
                 pipe.zadd('quality:runs',{state['run_id']:time.time()})
                 pipe.execute();break
             except WatchError:continue
-    RUN_LATENCY.observe(state['completed_at']-state['submitted_at'])
-    Queue('verification',connection=connection).enqueue(score_job,state['run_id'],job_timeout=40)
+    RUN_LATENCY.observe(state['completed_at'] - state.get('submitted_at', time.time()))
+    try:
+        Queue('verification', connection=connection).enqueue(score_job, state['run_id'], job_timeout=40)
+    except Exception:
+        pass
 
 def score_job(run_id):
     from .quality import sample_score
@@ -58,14 +61,19 @@ def analyze(state):
 
 def _analyze(state):
     connection=redis_connection()
+    is_inline=bool(state.get('inline'))
     if not save(connection,state,'analyzing'):return
     try:
         if time.time()>state['deadline']:
             raise TimeoutError('queue deadline exhausted')
         state=analysis_graph(gateway=Gateway(connection)).invoke(state)
+        if is_inline:
+            state['inline']=True
         carry(state)
         TASKS.labels('analysis','escalated' if state.get('failure') else 'success').inc()
         if not save(connection,state,'verifying'):return
+        if is_inline:
+            return _verify_job(state)
         Queue('verification',connection=connection).enqueue(verify_job,state,job_timeout=max(1,int(state['deadline']-time.time())+5),
             retry=Retry(max=1,interval=[2]))
     except Exception as exc:
@@ -78,13 +86,19 @@ def verify_job(state):
 
 def _verify_job(state):
     connection=redis_connection()
+    is_inline=bool(state.get('inline'))
     try:
         state=verification_graph().invoke(state)
+        if is_inline:
+            state['inline']=True
         carry(state)
         TASKS.labels('verification','success' if state.get('verified') else 'refused').inc()
         if not state.get('verified') and not state.get('failure') and not state.get('retried'):
             state['retried']=True
             state['retry_searches']=state.get('searches',0)
+            if is_inline:
+                save(connection,state,'retrying')
+                return _analyze(state)
             Queue('analysis',connection=connection).enqueue(analyze,state,job_timeout=max(1,int(state['deadline']-time.time())+5),
                 retry=Retry(max=1,interval=[2]))
             save(connection,state,'retrying')
@@ -92,6 +106,9 @@ def _verify_job(state):
         if not state.get('verified'):
             state=escalate(state,state.get('failure','verification_failed'))
         terminal(connection,state)
+        return state
     except Exception as exc:
         TASKS.labels('verification','error').inc()
-        terminal(connection,escalate(state,'verification_worker_error: '+type(exc).__name__))
+        state=escalate(state,'verification_worker_error: '+type(exc).__name__)
+        terminal(connection,state)
+        return state
